@@ -1,2 +1,2 @@
 # projeto_lp2
-Just another repository
+Nathan Fernandes

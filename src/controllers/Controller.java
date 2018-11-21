@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import ferramentas.Validar;
@@ -11,15 +12,15 @@ import internas.Doador;
 import internas.Receptor;
 import internas.Usuario;
 
-public class UsuarioController {
-	private ArrayList<Usuario> usuarios = new ArrayList<>();
+public class Controller {
+	private LinkedHashMap<String, Usuario> mapaUsuarios = new LinkedHashMap<>();
 
 	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
 		Validar.adicionaUsuario(id, nome, email, celular, classe);
 		if (!existeusuario(id)) {
 			if (existeClasse(classe)) {
 				Usuario novoUsuario = new Doador(id, nome, email, celular, classe);
-				this.usuarios.add(novoUsuario);
+				this.mapaUsuarios.put(id, novoUsuario);
 				return id;
 			}
 			throw new Exception("Entrada invalida: opcao de classe invalida.");
@@ -48,11 +49,7 @@ public class UsuarioController {
 	}
 
 	private boolean existeusuario(String id) {
-		for (Usuario usuario : usuarios) {
-			if (usuario.getId().equals(id))
-				return true;
-		}
-		return false;
+		return this.mapaUsuarios.containsKey(id);
 	}
 
 	private boolean existeClasse(String classe) {
@@ -77,7 +74,7 @@ public class UsuarioController {
 				if (existeClasse(fileUsuario[4])) {
 					Usuario novoUsuario = new Receptor(fileUsuario[0], fileUsuario[1], fileUsuario[2], fileUsuario[3],
 							fileUsuario[4]);
-					this.usuarios.add(novoUsuario);
+					this.mapaUsuarios.put(fileUsuario[0], novoUsuario);
 				} else {
 					throw new Exception("Entrada invalida: opcao de classe invalida.");
 				}

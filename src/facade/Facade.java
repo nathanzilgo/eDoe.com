@@ -1,10 +1,10 @@
 package facade;
 
-import controllers.UsuarioController;
+import controllers.Controller;
 import easyaccept.EasyAccept;
 
 public class Facade {
-	private UsuarioController usuarioController = new UsuarioController();
+	private Controller controller = new Controller();
 
 	public static void main(String[] args) {
 		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt" };
@@ -12,27 +12,27 @@ public class Facade {
 	}
 
 	public void lerReceptores(String caminho) throws Exception {
-		usuarioController.lerReceptores(caminho);
+		controller.lerReceptores(caminho);
 	}
 
 	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
-		return usuarioController.adicionaDoador(id, nome, email, celular, classe);
+		return controller.adicionaDoador(id, nome, email, celular, classe);
 	}
 
 	public String pesquisaUsuarioPorId(String id) {
-		return usuarioController.pesquisaUsuarioPorId(id);
+		return controller.pesquisaUsuarioPorId(id);
 	}
 
 	public String pesquisaUsuarioPorNome(String nome) {
-		return usuarioController.pesquisaUsuarioPorNome(nome);
+		return controller.pesquisaUsuarioPorNome(nome);
 	}
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
-		return usuarioController.atualizaUsuario(id, nome, email, celular);
+		return controller.atualizaUsuario(id, nome, email, celular);
 	}
 
 	public void removeUsuario(String id) {
-		usuarioController.removeUsuario(id);
+		controller.removeUsuario(id);
 	}
 
 }

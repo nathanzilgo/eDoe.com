@@ -10,7 +10,7 @@ public class Validar {
 		return valor.trim().equals("");
 	}
 
-	public static void adicionaDoador(String id, String nome, String email, String celular, String classe)
+	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe)
 			throws Exception {
 		if (isNull(nome) || isEmpty(nome))
 			throw new Exception("Entrada invalida: nome nao pode ser vazio ou nulo.");

@@ -11,6 +11,10 @@ public class Facade {
 		EasyAccept.main(args);
 	}
 
+	public void lerReceptores(String caminho) throws Exception {
+		usuarioController.lerReceptores(caminho);
+	}
+
 	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
 		return usuarioController.adicionaDoador(id, nome, email, celular, classe);
 	}

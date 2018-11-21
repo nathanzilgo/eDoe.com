@@ -1,5 +1,7 @@
 package facade;
 
+import java.io.File;
+
 import controllers.Controller;
 import easyaccept.EasyAccept;
 
@@ -11,7 +13,7 @@ public class Facade {
 		EasyAccept.main(args);
 	}
 
-	public void lerReceptores(String caminho) throws Exception {
+	public void lerReceptores(File caminho) throws Exception {
 		controller.lerReceptores(caminho);
 	}
 

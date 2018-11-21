@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -63,26 +64,14 @@ public class Controller {
 		return false;
 	}
 
-	public void lerReceptores(String caminho) throws Exception {
-		Scanner scanner = new Scanner(new File(caminho));
-		scanner.nextLine();
-		while (scanner.hasNextLine()) {
-			String[] fileUsuario = scanner.nextLine().split(",");
-			System.out.println(Arrays.toString(fileUsuario));
-			Validar.adicionaUsuario(fileUsuario[0], fileUsuario[1], fileUsuario[2], fileUsuario[3], fileUsuario[4]);
-			if (!existeusuario(fileUsuario[0])) {
-				if (existeClasse(fileUsuario[4])) {
-					Usuario novoUsuario = new Receptor(fileUsuario[0], fileUsuario[1], fileUsuario[2], fileUsuario[3],
-							fileUsuario[4]);
-					this.mapaUsuarios.put(fileUsuario[0], novoUsuario);
-				} else {
-					throw new Exception("Entrada invalida: opcao de classe invalida.");
-				}
-			} else {
-				throw new Exception("Usuario ja existente: " + fileUsuario[0] + ".");
-			}
-		}
-		scanner.close();
-	}
+    public void lerReceptores(File arquivo) throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileReader(arquivo));
+        while (sc.hasNextLine()) {
+			String[] dado = sc.nextLine().split(",");
+            Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
+			this.mapaUsuarios.put(dado[0], novoUsuario);
+        }
+        sc.close();
+    }
 
 }

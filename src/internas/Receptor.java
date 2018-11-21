@@ -6,6 +6,9 @@ public class Receptor extends Usuario {
 		super(id, nome, email, celular, classe);
 	}
 
-
+	@Override
+	public String toString() {
+		return super.toString() + "receptor";
+	}
 
 }

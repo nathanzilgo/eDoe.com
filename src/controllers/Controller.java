@@ -29,9 +29,11 @@ public class Controller {
 		throw new Exception("Usuario ja existente: " + id + ".");
 	}
 
-	public String pesquisaUsuarioPorId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String pesquisaUsuarioPorId(String id) throws Exception {
+		Validar.validaId(id);
+		if(existeusuario(id)) {
+			return this.mapaUsuarios.get(id).toString();
+		}throw new Exception("Usuario nao encontrado: " + id + ".");
 	}
 
 	public String pesquisaUsuarioPorNome(String nome) {

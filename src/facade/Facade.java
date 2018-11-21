@@ -21,7 +21,7 @@ public class Facade {
 		return controller.adicionaDoador(id, nome, email, celular, classe);
 	}
 
-	public String pesquisaUsuarioPorId(String id) {
+	public String pesquisaUsuarioPorId(String id) throws Exception {
 		return controller.pesquisaUsuarioPorId(id);
 	}
 

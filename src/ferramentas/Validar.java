@@ -24,4 +24,9 @@ public class Validar {
 			throw new Exception("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
 	}
 
+	public static void validaId(String id) throws Exception {
+		if (isNull(id) || isEmpty(id))
+			throw new Exception("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
+	}
+
 }

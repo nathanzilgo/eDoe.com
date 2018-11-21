@@ -11,11 +11,11 @@ public class Facade {
 		EasyAccept.main(args);
 	}
 
-	public int adicionaDoador(int id, String nome, String email, String celular, String classe) {
+	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
 		return usuarioController.adicionaDoador(id, nome, email, celular, classe);
 	}
 
-	public String pesquisaUsuarioPorId(int id) {
+	public String pesquisaUsuarioPorId(String id) {
 		return usuarioController.pesquisaUsuarioPorId(id);
 	}
 
@@ -23,11 +23,11 @@ public class Facade {
 		return usuarioController.pesquisaUsuarioPorNome(nome);
 	}
 
-	public String atualizaUsuario(int id, String nome, String email, String celular) {
+	public String atualizaUsuario(String id, String nome, String email, String celular) {
 		return usuarioController.atualizaUsuario(id, nome, email, celular);
 	}
 
-	public void removeUsuario(int id) {
+	public void removeUsuario(String id) {
 		usuarioController.removeUsuario(id);
 	}
 

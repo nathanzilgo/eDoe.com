@@ -29,7 +29,7 @@ public class Facade {
 		return controller.pesquisaUsuarioPorNome(nome);
 	}
 
-	public String atualizaUsuario(String id, String nome, String email, String celular) {
+	public String atualizaUsuario(String id, String nome, String email, String celular) throws Exception {
 		return controller.atualizaUsuario(id, nome, email, celular);
 	}
 

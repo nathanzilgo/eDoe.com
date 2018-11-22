@@ -34,4 +34,11 @@ public class Validar {
 			throw new Exception("Entrada invalida: nome nao pode ser vazio ou nulo.");
 	}
 
+	public static Boolean checaArgumento(String campo) {
+		if (!(isNull(campo) || isEmpty(campo))) {
+			return true;
+		}
+		return false;
+	}
+
 }

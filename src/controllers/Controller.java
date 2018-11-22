@@ -35,7 +35,7 @@ public class Controller {
 		if (existeusuario(id)) {
 			return this.mapaUsuarios.get(id).toString();
 		}
-		throw new Exception("Usuario nao encontrado: " + id + ".");
+		throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 	}
 
 	public String pesquisaUsuarioPorNome(String nome) throws Exception {
@@ -54,8 +54,14 @@ public class Controller {
 		throw new Exception("Usuario nao encontrado: " + nome + ".");
 	}
 
-	public String atualizaUsuario(String id, String nome, String email, String celular) {
-		return null;
+	public String atualizaUsuario(String id, String nome, String email, String celular) throws Exception {
+		Validar.validaId(id);
+		if (!mapaUsuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
+		}
+
+		mapaUsuarios.get(id).atualizaUsuario(nome, email, celular);
+		return pesquisaUsuarioPorId(id);
 	}
 
 	public void removeUsuario(String id) {
@@ -82,7 +88,7 @@ public class Controller {
 		Scanner sc = new Scanner(new FileReader(arquivo));
 		while (sc.hasNextLine()) {
 			String[] dado = sc.nextLine().split(",");
-			if(!existeusuario(dado[0])) {
+			if (!existeusuario(dado[0])) {
 				Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
 				this.mapaUsuarios.put(dado[0], novoUsuario);
 			} else {
@@ -92,7 +98,7 @@ public class Controller {
 				this.mapaUsuarios.get(dado[0]).setClasse(dado[2]);
 
 			}
-			
+
 		}
 		sc.close();
 	}

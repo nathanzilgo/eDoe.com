@@ -55,7 +55,6 @@ public class Controller {
 	}
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -83,8 +82,17 @@ public class Controller {
 		Scanner sc = new Scanner(new FileReader(arquivo));
 		while (sc.hasNextLine()) {
 			String[] dado = sc.nextLine().split(",");
-			Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
-			this.mapaUsuarios.put(dado[0], novoUsuario);
+			if(!existeusuario(dado[0])) {
+				Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
+				this.mapaUsuarios.put(dado[0], novoUsuario);
+			} else {
+				this.mapaUsuarios.get(dado[0]).setNome(dado[1]);
+				this.mapaUsuarios.get(dado[0]).setEmail(dado[2]);
+				this.mapaUsuarios.get(dado[0]).setTelefone(dado[4]);
+				this.mapaUsuarios.get(dado[0]).setClasse(dado[2]);
+
+			}
+			
 		}
 		sc.close();
 	}

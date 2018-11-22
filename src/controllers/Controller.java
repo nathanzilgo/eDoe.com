@@ -30,7 +30,7 @@ public class Controller {
 		throw new Exception("Usuario ja existente: " + id + ".");
 	}
 
-	public String pesquisaUsuarioPorId(String id) throws Exception {
+	public String pesquisaUsuarioPorId(String id) throws IllegalArgumentException {
 		Validar.validaId(id);
 		if (existeusuario(id)) {
 			return this.mapaUsuarios.get(id).toString();
@@ -54,7 +54,7 @@ public class Controller {
 		throw new Exception("Usuario nao encontrado: " + nome + ".");
 	}
 
-	public String atualizaUsuario(String id, String nome, String email, String celular) throws Exception {
+	public String atualizaUsuario(String id, String nome, String email, String celular) {
 		Validar.validaId(id);
 		if (!mapaUsuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
@@ -65,8 +65,13 @@ public class Controller {
 	}
 
 	public void removeUsuario(String id) {
-		// TODO Auto-generated method stub
+		Validar.validaId(id);
+		
+		if (!mapaUsuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
+		}
 
+		mapaUsuarios.remove(id);
 	}
 
 	private boolean existeusuario(String id) {
@@ -94,8 +99,8 @@ public class Controller {
 			} else {
 				this.mapaUsuarios.get(dado[0]).setNome(dado[1]);
 				this.mapaUsuarios.get(dado[0]).setEmail(dado[2]);
-				this.mapaUsuarios.get(dado[0]).setTelefone(dado[4]);
-				this.mapaUsuarios.get(dado[0]).setClasse(dado[2]);
+				this.mapaUsuarios.get(dado[0]).setTelefone(dado[3]);
+				this.mapaUsuarios.get(dado[0]).setClasse(dado[4]);
 
 			}
 

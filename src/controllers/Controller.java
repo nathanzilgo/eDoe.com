@@ -3,9 +3,7 @@ package controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -15,7 +13,14 @@ import internas.Receptor;
 import internas.Usuario;
 
 public class Controller {
-	private LinkedHashMap<String, Usuario> mapaUsuarios = new LinkedHashMap<>();
+
+	private LinkedHashMap<String, Usuario> mapaUsuarios;
+	private HashSet<String> descritores;
+
+	public Controller() {
+		this.mapaUsuarios = new LinkedHashMap<>();
+		this.descritores = new HashSet<>();
+	}
 
 	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
 		Validar.adicionaUsuario(id, nome, email, celular, classe);
@@ -82,7 +87,7 @@ public class Controller {
 		Scanner sc = new Scanner(new FileReader(arquivo));
 		while (sc.hasNextLine()) {
 			String[] dado = sc.nextLine().split(",");
-			if(!existeusuario(dado[0])) {
+			if (!existeusuario(dado[0])) {
 				Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
 				this.mapaUsuarios.put(dado[0], novoUsuario);
 			} else {
@@ -92,9 +97,62 @@ public class Controller {
 				this.mapaUsuarios.get(dado[0]).setClasse(dado[2]);
 
 			}
-			
+
 		}
 		sc.close();
+	}
+
+	// -------------------------------------------------------------------------US
+	// 2------------------------------------------------------------------------
+
+	/**
+	 * Retorna uma descrição caso ela esteja no conjunto.
+	 * 
+	 * @param descricao
+	 * @return
+	 */
+	public String getDescritor(String descricao) {
+		for (String str : this.descritores) {
+			if (str.equals(descricao.toLowerCase())) {
+				return str;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Valida se a descrição é nula ou vazia. Caso esteja correto, remove espaços
+	 * desnecessários da entrada e a adiciona no conjunto de descritores.
+	 * 
+	 * @param descricao
+	 * @throws Exception
+	 */
+	public void adicionaDescritor(String descricao) throws Exception {
+		Validar.validaDescritor(descricao);
+		Validar.retiraEspacos(descricao);
+
+		if (this.descritores.contains(descricao.toLowerCase())) {
+			throw new IllegalArgumentException(
+					"Descritor de Item ja existente: " + this.getDescritor(descricao.toLowerCase()));
+		} else {
+			this.descritores.add(descricao.toLowerCase());
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param descricao
+	 * @param quantidade
+	 * @param tags
+	 * @return
+	 */
+	public String adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) {
+		Validar.validaAdicionaItem(id, descricao, quantidade, tags);
+		if(!this.existeusuario(id)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
+		}
+		this.mapaUsuarios.get(id).adicionaItem();
 	}
 
 }

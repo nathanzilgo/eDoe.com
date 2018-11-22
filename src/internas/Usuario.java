@@ -1,12 +1,13 @@
 package internas;
 
 public class Usuario {
+	
 	private String id;
 	private String nome;
 	private String email;
 	private String telefone;
 	private String classe;
-
+	
 	public Usuario(String id, String nome, String email, String telefone, String classe) {
 		this.id = id;
 		this.nome = nome;

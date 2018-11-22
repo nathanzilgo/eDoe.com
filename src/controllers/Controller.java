@@ -140,19 +140,21 @@ public class Controller {
 	}
 
 	/**
-	 * 
+	 * Adiciona um item a um usuario.
+	 * retorna o id do usuario.
 	 * @param id
 	 * @param descricao
 	 * @param quantidade
 	 * @param tags
-	 * @return
+	 * @return String
 	 */
-	public String adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) {
+	public String adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) throws Exception{
 		Validar.validaAdicionaItem(id, descricao, quantidade, tags);
 		if(!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
 		this.mapaUsuarios.get(id).adicionaItem();
+		return id;
 	}
 
 }

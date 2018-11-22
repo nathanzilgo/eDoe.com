@@ -56,9 +56,9 @@ public class Validar {
 		if(quantidade <= 0) {
 			throw new IllegalArgumentException("Entrada invalida: quantidade deve ser maior que zero.");
 		}
-		
 	}
 	/**
+	 * Retira espaços inuteis da entrada.
 	 * 
 	 * @param entrada
 	 */

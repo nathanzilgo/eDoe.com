@@ -32,18 +32,26 @@ public class Controller {
 
 	public String pesquisaUsuarioPorId(String id) throws Exception {
 		Validar.validaId(id);
-		if(existeusuario(id)) {
+		if (existeusuario(id)) {
 			return this.mapaUsuarios.get(id).toString();
-		}throw new Exception("Usuario nao encontrado: " + id + ".");
+		}
+		throw new Exception("Usuario nao encontrado: " + id + ".");
 	}
 
 	public String pesquisaUsuarioPorNome(String nome) throws Exception {
 		Validar.validaNome(nome);
+		String retorno = "";
 		for (Usuario usuario : this.mapaUsuarios.values()) {
-			if(usuario.getNome().equalsIgnoreCase(nome)) {
-				return usuario.toString();
+			if (usuario.getNome().equalsIgnoreCase(nome)) {
+				retorno += usuario.toString() + " | ";
 			}
-		}throw new Exception("Usuario nao encontrado: " + nome + ".");
+
+		}
+		if (!retorno.trim().equals("")) {
+			retorno = retorno.substring(0, retorno.length() - 3);
+			return retorno.trim();
+		}
+		throw new Exception("Usuario nao encontrado: " + nome + ".");
 	}
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
@@ -71,14 +79,14 @@ public class Controller {
 		return false;
 	}
 
-    public void lerReceptores(File arquivo) throws FileNotFoundException {
-        Scanner sc = new Scanner(new FileReader(arquivo));
-        while (sc.hasNextLine()) {
+	public void lerReceptores(File arquivo) throws FileNotFoundException {
+		Scanner sc = new Scanner(new FileReader(arquivo));
+		while (sc.hasNextLine()) {
 			String[] dado = sc.nextLine().split(",");
-            Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
+			Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
 			this.mapaUsuarios.put(dado[0], novoUsuario);
-        }
-        sc.close();
-    }
+		}
+		sc.close();
+	}
 
 }

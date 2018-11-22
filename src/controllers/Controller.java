@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -36,9 +37,13 @@ public class Controller {
 		}throw new Exception("Usuario nao encontrado: " + id + ".");
 	}
 
-	public String pesquisaUsuarioPorNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public String pesquisaUsuarioPorNome(String nome) throws Exception {
+		Validar.validaNome(nome);
+		for (Usuario usuario : this.mapaUsuarios.values()) {
+			if(usuario.getNome().equalsIgnoreCase(nome)) {
+				return usuario.toString();
+			}
+		}throw new Exception("Usuario nao encontrado: " + nome + ".");
 	}
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {

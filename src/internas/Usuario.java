@@ -14,7 +14,7 @@ public class Usuario {
 		this.telefone = telefone;
 		this.classe = classe;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.nome + "/" + getId() + ", " + this.email + ", " + this.telefone + ", status: ";
@@ -22,10 +22,21 @@ public class Usuario {
 
 	private String getId() {
 		StringBuilder stringBuilder = new StringBuilder(this.id);
+		if (this.id.length() == 11) {
+			stringBuilder.insert(this.id.length() - 8, '.');
+			stringBuilder.insert(this.id.length() - 4, '.');
+			stringBuilder.insert(this.id.length(), '-');
+			return stringBuilder.toString();
+		}
+		stringBuilder.insert(this.id.length() - 12, '.');
 		stringBuilder.insert(this.id.length() - 8, '.');
-		stringBuilder.insert(this.id.length() - 4, '.');
-		stringBuilder.insert(this.id.length() , '-');
+		stringBuilder.insert(this.id.length() - 4, '/');
+		stringBuilder.insert(this.id.length() + 1, '-');
 		return stringBuilder.toString();
+	}
+
+	public String getNome() {
+		return this.nome;
 	}
 
 }

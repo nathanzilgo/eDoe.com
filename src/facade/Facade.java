@@ -25,7 +25,7 @@ public class Facade {
 		return controller.pesquisaUsuarioPorId(id);
 	}
 
-	public String pesquisaUsuarioPorNome(String nome) {
+	public String pesquisaUsuarioPorNome(String nome) throws Exception {
 		return controller.pesquisaUsuarioPorNome(nome);
 	}
 

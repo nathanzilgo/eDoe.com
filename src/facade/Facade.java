@@ -9,7 +9,7 @@ public class Facade {
 	private Controller controller = new Controller();
 
 	public static void main(String[] args) {
-		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt" };
+		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt", "acceptionTest/use_case_2.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -35,6 +35,33 @@ public class Facade {
 
 	public void removeUsuario(String id) {
 		controller.removeUsuario(id);
+	}
+	
+	public void adicionaDescritor(String descricao) throws Exception{
+		this.controller.adicionaDescritor(descricao);
+	}
+	/**
+	 * Retorna o ID do item cadastrado.
+	 * 
+	 * @param idDoador
+	 * @param descricao
+	 * @param quantidade
+	 * @param tags
+	 * @return Integer
+	 * @throws Exception
+	 */
+	public int adicionaItemParaDoacao(String idDoador, String descricao, int quantidade, String tags) throws Exception{
+		return this.controller.adicionaItemParaDoacao(idDoador, descricao, quantidade, tags);
+	}
+	
+	/**
+	 * Exibe um item cadastrado em um doador;
+	 * @param idItem
+	 * @param idDoador
+	 * @return String
+	 */
+	public String exibeItem(int idItem, String idDoador) {
+		return this.controller.exibeItem(idItem, idDoador);
 	}
 
 }

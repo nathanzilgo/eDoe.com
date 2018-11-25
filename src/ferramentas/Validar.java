@@ -1,13 +1,24 @@
 package ferramentas;
 
+import controllers.*;
+import internas.*;
+
 public class Validar {
 
 	private static boolean isNull(String valor) {
 		return valor == null;
 	}
+	
+	private static boolean isNull(Integer valor) {
+		return valor == null;
+	}
 
 	private static boolean isEmpty(String valor) {
 		return valor.trim().equals("");
+	}
+	
+	private static boolean isEmpty(Integer valor) {
+		return Integer.toString(valor).trim().equals("");
 	}
 	
 	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe)
@@ -64,6 +75,13 @@ public class Validar {
 	 */
 	public static void retiraEspacos(String entrada) {
 		entrada = entrada.trim();
+	}
+	
+	public static void validaExibeItem(int idItem, String idDoador) {
+		if(isNull(idDoador) || isEmpty(idDoador)) throw new IllegalArgumentException();
+		if(isNull(idItem) || isEmpty(idItem)) throw new IllegalArgumentException();
+		
+		
 	}
 
 }

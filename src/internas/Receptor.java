@@ -11,4 +11,16 @@ public class Receptor extends Usuario {
 		return super.toString() + "receptor";
 	}
 
+	@Override
+	public int adicionaItem(Item item) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean existeItem(int idItem) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

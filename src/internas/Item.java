@@ -1,36 +1,69 @@
 package internas;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ * Classe que representa um Item para doação.
+ * 
  * Dois itens para doação são iguais se eles tiverem o mesmo descritor de item e as mesmas tags (na mesma ordem).
+ * O ID de cada item é gerado a partir da ordem em que cada um foi posto na estrutura de Doador.
+ * 
  * @author Nathan Fernandes
  *
  */
 public class Item {
-	private String id;
-	private int quantidade;
-	private List<String> tags;
-	private String descricao;
-	private String data;
 	
-	public Item(String id, int quantidade, List<String> tags, String data) {
+	private int id; // definido na adição de um item em Doador.java
+	private int quantidade;	
+	private String tags;
+	private String descricao;
+	
+	public Item(String descricao, int quantidade, String tags) {
 		super();
-		this.id = id;
+		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
-		this.data = data;
 	}
 	
-	public void setQuantidade(int novaQuantidade) {
-		this.quantidade = novaQuantidade;
-	}
 	
-	public void setTags(List<String> newTags) {
-		this.tags = newTags;
+	public int getId() {
+		return id;
 	}
-	
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	public String getTags() {
+		return tags;
+	}
+
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,6 +93,33 @@ public class Item {
 		} else if (!tags.equals(other.tags))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.id);
+		builder.append(" - ");
+		builder.append(this.descricao);
+		builder.append(", tags: [" + this.tagsToString() + "]");
+		builder.append(", quantidade: " + this.quantidade);
+		
+		return builder.toString();
+	}
+	
+	public String tagsToString() {
+		String saida = "";
+		
+		for(char str: this.tags.toCharArray()) {
+			if(str != ',') {
+				saida += Character.toString(str);
+			}
+			else {
+				saida += Character.toString(str) + " ";
+			}
+		}
+		
+		return saida;
 	}
 	
 	

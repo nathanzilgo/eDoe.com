@@ -1,7 +1,6 @@
 package internas;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class Doador extends Usuario {
 	
@@ -30,6 +29,8 @@ public class Doador extends Usuario {
 		return contadorDeItens;
 	}
 	
+	
+	
 	@Override
 	public String toString() {
 		return super.toString() + "doador";
@@ -38,5 +39,10 @@ public class Doador extends Usuario {
 	@Override
 	public boolean existeItem(int idItem) {
 		return this.itens.containsKey(idItem);
+	}
+
+	@Override
+	public boolean existeItem(Item item) {
+		return this.itens.containsValue(item);
 	}
 }

@@ -17,8 +17,8 @@ import internas.Usuario;
 
 public class Controller {
 
-	private LinkedHashMap<String, Usuario> mapaUsuarios;
-	private HashSet<String> descritores;
+	protected LinkedHashMap<String, Usuario> mapaUsuarios;
+	protected HashSet<String> descritores;
 
 	public Controller() {
 		this.mapaUsuarios = new LinkedHashMap<>();
@@ -212,7 +212,14 @@ public class Controller {
 		}
 		
 		Item itemAdd = new Item(descricao, quantidade, tags);
-
+		
+		if(this.mapaUsuarios.get(id).existeItem(itemAdd)) {
+			int quantidadeAtual = this.mapaUsuarios.get(id).getItem(itemAdd).getQuantidade();
+			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidadeAtual + quantidade);
+			
+			return this.mapaUsuarios.get(id).getItem(itemAdd).getId();
+		}
+		
 		return this.mapaUsuarios.get(id).adicionaItem(itemAdd);
 	}
 	

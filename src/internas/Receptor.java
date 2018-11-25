@@ -23,4 +23,10 @@ public class Receptor extends Usuario {
 		return false;
 	}
 
+	@Override
+	public boolean existeItem(Item item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

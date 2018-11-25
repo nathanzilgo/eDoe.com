@@ -1,8 +1,5 @@
 package ferramentas;
 
-import controllers.*;
-import internas.*;
-
 public class Validar {
 
 	private static boolean isNull(String valor) {

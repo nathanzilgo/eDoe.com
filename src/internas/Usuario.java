@@ -98,8 +98,35 @@ public abstract class Usuario {
 	 */
 	public abstract int adicionaItem(Item item);
 	
+	/**
+	 * Implementado em Doador.java
+	 * Possui comportamento polimorfico com o outro método do mesmo nome
+	 * @param idItem
+	 * @return
+	 */
 	public abstract boolean existeItem(int idItem);
 	
+	/**
+	 * Implementado em Doador.java
+	 * Possui comportamento polimorfico com o outro método do mesmo nome.
+	 * @param item
+	 * @return
+	 */
+	public abstract boolean existeItem(Item item);
+	
+	/**
+	 * Procura por um item no mapa e o retorna.
+	 * @param item
+	 * @return
+	 */
+	public Item getItem(Item item) {
+		for(Item i: this.itens.values()) {
+			if(i.equals(item)) {
+				return item;
+			}
+		}
+		return null;
+	}
 }
 
 

@@ -3,16 +3,28 @@ package controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+<<<<<<< HEAD
+=======
+import java.util.HashSet;
+>>>>>>> us2_nathan
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import ferramentas.Validar;
 import internas.Doador;
+import internas.Item;
 import internas.Receptor;
 import internas.Usuario;
 
 public class Controller {
-	private LinkedHashMap<String, Usuario> mapaUsuarios = new LinkedHashMap<>();
+
+	private LinkedHashMap<String, Usuario> mapaUsuarios;
+	private HashSet<String> descritores;
+
+	public Controller() {
+		this.mapaUsuarios = new LinkedHashMap<>();
+		this.descritores = new HashSet<>();
+	}
 
 	/**
 	 * Metodo responsevel por criar um novo doador e adiciona-lo no mapa de
@@ -143,5 +155,86 @@ public class Controller {
 		}
 		sc.close();
 	}
+
+	// -------------------------------------------------------------------------US2------------------------------------------------------------------------
+
+
+	/**
+	 * Retorna uma descrição caso ela esteja no conjunto.
+	 * 
+	 * @param descricao
+	 * @return
+	 */
+	public String getDescritor(String descricao) {
+		for (String str : this.descritores) {
+			if (str.equals(descricao.toLowerCase())) {
+				return str;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Valida se a descrição é nula ou vazia. Caso esteja correto, remove espaços
+	 * desnecessários da entrada e a adiciona no conjunto de descritores.
+	 * 
+	 * @param descricao
+	 * @throws Exception
+	 */
+	public void adicionaDescritor(String descricao) throws Exception {
+		Validar.validaDescritor(descricao);
+		Validar.retiraEspacos(descricao);
+
+		if (this.descritores.contains(descricao.toLowerCase())) {
+			throw new IllegalArgumentException(
+					"Descritor de Item ja existente: " + this.getDescritor(descricao.toLowerCase()) + ".");
+		} else {
+			this.descritores.add(descricao.toLowerCase());
+		}
+	}
+
+	/**
+	 * Adiciona um item a um usuario.
+	 * retorna o id do usuario como String.
+	 * 
+	 * @param id
+	 * @param descricao
+	 * @param quantidade
+	 * @param tags
+	 * @return String
+	 */
+	public int adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) throws Exception{
+		Validar.validaAdicionaItem(id, descricao, quantidade, tags);
+		
+		if(!this.existeusuario(id)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
+		}
+		
+		Item itemAdd = new Item(descricao, quantidade, tags);
+
+		return this.mapaUsuarios.get(id).adicionaItem(itemAdd);
+	}
+	
+	/**
+	 * Retorna o método toString() de Item.java
+	 * Recebe como parametros o id do Item a ser exibido e do doador que possui o item.
+	 * @param idItem
+	 * @param idDoador
+	 * @return String
+	 */
+	public String exibeItem(int idItem, String idDoador) {
+		Validar.validaExibeItem(idItem, idDoador);
+		
+		if(!this.existeusuario(idDoador)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: \"" + idDoador + "\".");
+		}
+		
+		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) {
+			throw new IllegalArgumentException("Item nao encontrado: \"" + idItem + "\".");
+		}
+		
+		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
+	}
+	
 
 }

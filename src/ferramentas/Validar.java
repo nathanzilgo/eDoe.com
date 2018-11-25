@@ -16,18 +16,13 @@ public class Validar {
 	private static boolean isEmpty(String valor) {
 		return valor.trim().equals("");
 	}
-<<<<<<< HEAD
-
-	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe) {
-=======
 	
 	private static boolean isEmpty(Integer valor) {
 		return Integer.toString(valor).trim().equals("");
 	}
 	
-	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe)
-			throws Exception {
->>>>>>> us2_nathan
+	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe) throws Exception {
+
 		if (isNull(nome) || isEmpty(nome))
 			throw new IllegalArgumentException("Entrada invalida: nome nao pode ser vazio ou nulo.");
 		if (isNull(email) || isEmpty(email))
@@ -92,7 +87,6 @@ public class Validar {
 	public static void validaExibeItem(int idItem, String idDoador) {
 		if(isNull(idDoador) || isEmpty(idDoador)) throw new IllegalArgumentException();
 		if(isNull(idItem) || isEmpty(idItem)) throw new IllegalArgumentException();
-		
 		
 	}
 

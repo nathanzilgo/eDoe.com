@@ -1,32 +1,25 @@
 package internas;
 
-<<<<<<< HEAD
-import ferramentas.Validar;
-
-public class Usuario {
-=======
-import java.util.LinkedHashMap;
 import java.util.Map;
+
+import ferramentas.Validar;
 
 public abstract class Usuario {
 	
->>>>>>> us2_nathan
+
 	private String id;
 	private String nome;
 	private String email;
 	private String celular;
 	private String classe;
-<<<<<<< HEAD
 
-	public Usuario(String id, String nome, String email, String celular, String classe) {
-=======
 	/**
 	 * Estrutura que armazena os itens dos usuários doadores
 	 */
 	protected Map<Integer, Item> itens;
 	
-	public Usuario(String id, String nome, String email, String telefone, String classe) {
->>>>>>> us2_nathan
+	public Usuario(String id, String nome, String email, String celular, String classe) {
+
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -82,7 +75,6 @@ public abstract class Usuario {
 		return this.getItens().get(id);
 	}
 
-<<<<<<< HEAD
 	public void atualizaUsuario(String nome, String email, String celular) {
 		if (Validar.checaArgumento(nome)) {
 			this.nome = nome;
@@ -98,7 +90,7 @@ public abstract class Usuario {
 	public String toString() {
 		return this.nome + "/" + getId() + ", " + this.email + ", " + this.celular + ", status: ";
 	}
-=======
+	
 	/**
 	 * Implementada em Doador.java
 	 * @param item
@@ -107,7 +99,6 @@ public abstract class Usuario {
 	public abstract int adicionaItem(Item item);
 	
 	public abstract boolean existeItem(int idItem);
->>>>>>> us2_nathan
 	
 }
 

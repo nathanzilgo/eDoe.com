@@ -3,10 +3,9 @@ package controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-<<<<<<< HEAD
-=======
+
 import java.util.HashSet;
->>>>>>> us2_nathan
+
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -38,8 +37,10 @@ public class Controller {
 	 * @param classe  Classe do doador.
 	 * @return Retorna o id do doador.
 	 */
-	public String adicionaDoador(String id, String nome, String email, String celular, String classe) {
+	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception{
+		
 		Validar.adicionaUsuario(id, nome, email, celular, classe);
+		
 		if (!existeusuario(id)) {
 			if (existeClasse(classe)) {
 				Usuario novoUsuario = new Doador(id, nome, email, celular, classe);
@@ -226,11 +227,11 @@ public class Controller {
 		Validar.validaExibeItem(idItem, idDoador);
 		
 		if(!this.existeusuario(idDoador)) {
-			throw new IllegalArgumentException("Usuario nao encontrado: \"" + idDoador + "\".");
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
 		}
 		
 		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) {
-			throw new IllegalArgumentException("Item nao encontrado: \"" + idItem + "\".");
+			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 		}
 		
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();

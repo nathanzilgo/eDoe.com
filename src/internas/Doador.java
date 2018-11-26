@@ -1,19 +1,13 @@
 package internas;
 
 import java.util.LinkedHashMap;
+import controllers.*;
 
 public class Doador extends Usuario {
-	
-	/**
-	 * Variavel que é incrementada a cada item adicionado ao sistema.
-	 * gera o id de cada item.
-	 */
-	int contadorDeItens;
-	
+		
 	public Doador(String id, String nome, String email, String celular, String classe) {
 		super(id, nome, email, celular, classe);
 		this.itens = new LinkedHashMap<>();
-		this.contadorDeItens = 0;
 	}
 	
 	/**
@@ -21,12 +15,12 @@ public class Doador extends Usuario {
 	 * Coloca o Id de Item em seus atributos.
 	 */
 	public int adicionaItem(Item item) {
-		contadorDeItens ++;
-		this.itens.put(contadorDeItens, item);
+		ItemController.contadorDeItens ++;
+		this.itens.put(ItemController.contadorDeItens, item);
 		
-		this.itens.get(contadorDeItens).setId(contadorDeItens);
+		this.itens.get(ItemController.contadorDeItens).setId(ItemController.contadorDeItens);
 		
-		return contadorDeItens;
+		return ItemController.contadorDeItens;
 	}
 	
 	
@@ -43,6 +37,11 @@ public class Doador extends Usuario {
 
 	@Override
 	public boolean existeItem(Item item) {
-		return this.itens.containsValue(item);
+		for(Item i: this.itens.values()) {
+			if(i.equals(item)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

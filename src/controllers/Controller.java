@@ -214,9 +214,8 @@ public class Controller {
 		Item itemAdd = new Item(descricao, quantidade, tags);
 		
 		if(this.mapaUsuarios.get(id).existeItem(itemAdd)) {
-			int quantidadeAtual = this.mapaUsuarios.get(id).getItem(itemAdd).getQuantidade();
-			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidadeAtual + quantidade);
-			
+			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidade);
+
 			return this.mapaUsuarios.get(id).getItem(itemAdd).getId();
 		}
 		

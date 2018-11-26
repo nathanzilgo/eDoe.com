@@ -122,7 +122,7 @@ public abstract class Usuario {
 	public Item getItem(Item item) {
 		for(Item i: this.itens.values()) {
 			if(i.equals(item)) {
-				return item;
+				return i;
 			}
 		}
 		return null;

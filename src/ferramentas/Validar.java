@@ -87,7 +87,7 @@ public class Validar {
 		
 	}
 	
-	public static void validaAtualizaItem(int idItem, String idUsuario, int quantidade, String tags) throws Exception{
+	public static void validaItem(int idItem, String idUsuario) throws Exception{
 		if(idItem < 0) throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
 		if(isNull(idUsuario) || isEmpty(idUsuario)) throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
 		

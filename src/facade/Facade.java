@@ -79,5 +79,15 @@ public class Facade {
 	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception{
 		return this.controller.atualizaItemParaDoacao(idItem, idDoador, quantidade, tags);
 	}
-
+	/**
+	 * Remove um item cadastrado em um usuario doador caso ambos existam.
+	 * nao remove o descritor do item
+	 * 
+	 * @param idItem
+	 * @param idDoador
+	 * @throws Exception
+	 */
+	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception{
+		this.controller.removeItemParaDoacao(idItem, idDoador);
+	}
 }

@@ -257,7 +257,7 @@ public class Controller {
 	 * @throws Exception
 	 */
 	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception{
-		Validar.validaAtualizaItem(idItem, idDoador, quantidade, tags);
+		Validar.validaItem(idItem, idDoador);
 		
 		if(!this.existeusuario(idDoador)) throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
 		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
@@ -266,7 +266,18 @@ public class Controller {
 		if(tags != null) this.mapaUsuarios.get(idDoador).getItem(idItem).setTags(tags);
 		
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
-	}	
+	}
+	
+	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception{
+		Validar.validaItem(idItem, idDoador);
+		
+		
+		if(!this.existeusuario(idDoador)) throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
+		if(this.mapaUsuarios.get(idDoador).getItens().isEmpty()) throw new IllegalArgumentException("O Usuario nao possui itens cadastrados.");
+		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
+		
+		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
+	}
 		
 
 }

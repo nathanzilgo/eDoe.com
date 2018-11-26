@@ -2,8 +2,9 @@
 
 ## 		Sprint 1:
 ###			US 1:
-				Lucio Nathan
 				Gyovanna Costa
+				Lucio Nathan
+				Nathan Fernandes
 				
 ###			US 2:
 				Nathan Fernandes

@@ -55,13 +55,29 @@ public class Facade {
 	}
 	
 	/**
-	 * Exibe um item cadastrado em um doador;
+	 * Exibe um item cadastrado em um doador caso ele e o doador existam
+	 * e as entradas sejam validas.
+	 * 
 	 * @param idItem
 	 * @param idDoador
 	 * @return String
 	 */
-	public String exibeItem(int idItem, String idDoador) {
+	public String exibeItem(int idItem, String idDoador) throws Exception{
 		return this.controller.exibeItem(idItem, idDoador);
+	}
+	
+	/**
+	 * Modifica as tags e quantidade de um item especifico de um doador especifico no sistema, caso ambos existam
+	 * e as entradas sejam validas.
+	 * 
+	 * @param idItem
+	 * @param idDoador
+	 * @param quantidade
+	 * @param tags
+	 * @throws Exception
+	 */
+	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception{
+		return this.controller.atualizaItemParaDoacao(idItem, idDoador, quantidade, tags);
 	}
 
 }

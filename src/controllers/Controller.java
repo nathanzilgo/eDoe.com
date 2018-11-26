@@ -229,7 +229,7 @@ public class Controller {
 	 * @param idDoador
 	 * @return String
 	 */
-	public String exibeItem(int idItem, String idDoador) {
+	public String exibeItem(int idItem, String idDoador) throws Exception{
 		Validar.validaExibeItem(idItem, idDoador);
 		
 		if(!this.existeusuario(idDoador)) {
@@ -243,5 +243,30 @@ public class Controller {
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
 	}
 	
+	/**
+	 * Atualiza um item para doação.
+	 * Apenas as tags e quantidade podem ser modificadas.
+	 * Quantidade so eh modificada se o novo valor for maior que 0
+	 * Tags so sao modificadas se a nova string nao for nula
+	 * retorna o toString() do Item em questão.
+	 * @param idItem
+	 * @param idDoador
+	 * @param quantidade
+	 * @param tags
+	 * @return String
+	 * @throws Exception
+	 */
+	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception{
+		Validar.validaAtualizaItem(idItem, idDoador, quantidade, tags);
+		
+		if(!this.existeusuario(idDoador)) throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
+		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
+		
+		if(quantidade != 0 ) this.mapaUsuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
+		if(tags != null) this.mapaUsuarios.get(idDoador).getItem(idItem).setTags(tags);
+		
+		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
+	}	
+		
 
 }

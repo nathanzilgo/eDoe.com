@@ -7,4 +7,5 @@ public class ItemController  extends Controller{
 		super();
 		this.contadorDeItens = contadorDeItens;
 	}
+	
 }

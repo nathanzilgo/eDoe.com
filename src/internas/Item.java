@@ -50,7 +50,11 @@ public class Item {
 
 
 	public void setTags(String tags) {
-		this.tags = tags;
+		if(tags.equals(null) || tags.trim().isEmpty()) {
+			this.tags = "";
+		}else {
+			this.tags = tags;
+		}
 	}
 
 
@@ -109,6 +113,9 @@ public class Item {
 	
 	public String tagsToString() {
 		String saida = "";
+		
+		if(tags == null) return saida;
+		if(tags.trim().isEmpty()) return saida;
 		
 		for(char str: this.tags.toCharArray()) {
 			if(str != ',') {

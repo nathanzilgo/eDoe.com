@@ -81,10 +81,16 @@ public class Validar {
 		entrada = entrada.trim();
 	}
 	
-	public static void validaExibeItem(int idItem, String idDoador) {
+	public static void validaExibeItem(int idItem, String idDoador) throws Exception{
 		if(isNull(idDoador) || isEmpty(idDoador)) throw new IllegalArgumentException();
 		if(isNull(idItem) || isEmpty(idItem)) throw new IllegalArgumentException();
 		
 	}
+	
+	public static void validaAtualizaItem(int idItem, String idUsuario, int quantidade, String tags) throws Exception{
+		if(idItem < 0) throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
+		if(isNull(idUsuario) || isEmpty(idUsuario)) throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
+		
+ 	}
 
 }

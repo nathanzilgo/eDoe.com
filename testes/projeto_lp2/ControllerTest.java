@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import controllers.Controller;
 import internas.Usuario;
+import junit.framework.Assert;
 
 class ControllerTest {
 
@@ -133,7 +134,7 @@ class ControllerTest {
 
 	@Test
 	void testPesquisaUsuarioPorIdValido() throws Exception {
-		// Pesquisa por doador ja cadastrado
+		// Pesquisa doador ja cadastrado por id
 		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
 				"pessoa_fisica");
 		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
@@ -143,25 +144,63 @@ class ControllerTest {
 
 	@Test
 	void testPesquisaUsuarioPorIdInvalido() {
-		// Pesquisa por doador id null
+		// Pesquisa doador por id null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId(null);
 		});
 
-		// Pesquisa por doador id vazio
+		// Pesquisa doador por id vazio
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId("                  ");
 		});
 
-		// Pesquisa por doador inexistente
+		// Pesquisa doador por id inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId("12345678901");
 		});
 	}
 
 	@Test
-	void testPesquisaUsuarioPorNome() {
-		fail("Not yet implemented");
+	void testPesquisaUsuarioPorNomeValido() throws Exception {
+		/*
+		 * Pesquisa doador ja cadastrado por nome, unico doador cadastrado com esse nome
+		 * no sistema.
+		 */
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+				controller.pesquisaUsuarioPorNome("Raquel Lopes"));
+
+		/*
+		 * Pesquisa doador ja cadastrado por nome, varios doadores cadastrados com esse
+		 * nome no sistema.
+		 */
+		controller.adicionaDoador("12345678900", "Igreja", "igrejarosario@gmail.com", "(21) 9888-0021", "igreja");
+		controller.adicionaDoador("12345648577", "Igreja", "igrejamatias@gmail.com", "(21) 3353-2221", "igreja");
+		controller.adicionaDoador("36271892019", "Igreja", "igrejadejesus@gmail.com", "(21) 9899-0023", "igreja");
+		assertEquals(
+				"Igreja/123.456.789-00, igrejarosario@gmail.com, (21) 9888-0021, status: doador | Igreja/123.456.485-77, igrejamatias@gmail.com, (21) 3353-2221, status: doador | Igreja/362.718.920-19, igrejadejesus@gmail.com, (21) 9899-0023, status: doador",
+				controller.pesquisaUsuarioPorNome("Igreja"));
+
+	}
+
+	@Test
+	void testPesquisaUsuarioPorNomeInvalido() throws Exception {
+		// Pesquisa doador por nome null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorNome(null);
+		});
+
+		// Pesquisa doador por nome vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorNome("");
+		});
+
+		// Pesquisa doador por nome inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorNome("Matheus");
+		});
+
 	}
 
 	@Test

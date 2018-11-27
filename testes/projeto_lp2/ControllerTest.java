@@ -2,6 +2,7 @@ package projeto_lp2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 
 import org.junit.jupiter.api.Assertions;
@@ -131,8 +132,31 @@ class ControllerTest {
 	}
 
 	@Test
-	void testPesquisaUsuarioPorId() {
-		fail("Not yet implemented");
+	void testPesquisaUsuarioPorIdValido() throws Exception {
+		// Pesquisa por doador ja cadastrado
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+				controller.pesquisaUsuarioPorId("01234567899"));
+
+	}
+
+	@Test
+	void testPesquisaUsuarioPorIdInvalido() {
+		// Pesquisa por doador id null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorId(null);
+		});
+
+		// Pesquisa por doador id vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorId("                  ");
+		});
+
+		// Pesquisa por doador inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorId("12345678901");
+		});
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.LinkedHashMap;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import controllers.Controller;
@@ -52,6 +53,81 @@ class ControllerTest {
 		// Adiciona sociedade como doador.
 		assertEquals("12345678901", controller.adicionaDoador("12345678901", "Sociedade", "sociedade@gmail.com",
 				"3321 - 4166", "sociedade"));
+	}
+
+	@Test
+	void testAdicionaDoadorInvalido() throws Exception {
+		// Adiciona doador cpf/cnpj null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador(null, "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador cpf/cnpj vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("           ", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador nome null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", null, "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador nome vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador email null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", null, "(83) 9990-9999", "pessoa_fisica");
+		});
+
+		// Adiciona doador email vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "       ", "(83) 9990-9999", "pessoa_fisica");
+		});
+
+		// Adiciona doador telefone null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", null,
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador telefone vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador classe null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					null);
+		});
+
+		// Adiciona doador classe vazia
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"    ");
+		});
+
+		// Adiciona doador existente
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"pessoa_fisica");
+		});
+
+		// Adiciona doador classe inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+					"nova_pessoa");
+		});
 	}
 
 	@Test

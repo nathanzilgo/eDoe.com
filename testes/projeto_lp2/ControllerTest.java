@@ -273,17 +273,34 @@ class ControllerTest {
 	}
 
 	@Test
-	void testLerReceptores() {
-		fail("Not yet implemented");
+	void testAdicionaDescritorValido() throws Exception {
+		// Adiciona descritor valido
+		controller.adicionaDescritor("nova descricao         ");
+		assertEquals("nova descricao", controller.getDescritor("nova descricao"));
+	}
+
+	@Test
+	void testAdicionaDescritorInvalido() throws Exception {
+		// Adiciona descritor com descricao null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDescritor(null);
+		});
+
+		// Adiciona descritor com descricao vazia
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDescritor("     ");
+		});
+
+		// Adiciona descritor com descricao existente
+		controller.adicionaDescritor("nova descricao");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.adicionaDescritor("NOVA DESCRICAO           ");
+		});
+
 	}
 
 	@Test
 	void testGetDescritor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testAdicionaDescritor() {
 		fail("Not yet implemented");
 	}
 

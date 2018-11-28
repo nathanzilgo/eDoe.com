@@ -393,12 +393,12 @@ class ControllerTest {
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 
-		// Exibe item com doador nao existente
+		// Exibe item com doador inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.exibeItem(1, "000000000");
 		});
 
-		// Exibe item com id de item nao existente
+		// Exibe item com id de item inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.exibeItem(4, "01234567899");
 		});
@@ -448,8 +448,41 @@ class ControllerTest {
 	}
 
 	@Test
-	void testRemoveItemParaDoacao() {
-		fail("Not yet implemented");
+	void testRemoveItemParaDoacaoValido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+		// Retornando toString do item cadeira de rodas do doador Raquel
+		assertEquals("1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1",
+				controller.exibeItem(1, "01234567899"));
+
+		// Removendo item
+		controller.removeItemParaDoacao(1, "01234567899");
+		// Deve retornar um erro que item nao existe para esse doador
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.exibeItem(1, "01234567899");
+		});
+	}
+
+	@Test
+	void testRemoveItemParaDoacaoInvalido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+
+		// Remove item com doador inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(1, "00000000000", 1, "manual, adulto");
+		});
+
+		// Remove item com item inexistente para esse doador
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(4, "01234567899", 1, "manual, adulto");
+		});
 	}
 
 }

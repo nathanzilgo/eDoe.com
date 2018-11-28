@@ -337,9 +337,6 @@ class ControllerTest {
 
 	@Test
 	void testAdicionaItemParaDoacaoInvalido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Adiciona item com id null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.adicionaItemParaDoacao(null, "cadeira de rodas", 1, "manual, adulto");
@@ -377,8 +374,34 @@ class ControllerTest {
 	}
 
 	@Test
-	void testExibeItem() {
-		fail("Not yet implemented");
+	void testExibeItemValido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+		// Retornando toString do item do doador Raquel
+		assertEquals("1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1",
+				controller.exibeItem(1, "01234567899"));
+	}
+
+	@Test
+	void testExibeItemInvalido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+
+		// Exibe item com doador nao existente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.exibeItem(1, "000000000");
+		});
+
+		// Exibe item com id de item nao existente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.exibeItem(4, "01234567899");
+		});
 	}
 
 	@Test

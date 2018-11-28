@@ -380,7 +380,7 @@ class ControllerTest {
 				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
-		// Retornando toString do item do doador Raquel
+		// Retornando toString do item cadeira de rodas do doador Raquel
 		assertEquals("1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1",
 				controller.exibeItem(1, "01234567899"));
 	}
@@ -405,8 +405,46 @@ class ControllerTest {
 	}
 
 	@Test
-	void testAtualizaItemParaDoacao() {
-		fail("Not yet implemented");
+	void testAtualizaItemParaDoacaoValido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+
+		// Retornando toString do item cadeira de rodas do doador Raquel
+		assertEquals("1 - cadeira de rodas, tags: [automatica,  infatil], quantidade: 5",
+				controller.atualizaItemParaDoacao(1, "01234567899", 5, "automatica, infatil"));
+	}
+
+	@Test
+	void testAtualizaItemParaDoacaoInvalido() throws Exception {
+		// Criado doador Raquel
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
+		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
+
+		// Atualiza item com doador inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(1, "00000000000", 1, "manual, adulto");
+		});
+
+		// Atualiza item com item inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(4, "01234567899", 1, "manual, adulto");
+		});
+
+		// Adiciona item com quantidade invalida
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(4, "01234567899", 0, "manual, adulto");
+		});
+
+		// Adiciona item com quantidade negativa
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaItemParaDoacao(4, "01234567899", -1, "manual, adulto");
+		});
+
 	}
 
 	@Test

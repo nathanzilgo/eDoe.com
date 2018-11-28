@@ -18,11 +18,6 @@ class ControllerTest {
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 
 	@Test
-	void testController() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testAdicionaDoadorValido() throws Exception {
 		// Adiciona pessoa física como doador.
 		assertEquals("01234567899", controller.adicionaDoador("01234567899", "Raquel Lopes",
@@ -144,17 +139,17 @@ class ControllerTest {
 
 	@Test
 	void testPesquisaUsuarioPorIdInvalido() {
-		// Pesquisa doador por id null
+		// Pesquisa usuario por id null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId(null);
 		});
 
-		// Pesquisa doador por id vazio
+		// Pesquisa usuario por id vazio
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId("                  ");
 		});
 
-		// Pesquisa doador por id inexistente
+		// Pesquisa usuario por id inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId("12345678901");
 		});
@@ -185,18 +180,18 @@ class ControllerTest {
 	}
 
 	@Test
-	void testPesquisaUsuarioPorNomeInvalido() throws Exception {
-		// Pesquisa doador por nome null
+	void testPesquisaUsuarioPorNomeInvalido() {
+		// Pesquisa usuario por nome null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorNome(null);
 		});
 
-		// Pesquisa doador por nome vazio
+		// Pesquisa usuario por nome vazio
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorNome("");
 		});
 
-		// Pesquisa doador por nome inexistente
+		// Pesquisa usuario por nome inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorNome("Matheus");
 		});
@@ -228,18 +223,18 @@ class ControllerTest {
 	}
 
 	@Test
-	void testAtualizaUsuarioInvalido() throws Exception {
-		// Atualiza doador por id null
+	void testAtualizaUsuarioInvalido() {
+		// Atualiza usuario por id null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.atualizaUsuario(null, "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999");
 		});
 
-		// Atualiza doador por id vazio
+		// Atualiza usuario por id vazio
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.atualizaUsuario("          ", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999");
 		});
 
-		// Atualiza doador por id inexistente
+		// Atualiza usuario por id inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.atualizaUsuario("12345678901", "Raquel Lopes", "raquel@computacao.ufcg.edu.br",
 					"(83) 9990-9999");
@@ -248,8 +243,33 @@ class ControllerTest {
 	}
 
 	@Test
-	void testRemoveUsuario() {
-		fail("Not yet implemented");
+	void testRemoveUsuarioValido() throws Exception {
+		// Remove doador ja cadastrado
+		String id = "01234567899";
+		controller.adicionaDoador(id, "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		controller.removeUsuario(id);
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.pesquisaUsuarioPorId(id);
+		});
+	}
+
+	@Test
+	void testRemoveUsuarioInvalido() {
+		// Remove usuario por id null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.removeUsuario(null);
+		});
+
+		// Remove usuario por id vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.removeUsuario("");
+		});
+
+		// Remove usuario por id inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.removeUsuario("01234567899");
+		});
 	}
 
 	@Test

@@ -35,7 +35,23 @@ class UsuarioTest {
 
 	@Test
 	void testSetEmail() {
-		fail("Not yet implemented");
+		// Cadastrando doador
+		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Alterando email do doador
+		this.novoUsuario.setEmail("raquel@ccc.ufcg.edu.br");
+		// Retorna representacao textual do doador com email atualizado
+		assertEquals("Raquel Lopes/012.345.678-99, raquel@ccc.ufcg.edu.br, (83) 9990-9999, status: doador",
+				this.novoUsuario.toString());
+
+		// Cadastrando novo receptor
+		this.novoUsuario = new Receptor("91724529000103", "Pedro Henrique", "pedrohenriquedavimoura_@keffin.com.br",
+				"(27) 98460-3045", "ORGAO_PUBLICO_MUNICIPAL");
+		// Alterando email do receptor
+		this.novoUsuario.setEmail("pedro@gmail.com");
+		// Retorna representacao textual do receptor com email atualizado
+		assertEquals("Pedro Henrique/91.724.529/0001-03, pedro@gmail.com, (27) 98460-3045, status: receptor",
+				this.novoUsuario.toString());
 	}
 
 	@Test

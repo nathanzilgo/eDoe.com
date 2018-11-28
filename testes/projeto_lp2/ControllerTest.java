@@ -300,8 +300,16 @@ class ControllerTest {
 	}
 
 	@Test
-	void testGetDescritor() {
-		fail("Not yet implemented");
+	void testGetDescritorValido() throws Exception {
+		// Retorna descritor ja cadastrado
+		controller.adicionaDescritor("nova descricao         ");
+		assertEquals("nova descricao", controller.getDescritor("nova descricao"));
+	}
+
+	@Test
+	void testGetDescritorInvalido() {
+		// Retorna descritor inexistente
+		assertEquals(null, controller.getDescritor("nova descricao"));
 	}
 
 	@Test

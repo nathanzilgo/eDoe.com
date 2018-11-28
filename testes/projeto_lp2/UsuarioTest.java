@@ -56,7 +56,24 @@ class UsuarioTest {
 
 	@Test
 	void testSetTelefone() {
-		fail("Not yet implemented");
+		// Cadastrando doador
+		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Alterando email do doador
+		this.novoUsuario.setTelefone("0000 - 0000");
+		// Retorna representacao textual do doador com telefone atualizado
+		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, 0000 - 0000, status: doador",
+				this.novoUsuario.toString());
+
+		// Cadastrando novo receptor
+		this.novoUsuario = new Receptor("91724529000103", "Pedro Henrique", "pedrohenriquedavimoura_@keffin.com.br",
+				"(27) 98460-3045", "ORGAO_PUBLICO_MUNICIPAL");
+		// Alterando email do receptor
+		this.novoUsuario.setTelefone("(27) 0000 - 0000");
+		// Retorna representacao textual do receptor com telefone atualizado
+		assertEquals(
+				"Pedro Henrique/91.724.529/0001-03, pedrohenriquedavimoura_@keffin.com.br, (27) 0000 - 0000, status: receptor",
+				this.novoUsuario.toString());
 	}
 
 	@Test

@@ -37,10 +37,10 @@ public class Controller {
 	 * @param classe  Classe do doador.
 	 * @return Retorna o id do doador.
 	 */
-	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception{
-		
+	public String adicionaDoador(String id, String nome, String email, String celular, String classe) throws Exception {
+
 		Validar.adicionaUsuario(id, nome, email, celular, classe);
-		
+
 		if (!existeusuario(id)) {
 			if (existeClasse(classe)) {
 				Usuario novoUsuario = new Doador(id, nome, email, celular, classe);
@@ -96,11 +96,11 @@ public class Controller {
 	 * Metodo responsavel por atualizar os dados de um usuario. Caso algum campo
 	 * seja vazio ou nulo, ele não atualiza esse campo.
 	 * 
-	 * @param id Key do usuario a ser atualizado.
-	 * @param nome Nome a ser atualizado.
-	 * @param email Email a ser atualizado.
+	 * @param id      Key do usuario a ser atualizado.
+	 * @param nome    Nome a ser atualizado.
+	 * @param email   Email a ser atualizado.
 	 * @param celular Celular a ser atualizado.
-	 * @return Retorna uma representacao em String do usuario. 
+	 * @return Retorna uma representacao em String do usuario.
 	 */
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
@@ -159,7 +159,6 @@ public class Controller {
 
 	// -------------------------------------------------------------------------US2------------------------------------------------------------------------
 
-
 	/**
 	 * Retorna uma descrição caso ela esteja no conjunto.
 	 * 
@@ -184,7 +183,7 @@ public class Controller {
 	 */
 	public void adicionaDescritor(String descricao) throws Exception {
 		Validar.validaDescritor(descricao);
-		Validar.retiraEspacos(descricao);
+		descricao = Validar.retiraEspacos(descricao);
 
 		if (this.descritores.contains(descricao.toLowerCase())) {
 			throw new IllegalArgumentException(
@@ -195,8 +194,7 @@ public class Controller {
 	}
 
 	/**
-	 * Adiciona um item a um usuario.
-	 * retorna o id do usuario como String.
+	 * Adiciona um item a um usuario. retorna o id do usuario como String.
 	 * 
 	 * @param id
 	 * @param descricao
@@ -204,51 +202,51 @@ public class Controller {
 	 * @param tags
 	 * @return String
 	 */
-	public int adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) throws Exception{
+	public int adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) throws Exception {
 		Validar.validaAdicionaItem(id, descricao, quantidade, tags);
-		
-		if(!this.existeusuario(id)) {
+
+		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-		
 		Item itemAdd = new Item(descricao, quantidade, tags);
-		
-		if(this.mapaUsuarios.get(id).existeItem(itemAdd)) {
+
+		if (this.mapaUsuarios.get(id).existeItem(itemAdd)) {
 			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidade);
 
 			return this.mapaUsuarios.get(id).getItem(itemAdd).getId();
 		}
-		
+
 		return this.mapaUsuarios.get(id).adicionaItem(itemAdd);
 	}
-	
+
 	/**
-	 * Retorna o método toString() de Item.java
-	 * Recebe como parametros o id do Item a ser exibido e do doador que possui o item.
+	 * Retorna o método toString() de Item.java Recebe como parametros o id do Item
+	 * a ser exibido e do doador que possui o item.
+	 * 
 	 * @param idItem
 	 * @param idDoador
 	 * @return String
 	 */
-	public String exibeItem(int idItem, String idDoador) throws Exception{
+	public String exibeItem(int idItem, String idDoador) throws Exception {
 		Validar.validaExibeItem(idItem, idDoador);
-		
-		if(!this.existeusuario(idDoador)) {
+
+		if (!this.existeusuario(idDoador)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
 		}
-		
-		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) {
+
+		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem)) {
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 		}
-		
+
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
 	}
-	
+
 	/**
-	 * Atualiza um item para doação.
-	 * Apenas as tags e quantidade podem ser modificadas.
-	 * Quantidade so eh modificada se o novo valor for maior que 0
-	 * Tags so sao modificadas se a nova string nao for nula
-	 * retorna o toString() do Item em questão.
+	 * Atualiza um item para doação. Apenas as tags e quantidade podem ser
+	 * modificadas. Quantidade so eh modificada se o novo valor for maior que 0 Tags
+	 * so sao modificadas se a nova string nao for nula retorna o toString() do Item
+	 * em questão.
+	 * 
 	 * @param idItem
 	 * @param idDoador
 	 * @param quantidade
@@ -256,28 +254,33 @@ public class Controller {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception{
+	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception {
 		Validar.validaItem(idItem, idDoador);
-		
-		if(!this.existeusuario(idDoador)) throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
-		
-		if(quantidade != 0 ) this.mapaUsuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
-		if(tags != null) this.mapaUsuarios.get(idDoador).getItem(idItem).setTags(tags);
-		
+
+		if (!this.existeusuario(idDoador))
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
+		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem))
+			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
+
+		if (quantidade != 0)
+			this.mapaUsuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
+		if (tags != null)
+			this.mapaUsuarios.get(idDoador).getItem(idItem).setTags(tags);
+
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
 	}
-	
-	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception{
+
+	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception {
 		Validar.validaItem(idItem, idDoador);
-		
-		
-		if(!this.existeusuario(idDoador)) throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if(this.mapaUsuarios.get(idDoador).getItens().isEmpty()) throw new IllegalArgumentException("O Usuario nao possui itens cadastrados.");
-		if(!this.mapaUsuarios.get(idDoador).existeItem(idItem)) throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
-		
+
+		if (!this.existeusuario(idDoador))
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
+		if (this.mapaUsuarios.get(idDoador).getItens().isEmpty())
+			throw new IllegalArgumentException("O Usuario nao possui itens cadastrados.");
+		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem))
+			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
+
 		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
 	}
-		
 
 }

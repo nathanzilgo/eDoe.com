@@ -15,7 +15,6 @@ import junit.framework.Assert;
 class ControllerTest {
 
 	private Controller controller = new Controller();
-	private LinkedHashMap<String, Usuario> mapaUsuarios;
 
 	@Test
 	void testAdicionaDoadorValido() throws Exception {
@@ -313,7 +312,7 @@ class ControllerTest {
 	}
 
 	@Test
-	void testAdicionaItemParaDoacao() {
+	void testAdicionaItemParaDoacaoValido() {
 		fail("Not yet implemented");
 	}
 

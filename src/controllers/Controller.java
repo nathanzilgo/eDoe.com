@@ -208,7 +208,6 @@ public class Controller {
 		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-
 		Item itemAdd = new Item(descricao, quantidade, tags);
 
 		if (this.mapaUsuarios.get(id).existeItem(itemAdd)) {

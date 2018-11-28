@@ -204,8 +204,47 @@ class ControllerTest {
 	}
 
 	@Test
-	void testAtualizaUsuario() {
-		fail("Not yet implemented");
+	void testAtualizaUsuarioValido() throws Exception {
+		// Atualiza nome de doador ja cadastrado
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		assertEquals("Raquel A. Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+				controller.atualizaUsuario("01234567899", "Raquel A. Lopes", "", ""));
+
+		// Atualiza email de doador ja cadastrado
+		assertEquals(
+				"Raquel A. Lopes/012.345.678-99, raquel_lopes@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+				controller.atualizaUsuario("01234567899", "     ", "raquel_lopes@computacao.ufcg.edu.br", ""));
+
+		// Atualiza telefone de doador ja cadastrado
+		assertEquals(
+				"Raquel A. Lopes/012.345.678-99, raquel_lopes@computacao.ufcg.edu.br, (83) 3333-3333, status: doador",
+				controller.atualizaUsuario("01234567899", "     ", null, "(83) 3333-3333"));
+
+		// Atualiza nome, email e telefone de doador ja cadastrado
+		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+				controller.atualizaUsuario("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br",
+						"(83) 9990-9999"));
+	}
+
+	@Test
+	void testAtualizaUsuarioInvalido() throws Exception {
+		// Atualiza doador por id null
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaUsuario(null, "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999");
+		});
+
+		// Atualiza doador por id vazio
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaUsuario("          ", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999");
+		});
+
+		// Atualiza doador por id inexistente
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			controller.atualizaUsuario("12345678901", "Raquel Lopes", "raquel@computacao.ufcg.edu.br",
+					"(83) 9990-9999");
+		});
+
 	}
 
 	@Test

@@ -172,17 +172,49 @@ class UsuarioTest {
 
 	@Test
 	void testAdicionaItem() {
-		fail("Not yet implemented");
+		// Cadastrando doador
+		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Adicionando itens a doador
+		this.novoItem = new Item("cadeira de rodas", 1, "manual, adulto");
+		this.novoUsuario.adicionaItem(novoItem);
+		this.novoItem = new Item("curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
+		this.novoUsuario.adicionaItem(novoItem);
+		// Retorna os itens do doador
+		assertEquals(
+				"{1=1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1, 2=2 - curso sobre cuidados com o bebê, tags: [maternidade,  duracao 12h], quantidade: 3}",
+				this.novoUsuario.getItens().toString());
 	}
 
 	@Test
 	void testExisteItemInt() {
-		fail("Not yet implemented");
+		// Cadastrando doador
+		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Retorna se doador possui item verificando a partir do id do item
+		assertEquals(false, this.novoUsuario.existeItem(1));
+		// Criando novo item
+		this.novoItem = new Item("cadeira de rodas", 1, "manual, adulto");
+		// Adicionando item a doador
+		this.novoUsuario.adicionaItem(novoItem);
+		// Retorna se doador possui item verificando a partir do id do item
+		assertEquals(true, this.novoUsuario.existeItem(1));
+
 	}
 
 	@Test
 	void testExisteItemItem() {
-		fail("Not yet implemented");
+		// Cadastrando doador
+		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		// Criando novo item
+		this.novoItem = new Item("cadeira de rodas", 1, "manual, adulto");
+		// Retorna se doador possui item verificando a partir do objeto novoItem
+		assertEquals(false, this.novoUsuario.existeItem(novoItem));
+		// Adicionando item a doador
+		this.novoUsuario.adicionaItem(novoItem);
+		// Retorna se doador possui item verificando a partir do objeto novoItem
+		assertEquals(true, this.novoUsuario.existeItem(novoItem));
 	}
 
 }

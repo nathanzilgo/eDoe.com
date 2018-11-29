@@ -1,10 +1,12 @@
 package internas;
 
 import java.util.LinkedHashMap;
+import java.util.Random;
+
 import controllers.*;
 
 public class Doador extends Usuario {
-		
+
 	public Doador(String id, String nome, String email, String celular, String classe) {
 		super(id, nome, email, celular, classe);
 		this.itens = new LinkedHashMap<>();
@@ -15,12 +17,10 @@ public class Doador extends Usuario {
 	 * Coloca o Id de Item em seus atributos.
 	 */
 	public int adicionaItem(Item item) {
-		this.contadorDeItens ++;
-		this.itens.put(this.contadorDeItens, item);
+
+		this.itens.put(item.getId(), item);
 		
-		this.itens.get(this.contadorDeItens).setId(this.contadorDeItens);
-		
-		return this.contadorDeItens;
+		return item.getId();
 	}
 	
 	

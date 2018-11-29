@@ -17,12 +17,14 @@ import internas.Usuario;
 
 public class Controller {
 
-	protected LinkedHashMap<String, Usuario> mapaUsuarios;
-	protected HashSet<String> descritores;
+	private LinkedHashMap<String, Usuario> mapaUsuarios;
+	private HashSet<String> descritores;
+	public static HashSet<Integer> itensIds;
 
 	public Controller() {
 		this.mapaUsuarios = new LinkedHashMap<>();
 		this.descritores = new HashSet<>();
+		this.itensIds = new HashSet<>();
 	}
 
 	/**
@@ -293,5 +295,9 @@ public class Controller {
 
 		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
 	}
+
+	public static HashSet<Integer> getItensIds(){
+	    return itensIds;
+    }
 
 }

@@ -13,7 +13,6 @@ public class Receptor extends Usuario {
 
 	@Override
 	public int adicionaItem(Item item) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

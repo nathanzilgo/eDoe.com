@@ -1,5 +1,8 @@
 package internas;
 
+import java.util.Random;
+import controllers.*;
+
 /**
  * Classe que representa um Item para doacao.
  * 
@@ -10,8 +13,9 @@ package internas;
  *
  */
 public class Item {
-	
-	private int id; // definido na adicao de um item em Doador.java
+
+	private Random alt;
+	private int id;
 	private int quantidade;	
 	private String tags;
 	private String descricao;
@@ -21,6 +25,8 @@ public class Item {
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
+		this.alt = new Random();
+		this.id = this.generateRandom();
 	}
 	
 	
@@ -128,4 +134,14 @@ public class Item {
 		
 		return saida;
 	}
+
+	public int generateRandom(){
+		this.id  = alt.nextInt(100 - 1) + 1;
+
+		while(Controller.getItensIds().contains(this.id)){
+		    this.id = alt.nextInt(100 - 1) + 1;
+        }
+        return this.id;
+	}
+
 }

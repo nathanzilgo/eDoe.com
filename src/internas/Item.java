@@ -6,73 +6,63 @@ import internas.Doador;
 /**
  * Classe que representa um Item para doacao.
  * 
- * Dois itens para doacao sao iguais se eles tiverem o mesmo descritor de item e as mesmas tags (na mesma ordem).
- * O ID de cada item e gerado a partir da ordem em que cada um foi posto na estrutura de Doador.
+ * Dois itens para doacao sao iguais se eles tiverem o mesmo descritor de item e
+ * as mesmas tags (na mesma ordem). O ID de cada item e gerado a partir da ordem
+ * em que cada um foi posto na estrutura de Doador.
  * 
  * @author Nathan Fernandes
  *
  */
 public class Item {
 
-	private Random alt;
 	private int id;
-	private int quantidade;	
+	private int quantidade;
 	private String tags;
 	private String descricao;
-	
-	public Item(String descricao, int quantidade, String tags) {
+
+	public Item(String descricao, int quantidade, String tags, int id) {
 		super();
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
-		this.alt = new Random();
-		this.id = this.generateRandom();
+		this.id = id;
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public int getQuantidade() {
 		return quantidade;
 	}
-
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 
-
 	public String getTags() {
 		return tags;
 	}
 
-
 	public void setTags(String tags) {
-		if(tags.equals(null) || tags.trim().isEmpty()) {
+		if (tags.equals(null) || tags.trim().isEmpty()) {
 			this.tags = "";
-		}else {
+		} else {
 			this.tags = tags;
 		}
 	}
-
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -104,7 +94,7 @@ public class Item {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -116,36 +106,24 @@ public class Item {
 
 		return builder.toString();
 	}
-	
+
 	public String tagsToString() {
 		String saida = "";
-		
-		if(tags == null) return saida;
-		if(tags.trim().isEmpty()) return saida;
-		
-		for(char str: this.tags.toCharArray()) {
-			if(str != ',') {
+
+		if (tags == null)
+			return saida;
+		if (tags.trim().isEmpty())
+			return saida;
+
+		for (char str : this.tags.toCharArray()) {
+			if (str != ',') {
 				saida += Character.toString(str);
-			}
-			else {
+			} else {
 				saida += Character.toString(str) + " ";
 			}
 		}
-		
+
 		return saida;
-	}
-
-    /**
-     * Gera um ID unico pro item com base em um numero aleatorio e os atributos de Item.
-     * @return int
-     */
-	public int generateRandom(){
-		int tmp  = alt.nextInt(100 - 1) + 1;
-
-		this.id += tmp * this.descricao.length() + tmp * this.quantidade;
-		this.id += tmp * this.tags.length();
-
-        return this.id;
 	}
 
 }

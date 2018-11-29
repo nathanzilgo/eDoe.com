@@ -19,12 +19,12 @@ public class Controller {
 
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
-	public static HashSet<Integer> itensIds;
+	private int contadorIdItem;
 
 	public Controller() {
 		this.mapaUsuarios = new LinkedHashMap<>();
 		this.descritores = new HashSet<>();
-		this.itensIds = new HashSet<>();
+		this.contadorIdItem = 0;
 	}
 
 	/**
@@ -196,8 +196,8 @@ public class Controller {
 	}
 
 	/**
-	 * Adiciona um item a um usuario. retorna o id do usuario como String.
-	 * Verifica se as entradas sao validas, caso contrario, excesoes serão lancadas.
+	 * Adiciona um item a um usuario. retorna o id do usuario como String. Verifica
+	 * se as entradas sao validas, caso contrario, excesoes serão lancadas.
 	 *
 	 * @param id
 	 * @param descricao
@@ -211,21 +211,21 @@ public class Controller {
 		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-		Item itemAdd = new Item(descricao, quantidade, tags);
+		Item itemAdd = new Item(descricao, quantidade, tags, this.contadorIdItem + 1);
 
 		if (this.mapaUsuarios.get(id).existeItem(itemAdd)) {
 			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidade);
-
 			return this.mapaUsuarios.get(id).getItem(itemAdd).getId();
 		}
 
+		this.contadorIdItem++;
 		return this.mapaUsuarios.get(id).adicionaItem(itemAdd);
 	}
 
 	/**
-	 * Retorna o metodo toString() de Item.java
-	 * Recebe como parametros o id do Item a ser exibido e do doador que possui o item.
-	 * Verifica se as entradas sao validas, caso contrario, excecoes serao lancadas.
+	 * Retorna o metodo toString() de Item.java Recebe como parametros o id do Item
+	 * a ser exibido e do doador que possui o item. Verifica se as entradas sao
+	 * validas, caso contrario, excecoes serao lancadas.
 	 * 
 	 * @param idItem
 	 * @param idDoador
@@ -275,9 +275,9 @@ public class Controller {
 	}
 
 	/**
-	 * Remove um item para doacao de um Usuario Doador, caso o item e o usuario existam
-	 * e as entradas sejam validas.
-	 * O descritor do item permanece no conjunto de descritores.
+	 * Remove um item para doacao de um Usuario Doador, caso o item e o usuario
+	 * existam e as entradas sejam validas. O descritor do item permanece no
+	 * conjunto de descritores.
 	 *
 	 * @param idItem
 	 * @param idDoador

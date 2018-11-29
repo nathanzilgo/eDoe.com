@@ -1,5 +1,6 @@
 package internas;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import ferramentas.Validar;
@@ -26,6 +27,7 @@ public abstract class Usuario {
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
+		this.itens = new HashMap<>();
 		
 	}
 

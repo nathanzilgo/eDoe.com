@@ -295,9 +295,4 @@ public class Controller {
 
 		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
 	}
-
-	public static HashSet<Integer> getItensIds(){
-	    return itensIds;
-    }
-
 }

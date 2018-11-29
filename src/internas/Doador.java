@@ -1,5 +1,6 @@
 package internas;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -43,5 +44,9 @@ public class Doador extends Usuario {
 			}
 		}
 		return false;
+	}
+
+	public HashSet<Integer> getItensIds(){
+		return this.idsItens;
 	}
 }

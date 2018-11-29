@@ -1,6 +1,7 @@
 package internas;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import ferramentas.Validar;
@@ -13,7 +14,7 @@ public abstract class Usuario {
 	private String email;
 	private String celular;
 	private String classe;
-
+	protected HashSet<Integer> idsItens;
 	/**
 	 * Estrutura que armazena os itens dos usuarios doadores
 	 */

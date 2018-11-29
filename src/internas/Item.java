@@ -1,7 +1,7 @@
 package internas;
 
 import java.util.Random;
-import controllers.*;
+import internas.Doador;
 
 /**
  * Classe que representa um Item para doacao.
@@ -113,7 +113,7 @@ public class Item {
 		builder.append(this.descricao);
 		builder.append(", tags: [" + this.tagsToString() + "]");
 		builder.append(", quantidade: " + this.quantidade);
-		
+
 		return builder.toString();
 	}
 	
@@ -135,12 +135,16 @@ public class Item {
 		return saida;
 	}
 
+    /**
+     * Gera um ID unico pro item com base em um numero aleatorio e os atributos de Item.
+     * @return int
+     */
 	public int generateRandom(){
-		this.id  = alt.nextInt(100 - 1) + 1;
+		int tmp  = alt.nextInt(100 - 1) + 1;
 
-		while(Controller.getItensIds().contains(this.id)){
-		    this.id = alt.nextInt(100 - 1) + 1;
-        }
+		this.id += tmp * this.descricao.length() + tmp * this.quantidade;
+		this.id += tmp * this.tags.length();
+
         return this.id;
 	}
 

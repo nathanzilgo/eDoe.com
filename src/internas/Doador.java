@@ -15,12 +15,12 @@ public class Doador extends Usuario {
 	 * Coloca o Id de Item em seus atributos.
 	 */
 	public int adicionaItem(Item item) {
-		ItemController.contadorDeItens ++;
-		this.itens.put(ItemController.contadorDeItens, item);
+		this.contadorDeItens ++;
+		this.itens.put(this.contadorDeItens, item);
 		
-		this.itens.get(ItemController.contadorDeItens).setId(ItemController.contadorDeItens);
+		this.itens.get(this.contadorDeItens).setId(this.contadorDeItens);
 		
-		return ItemController.contadorDeItens;
+		return this.contadorDeItens;
 	}
 	
 	

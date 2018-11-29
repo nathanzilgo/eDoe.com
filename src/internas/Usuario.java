@@ -12,6 +12,7 @@ public abstract class Usuario {
 	private String email;
 	private String celular;
 	private String classe;
+	protected int contadorDeItens = 0;
 
 	/**
 	 * Estrutura que armazena os itens dos usuarios doadores

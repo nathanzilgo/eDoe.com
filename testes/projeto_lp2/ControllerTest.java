@@ -318,17 +318,17 @@ class ControllerTest {
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		assertEquals(1, controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto"));
 		// Criado item curso sobre cuidados com o bebe e adicionado a Igreja, retorna o
-		// id do item = 2
-		assertEquals(2, controller.adicionaItemParaDoacao("12345678900", "curso sobre cuidados com o bebe", 1,
+		// id do item = 1
+		assertEquals(1, controller.adicionaItemParaDoacao("12345678900", "curso sobre cuidados com o bebe", 1,
 				"maternidade, duracao 12h"));
-		// Criado item casaco e adicionado a Raquel, retorna o id do item = 3
-		assertEquals(3, controller.adicionaItemParaDoacao("01234567899", "casaco", 1, "frio, adulto"));
+		// Criado item casaco e adicionado a Raquel, retorna o id do item = 2
+		assertEquals(2, controller.adicionaItemParaDoacao("01234567899", "casaco", 1, "frio, adulto"));
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id anterior do
 		// item ja existente em Raquel = 1
 		assertEquals(1, controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto"));
-		// Criado item cadeira de rodas e adicionado a Igreja, retorna o id do item = 4
+		// Criado item cadeira de rodas e adicionado a Igreja, retorna o id do item = 2
 		// pois esse ainda nao existia no doador Igreja
-		assertEquals(4, controller.adicionaItemParaDoacao("12345678900", "cadeira de rodas", 1, "manual, adulto"));
+		assertEquals(2, controller.adicionaItemParaDoacao("12345678900", "cadeira de rodas", 1, "manual, adulto"));
 	}
 
 	@Test

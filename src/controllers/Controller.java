@@ -160,10 +160,10 @@ public class Controller {
 	// -------------------------------------------------------------------------US2------------------------------------------------------------------------
 
 	/**
-	 * Retorna uma descrição caso ela esteja no conjunto.
+	 * Retorna uma descrição caso ela esteja no conjunto de descritores
 	 * 
 	 * @param descricao
-	 * @return
+	 * @return String
 	 */
 	public String getDescritor(String descricao) {
 		for (String str : this.descritores) {
@@ -195,7 +195,8 @@ public class Controller {
 
 	/**
 	 * Adiciona um item a um usuario. retorna o id do usuario como String.
-	 * 
+	 * Verifica se as entradas são válidas, caso contrario, exceçoes serão lançadas.
+	 *
 	 * @param id
 	 * @param descricao
 	 * @param quantidade
@@ -220,8 +221,9 @@ public class Controller {
 	}
 
 	/**
-	 * Retorna o método toString() de Item.java Recebe como parametros o id do Item
-	 * a ser exibido e do doador que possui o item.
+	 * Retorna o método toString() de Item.java
+	 * Recebe como parametros o id do Item a ser exibido e do doador que possui o item.
+	 * Verifica se as entradas são válidas, caso contrario, exceçoes serão lançadas.
 	 * 
 	 * @param idItem
 	 * @param idDoador
@@ -270,6 +272,15 @@ public class Controller {
 		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
 	}
 
+	/**
+	 * Remove um item para doação de um Usuario Doador, caso o item e o usuário existam
+	 * e as entradas sejam válidas.
+	 * O descritor do item permanece no conjunto de descritores.
+	 *
+	 * @param idItem
+	 * @param idDoador
+	 * @throws Exception
+	 */
 	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception {
 		Validar.validaItem(idItem, idDoador);
 

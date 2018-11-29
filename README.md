@@ -12,7 +12,6 @@
 
 ###			US 3:
 				Mateus Diniz
-				Nathan Fernandes
 			
 ###			US 4:
 				Lucio Nathan

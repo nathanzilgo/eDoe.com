@@ -111,11 +111,6 @@ class UsuarioTest {
 	}
 
 	@Test
-	void testSetItens() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testGetItemInt() {
 		// Cadastrando doador
 		this.novoUsuario = new Doador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
@@ -130,7 +125,15 @@ class UsuarioTest {
 
 	@Test
 	void testAtualizaUsuario() {
-		fail("Not yet implemented");
+		// Cadastrando usuario
+		this.novoUsuario = new Receptor("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br",
+				"(83) 9990-9999", "pessoa_fisica");
+		// Atualizando dados do usuario
+		this.novoUsuario.atualizaUsuario("Raquel", null, "0000 - 0000");
+		// Retorna usuario com dados atualizados
+		assertEquals("Raquel/012.345.678-99, raquel@computacao.ufcg.edu.br, 0000 - 0000, status: receptor",
+				this.novoUsuario.toString());
+
 	}
 
 	@Test

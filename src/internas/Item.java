@@ -1,17 +1,17 @@
 package internas;
 
 /**
- * Classe que representa um Item para doação.
+ * Classe que representa um Item para doacao.
  * 
- * Dois itens para doação são iguais se eles tiverem o mesmo descritor de item e as mesmas tags (na mesma ordem).
- * O ID de cada item é gerado a partir da ordem em que cada um foi posto na estrutura de Doador.
+ * Dois itens para doacao sao iguais se eles tiverem o mesmo descritor de item e as mesmas tags (na mesma ordem).
+ * O ID de cada item e gerado a partir da ordem em que cada um foi posto na estrutura de Doador.
  * 
  * @author Nathan Fernandes
  *
  */
 public class Item {
 	
-	private int id; // definido na adição de um item em Doador.java
+	private int id; // definido na adicao de um item em Doador.java
 	private int quantidade;	
 	private String tags;
 	private String descricao;

@@ -27,7 +27,7 @@ public class Controller {
 
 	/**
 	 * Metodo responsevel por criar um novo doador e adiciona-lo no mapa de
-	 * usuarios. O metodo checa se o usuário ja existe e se a classe e valida antes
+	 * usuarios. O metodo checa se o usuario ja existe e se a classe e valida antes
 	 * de cria-lo, caso nao sejam, da erro.
 	 * 
 	 * @param id      Key do doador no mapa de usuários.
@@ -69,7 +69,7 @@ public class Controller {
 	}
 
 	/**
-	 * Método responsavel pela pesquisa de um ou mais usuarios pelo nome. Se o nome
+	 * Metodo responsavel pela pesquisa de um ou mais usuarios pelo nome. Se o nome
 	 * dos usuarios forem iguais, todos serao retornados na ordem de insercao.
 	 * 
 	 * @param nome Nome do usuario a ser pesquisado.
@@ -160,7 +160,7 @@ public class Controller {
 	// -------------------------------------------------------------------------US2------------------------------------------------------------------------
 
 	/**
-	 * Retorna uma descrição caso ela esteja no conjunto de descritores
+	 * Retorna uma descricao caso ela esteja no conjunto de descritores
 	 * 
 	 * @param descricao
 	 * @return String
@@ -175,8 +175,8 @@ public class Controller {
 	}
 
 	/**
-	 * Valida se a descrição é nula ou vazia. Caso esteja correto, remove espaços
-	 * desnecessários da entrada e a adiciona no conjunto de descritores.
+	 * Valida se a descricao e nula ou vazia. Caso esteja correto, remove espacos
+	 * desnecessarios da entrada e a adiciona no conjunto de descritores.
 	 * 
 	 * @param descricao
 	 * @throws Exception
@@ -195,7 +195,7 @@ public class Controller {
 
 	/**
 	 * Adiciona um item a um usuario. retorna o id do usuario como String.
-	 * Verifica se as entradas são válidas, caso contrario, exceçoes serão lançadas.
+	 * Verifica se as entradas sao validas, caso contrario, excesoes serão lancadas.
 	 *
 	 * @param id
 	 * @param descricao
@@ -221,9 +221,9 @@ public class Controller {
 	}
 
 	/**
-	 * Retorna o método toString() de Item.java
+	 * Retorna o metodo toString() de Item.java
 	 * Recebe como parametros o id do Item a ser exibido e do doador que possui o item.
-	 * Verifica se as entradas são válidas, caso contrario, exceçoes serão lançadas.
+	 * Verifica se as entradas sao validas, caso contrario, excecoes serao lancadas.
 	 * 
 	 * @param idItem
 	 * @param idDoador
@@ -244,10 +244,10 @@ public class Controller {
 	}
 
 	/**
-	 * Atualiza um item para doação. Apenas as tags e quantidade podem ser
+	 * Atualiza um item para doacao. Apenas as tags e quantidade podem ser
 	 * modificadas. Quantidade so eh modificada se o novo valor for maior que 0 Tags
 	 * so sao modificadas se a nova string nao for nula retorna o toString() do Item
-	 * em questão.
+	 * em questao.
 	 * 
 	 * @param idItem
 	 * @param idDoador
@@ -273,8 +273,8 @@ public class Controller {
 	}
 
 	/**
-	 * Remove um item para doação de um Usuario Doador, caso o item e o usuário existam
-	 * e as entradas sejam válidas.
+	 * Remove um item para doacao de um Usuario Doador, caso o item e o usuario existam
+	 * e as entradas sejam validas.
 	 * O descritor do item permanece no conjunto de descritores.
 	 *
 	 * @param idItem

@@ -11,7 +11,7 @@ public class Doador extends Usuario {
 	}
 	
 	/**
-	 * Adiciona um item a um usuário doador e retorna seu ID (contadorDeItens)
+	 * Adiciona um item a um usuario doador e retorna seu ID (contadorDeItens)
 	 * Coloca o Id de Item em seus atributos.
 	 */
 	public int adicionaItem(Item item) {

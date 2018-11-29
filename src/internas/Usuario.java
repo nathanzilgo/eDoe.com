@@ -14,7 +14,7 @@ public abstract class Usuario {
 	private String classe;
 
 	/**
-	 * Estrutura que armazena os itens dos usuários doadores
+	 * Estrutura que armazena os itens dos usuarios doadores
 	 */
 	protected Map<Integer, Item> itens;
 	
@@ -100,7 +100,7 @@ public abstract class Usuario {
 	
 	/**
 	 * Implementado em Doador.java
-	 * Possui comportamento polimorfico com o outro método do mesmo nome
+	 * Possui comportamento polimorfico com o outro metodo do mesmo nome
 	 * @param idItem
 	 * @return
 	 */
@@ -108,7 +108,7 @@ public abstract class Usuario {
 	
 	/**
 	 * Implementado em Doador.java
-	 * Possui comportamento polimorfico com o outro método do mesmo nome.
+	 * Possui comportamento polimorfico com o outro metodo do mesmo nome.
 	 * @param item
 	 * @return
 	 */

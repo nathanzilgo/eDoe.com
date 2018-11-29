@@ -14,7 +14,7 @@ class ControllerTest {
 
 	@Test
 	void testAdicionaDoadorValido() throws Exception {
-		// Adiciona pessoa física como doador.
+		// Adiciona pessoa fisica como doador.
 		assertEquals("01234567899", controller.adicionaDoador("01234567899", "Raquel Lopes",
 				"raquel@computacao.ufcg.edu.br", "(83) 9990-9999", "pessoa_fisica"));
 

@@ -57,7 +57,7 @@ public class Validar {
 	}
 
 	/**
-	 * Valida entradas para adição de item.
+	 * Valida entradas para adicao de item.
 	 * 
 	 * @param id
 	 * @param descricao
@@ -76,7 +76,7 @@ public class Validar {
 	}
 
 	/**
-	 * Retira espaços inuteis da entrada.
+	 * Retira espaacos inuteis da entrada.
 	 * 
 	 * @param entrada
 	 */

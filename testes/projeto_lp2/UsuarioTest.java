@@ -16,10 +16,10 @@ class UsuarioTest {
 			"(83) 9990-9999", "pessoa_fisica");
 	private Usuario novoReceptor = new Receptor("91724529000103", "Pedro Henrique",
 			"pedrohenriquedavimoura_@keffin.com.br", "(27) 98460-3045", "ORGAO_PUBLICO_MUNICIPAL");
-	private Item itemUm = new Item("cadeira de rodas", 1, "manual, adulto");
-	private Item itemDois = new Item("curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
+	private Item itemUm = new Item("cadeira de rodas", 1, "manual, adulto", 1);
+	private Item itemDois = new Item("curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h", 2);
 
-	/**@Test
+	@Test
 	void testSetNome() {
 		this.novoDoador.setNome("Raquel");
 		assertEquals("Raquel/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
@@ -68,6 +68,7 @@ class UsuarioTest {
 		assertEquals(
 				"{1=1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1, 2=2 - curso sobre cuidados com o bebê, tags: [maternidade,  duracao 12h], quantidade: 3}",
 				this.novoDoador.getItens().toString());
+
 	}
 
 	@Test
@@ -108,6 +109,7 @@ class UsuarioTest {
 		assertEquals(
 				"{1=1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1, 2=2 - curso sobre cuidados com o bebê, tags: [maternidade,  duracao 12h], quantidade: 3}",
 				this.novoDoador.getItens().toString());
+
 	}
 
 	@Test
@@ -124,5 +126,5 @@ class UsuarioTest {
 		this.novoDoador.adicionaItem(itemUm);
 		assertEquals(true, this.novoDoador.existeItem(itemUm));
 	}
-**/
+
 }

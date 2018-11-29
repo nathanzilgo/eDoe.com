@@ -9,7 +9,7 @@ package internas;
  * @author Nathan Fernandes
  *
  */
-public class Item implements Comparable<Item>{
+public class Item {
 	
 	private int id; // definido na adicao de um item em Doador.java
 	private int quantidade;	
@@ -128,15 +128,4 @@ public class Item implements Comparable<Item>{
 		
 		return saida;
 	}
-
-	public int compareTo(Item outro){
-		if(this.quantidade == outro.quantidade){
-			return this.descricao.compareTo(outro.descricao);
-		}
-		if(this.quantidade < outro.quantidade) return -1;
-		if(this.quantidade > outro.quantidade) return 1;
-		
-		return 0;
-	}
-	
 }

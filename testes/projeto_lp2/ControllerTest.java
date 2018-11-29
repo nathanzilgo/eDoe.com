@@ -2,14 +2,10 @@ package projeto_lp2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-import java.util.LinkedHashMap;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import controllers.Controller;
-import internas.Usuario;
 import junit.framework.Assert;
 
 class ControllerTest {

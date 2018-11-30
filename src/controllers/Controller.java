@@ -122,6 +122,12 @@ public class Controller {
 		return mapaUsuarios.get(id).toString();
 	}
 
+	/**
+	 * Metodo responsavel por remover um usuario do sistema. Caso o id seja vazio ou
+	 * nulo sera lançada uma excecao.
+	 * 
+	 * @param id Key do usuario a ser removido.
+	 */
 	public void removeUsuario(String id) {
 		Validar.validaId(id);
 
@@ -147,6 +153,14 @@ public class Controller {
 		return false;
 	}
 
+	/**
+	 * Metodo responsavel por ler arquivo csv que contem informacoes de receptores e
+	 * cadastra-los no sistema ou atualizar suas informacoes caso algum ja esteja
+	 * cadastrado.
+	 * 
+	 * @param arquivo arquivo csv com informacoes de receptores.
+	 * @throws FileNotFoundException
+	 */
 	public void lerReceptores(File arquivo) throws FileNotFoundException {
 		Scanner sc = new Scanner(new FileReader(arquivo));
 		while (sc.hasNextLine()) {

@@ -16,8 +16,8 @@ class UsuarioTest {
 			"(83) 9990-9999", "pessoa_fisica");
 	private Usuario novoReceptor = new Receptor("91724529000103", "Pedro Henrique",
 			"pedrohenriquedavimoura_@keffin.com.br", "(27) 98460-3045", "ORGAO_PUBLICO_MUNICIPAL");
-	private Item itemUm = new Item("cadeira de rodas", 1, "manual, adulto", 1);
-	private Item itemDois = new Item("curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h", 2);
+	private Item itemUm = new Item(1, "cadeira de rodas", 1, "manual, adulto");
+	private Item itemDois = new Item(2, "curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
 
 	@Test
 	void testSetNome() {

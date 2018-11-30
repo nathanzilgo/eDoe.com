@@ -3,7 +3,8 @@ package controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 import java.util.LinkedHashMap;
@@ -205,21 +206,15 @@ public class Controller {
 	 * @param tags
 	 * @return String
 	 */
-	public int adicionaItemParaDoacao(String id, String descricao, int quantidade, String tags) throws Exception {
-		Validar.validaAdicionaItem(id, descricao, quantidade, tags);
+	public int adicionaItemParaDoacao(String id, String descricaoItem, int quantidade, String tags) {
+		Validar.validaAdicionaItem(id, descricaoItem, quantidade, tags);
 
 		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-		Item itemAdd = new Item(descricao, quantidade, tags, this.contadorIdItem + 1);
 
-		if (this.mapaUsuarios.get(id).existeItem(itemAdd)) {
-			this.mapaUsuarios.get(id).getItem(itemAdd).setQuantidade(quantidade);
-			return this.mapaUsuarios.get(id).getItem(itemAdd).getId();
-		}
+		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 
-		this.contadorIdItem++;
-		return this.mapaUsuarios.get(id).adicionaItem(itemAdd);
 	}
 
 	/**
@@ -295,4 +290,68 @@ public class Controller {
 
 		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
 	}
+	
+	private int incrementador() {
+		this.contadorIdItem++;
+		return this.contadorIdItem;
+	}
+	
+	public int adicionaItemNecessario(String idReceptor, String descricaoItem, int quantidade, String tags) {
+		Validar.validaAdicionaItem(idReceptor, descricaoItem, quantidade, tags);
+
+		if (!this.existeusuario(idReceptor)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
+		}
+
+		return this.mapaUsuarios.get(idReceptor).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
+
+	}
+
+	public String listaItensNecessarios() {
+		ArrayList<String> itens = new ArrayList<String>();
+
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Receptor) {
+				for (Item item : usuario.retornaItensUsuario()) {
+					itens.add(item.toString() + ", Receptor: " + usuario.getNome() + "/" + usuario.retornaId());
+				}
+			}
+		}
+
+		Collections.sort(itens);
+
+		String retorno = "";
+
+		for (int i = 0; i < itens.size() - 1; i++) {
+
+			retorno += itens.get(i) + " | ";
+		}
+
+		retorno += itens.get(itens.size() - 1);
+
+		return retorno;
+	}
+	
+	public String atualizaItemNecessario(String idReceptor, int idItem, int novaQuantidade, String novasTags) {
+
+		Validar.validaId(idReceptor);
+
+		if (!mapaUsuarios.containsKey(idReceptor)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
+		}
+		return mapaUsuarios.get(idReceptor).atualizaItem(idItem, novaQuantidade, novasTags);
+	}
+
+	public void removeItemNecessario(String idReceptor, int idItem) {
+
+		Validar.validaId(idReceptor);
+
+		if (!mapaUsuarios.containsKey(idReceptor)) {
+			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
+		}
+
+		mapaUsuarios.get(idReceptor).removeItemNecessario(idItem);
+
+	}
+
 }

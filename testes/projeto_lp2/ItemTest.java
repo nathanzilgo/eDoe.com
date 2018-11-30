@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import internas.Item;
 
 class ItemTest {
-	Item i1 = new Item("macarrao bom", 5, "macarrao,almondegas", 1);
-	Item i2 = new Item("sapatos novos", 2, "adidas,novo", 2);
-	Item i3 = new Item("macarrao bom", 3, "macarrao,almondegas", 3);
+	Item i1 = new Item(1, "macarrao bom", 5, "macarrao,almondegas");
+	Item i2 = new Item(2, "sapatos novos", 2, "adidas,novo");
+	Item i3 = new Item(3, "macarrao bom", 3, "macarrao,almondegas");
 
 	@Test
 	void testHashCode() {

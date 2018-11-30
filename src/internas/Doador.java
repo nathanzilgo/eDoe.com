@@ -12,17 +12,7 @@ public class Doador extends Usuario {
 		super(id, nome, email, celular, classe);
 		this.itens = new LinkedHashMap<>();
 	}
-	
-	/**
-	 * Adiciona um item a um usuario doador e retorna seu ID (contadorDeItens)
-	 * Coloca o Id de Item em seus atributos.
-	 */
-	public int adicionaItem(Item item) {
 
-		this.itens.put(item.getId(), item);
-		
-		return item.getId();
-	}
 	
 	
 	

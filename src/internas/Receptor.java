@@ -11,10 +11,6 @@ public class Receptor extends Usuario {
 		return super.toString() + "receptor";
 	}
 
-	@Override
-	public int adicionaItem(Item item) {
-		return 0;
-	}
 
 	@Override
 	public boolean existeItem(int idItem) {

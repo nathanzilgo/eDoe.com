@@ -20,18 +20,17 @@ public class Item {
 	private String tags;
 	private String descricao;
 
-	public Item(String descricao, int quantidade, String tags, int id) {
-		super();
+	public Item(int id, String descricao, int quantidade, String tags) {
+		this.id = id;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
-		this.id = id;
 	}
 
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -69,7 +68,6 @@ public class Item {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
 		return result;
 	}
 
@@ -87,11 +85,6 @@ public class Item {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (tags == null) {
-			if (other.tags != null)
-				return false;
-		} else if (!tags.equals(other.tags))
-			return false;
 		return true;
 	}
 
@@ -100,7 +93,7 @@ public class Item {
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.id);
 		builder.append(" - ");
-		builder.append(this.descricao);
+		builder.append(this.descricao.toLowerCase());
 		builder.append(", tags: [" + this.tagsToString() + "]");
 		builder.append(", quantidade: " + this.quantidade);
 
@@ -124,6 +117,26 @@ public class Item {
 		}
 
 		return saida;
+	}
+
+	public String atualizaItem(int novaQuantidade, String novasTags) {
+
+		if (novaQuantidade > 0) {
+
+			this.quantidade = novaQuantidade;
+		}
+
+		if (novasTags != null) {
+			if (!novasTags.trim().equals("")) {
+				this.tags = novasTags;
+
+			}
+		}
+		return toString();
+	}
+	
+	public int retornaId() {
+		return this.id;
 	}
 
 }

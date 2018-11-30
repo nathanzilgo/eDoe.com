@@ -2,8 +2,6 @@ package projeto_lp2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Random;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +11,6 @@ import junit.framework.Assert;
 class ControllerTest {
 
 	private Controller controller = new Controller();
-	private Random alt = new Random();
 
 	@Test
 	void testAdicionaDoadorValido() throws Exception {
@@ -324,14 +321,11 @@ class ControllerTest {
 		// id do item = 1
 		assertEquals(2, controller.adicionaItemParaDoacao("12345678900", "curso sobre cuidados com o bebe", 1,
 				"maternidade, duracao 12h"));
-		// Criado item casaco e adicionado a Raquel, retorna o id do item = 2
+		// Criado item casaco e adicionado a Raquel, retorna o id do item = 3
 		assertEquals(3, controller.adicionaItemParaDoacao("01234567899", "casaco", 1, "frio, adulto"));
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id anterior do
 		// item ja existente em Raquel = 1
 		assertEquals(1, controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto"));
-		// Criado item cadeira de rodas e adicionado a Igreja, retorna o id do item = 2
-		// pois esse ainda nao existia no doador Igreja
-		assertEquals(4, controller.adicionaItemParaDoacao("12345678900", "cadeira de rodas", 1, "manual, adulto"));
 	}
 
 	@Test

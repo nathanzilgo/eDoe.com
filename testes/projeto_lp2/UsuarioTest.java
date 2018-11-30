@@ -17,7 +17,6 @@ class UsuarioTest {
 	private Usuario novoReceptor = new Receptor("91724529000103", "Pedro Henrique",
 			"pedrohenriquedavimoura_@keffin.com.br", "(27) 98460-3045", "ORGAO_PUBLICO_MUNICIPAL");
 	private Item itemUm = new Item(1, "cadeira de rodas", 1, "manual, adulto");
-	private Item itemDois = new Item(2, "curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
 
 	@Test
 	void testSetNome() {
@@ -63,8 +62,8 @@ class UsuarioTest {
 
 	@Test
 	void testGetItens() {
-		this.novoDoador.adicionaItem(itemUm);
-		this.novoDoador.adicionaItem(itemDois);
+		this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
+		this.novoDoador.adicionaItem(2, "curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
 		assertEquals(
 				"{1=1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1, 2=2 - curso sobre cuidados com o bebê, tags: [maternidade,  duracao 12h], quantidade: 3}",
 				this.novoDoador.getItens().toString());
@@ -73,7 +72,7 @@ class UsuarioTest {
 
 	@Test
 	void testGetItemInt() {
-		int id = this.novoDoador.adicionaItem(itemUm);
+		int id = this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
 		assertEquals(id + " - cadeira de rodas, tags: [manual,  adulto], quantidade: 1",
 				this.novoDoador.getItem(1).toString());
 	}
@@ -104,8 +103,8 @@ class UsuarioTest {
 
 	@Test
 	void testAdicionaItem() {
-		this.novoDoador.adicionaItem(itemUm);
-		this.novoDoador.adicionaItem(itemDois);
+		this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
+		this.novoDoador.adicionaItem(2, "curso sobre cuidados com o bebê", 3, "maternidade, duracao 12h");
 		assertEquals(
 				"{1=1 - cadeira de rodas, tags: [manual,  adulto], quantidade: 1, 2=2 - curso sobre cuidados com o bebê, tags: [maternidade,  duracao 12h], quantidade: 3}",
 				this.novoDoador.getItens().toString());
@@ -115,7 +114,7 @@ class UsuarioTest {
 	@Test
 	void testExisteItemInt() {
 		assertEquals(false, this.novoDoador.existeItem(1));
-		this.novoDoador.adicionaItem(itemUm);
+		this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
 		assertEquals(true, this.novoDoador.existeItem(1));
 
 	}
@@ -123,7 +122,7 @@ class UsuarioTest {
 	@Test
 	void testExisteItemItem() {
 		assertEquals(false, this.novoDoador.existeItem(itemUm));
-		this.novoDoador.adicionaItem(itemUm);
+		this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
 		assertEquals(true, this.novoDoador.existeItem(itemUm));
 	}
 

@@ -168,6 +168,7 @@ public abstract class Usuario {
 		}
 
 		return getIdItem(item);
+
 	}
 
 	/**

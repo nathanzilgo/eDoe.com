@@ -25,7 +25,7 @@ public class Controller {
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
-	
+
 	public Controller() {
 		this.mapaUsuarios = new LinkedHashMap<>();
 		this.descritores = new HashSet<>();
@@ -221,6 +221,15 @@ public class Controller {
 
 		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 
+	}
+
+	private boolean existeItem(int idItem) {
+		for (Usuario usuario : this.mapaUsuarios.values()) {
+			if (usuario.existeItem(idItem)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

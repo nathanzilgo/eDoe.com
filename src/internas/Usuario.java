@@ -118,6 +118,7 @@ public abstract class Usuario {
 		}
 
 		return getIdItem(item);
+
 	}
 
 	/**
@@ -193,13 +194,14 @@ public abstract class Usuario {
 	private int getIdItem(Item item) {
 		return getItem(item).getId();
 	}
+
 	public ArrayList<Item> pesquisaDescricao(String entrada) {
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
-		for(Item item : itens.values()) {
-			if(item.pesquisaNaDescricao(entrada)) {
+		for (Item item : itens.values()) {
+			if (item.pesquisaNaDescricao(entrada)) {
 				itensPesquisados.add(item);
 			}
 		}
 		return itensPesquisados;
-}
+	}
 }

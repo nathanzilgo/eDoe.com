@@ -99,5 +99,9 @@ public class Validar {
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
 
 	}
-
+	public static void validaPesquisa(String entrada) {
+		if(isNull(entrada) || isEmpty(entrada)) {
+			throw new IllegalArgumentException("Entrada invalida: texto da pesquisa nao pode ser vazio ou nulo.");
+		}
+	}
 }

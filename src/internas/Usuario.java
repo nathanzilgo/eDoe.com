@@ -1,5 +1,6 @@
 package internas;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -192,5 +193,13 @@ public abstract class Usuario {
 	private int getIdItem(Item item) {
 		return getItem(item).getId();
 	}
-
+	public ArrayList<Item> pesquisaDescricao(String entrada) {
+		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		for(Item item : itens.values()) {
+			if(item.pesquisaNaDescricao(entrada)) {
+				itensPesquisados.add(item);
+			}
+		}
+		return itensPesquisados;
+}
 }

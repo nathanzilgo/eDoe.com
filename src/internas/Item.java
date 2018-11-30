@@ -138,5 +138,12 @@ public class Item {
 	public int retornaId() {
 		return this.id;
 	}
-
+	public boolean pesquisaNaDescricao(String entrada) {
+		for(String palavra : getDescricao().split(" ")) {
+			if(palavra.toLowerCase().equals(entrada.toLowerCase())) {
+				return true;
+				}
+			}	
+		return false;
+	}
 }

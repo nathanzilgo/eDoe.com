@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import ferramentas.DescricaoComparator;
+import ferramentas.QuantidadeComparator;
 import ferramentas.Validar;
 import internas.Doador;
 import internas.Item;
@@ -21,11 +23,15 @@ public class Controller {
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
 	private int contadorIdItem;
-
+	private DescricaoComparator descricaoComparator;
+	private QuantidadeComparator quantidadeComparator;
+	
 	public Controller() {
 		this.mapaUsuarios = new LinkedHashMap<>();
 		this.descritores = new HashSet<>();
 		this.contadorIdItem = 0;
+		this.descricaoComparator = new DescricaoComparator();
+		this.quantidadeComparator = new QuantidadeComparator();
 	}
 
 	/**
@@ -290,12 +296,12 @@ public class Controller {
 
 		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
 	}
-	
+
 	private int incrementador() {
 		this.contadorIdItem++;
 		return this.contadorIdItem;
 	}
-	
+
 	public int adicionaItemNecessario(String idReceptor, String descricaoItem, int quantidade, String tags) {
 		Validar.validaAdicionaItem(idReceptor, descricaoItem, quantidade, tags);
 
@@ -331,7 +337,7 @@ public class Controller {
 
 		return retorno;
 	}
-	
+
 	public String atualizaItemNecessario(String idReceptor, int idItem, int novaQuantidade, String novasTags) {
 
 		Validar.validaId(idReceptor);
@@ -354,4 +360,78 @@ public class Controller {
 
 	}
 
+	public String pesquisaItemParaDoacaoPorDescricao(String entrada) {
+		Validar.validaPesquisa(entrada);
+		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Doador) {
+				for (Item item : usuario.pesquisaDescricao(entrada)) {
+					itensPesquisados.add(item);
+				}
+			}
+		}
+
+		Collections.sort(itensPesquisados, descricaoComparator);
+		return strItensPesquisados(itensPesquisados);
+	}
+
+	private String strItensPesquisados(ArrayList<Item> entrada) {
+		String saida = "";
+		for (int i = 0; i < entrada.size() - 1; i++) {
+			saida += entrada.get(i).toString() + " | ";
+		}
+		saida += entrada.get(entrada.size() - 1).toString();
+		return saida;
+	}
+
+	/**
+	 * Lista os itens organizados pelos descritores
+	 * 
+	 * @return
+	 */
+
+	public String litaDescritores() {
+		ArrayList<Item> exibeDescritores = new ArrayList<>();
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Doador) {
+				for (Item item : usuario.getItens().values()) {
+					exibeDescritores.add(item);
+				}
+			}
+		}
+		Collections.sort(exibeDescritores, descricaoComparator);
+		return strExibeDescritores(exibeDescritores);
+	}
+
+	private String strExibeDescritores(ArrayList<Item> entrada) {
+		String saida = "";
+		for (int i = 0; i < entrada.size() - 1; i++) {
+			saida += entrada.get(i).getQuantidade() + " - " + entrada.get(i).getDescricao() + " | ";
+		}
+		saida += entrada.get(entrada.size() - 1).getQuantidade() + " - "
+				+ entrada.get(entrada.size() - 1).getDescricao();
+		return saida;
+	}
+
+	public String listaItensDoacao() {
+		ArrayList<Item> itensDoacao = new ArrayList<>();
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Doador) {
+				for (Item item : usuario.getItens().values()) {
+					itensDoacao.add(item);
+				}
+			}
+		}
+		Collections.sort(itensDoacao, quantidadeComparator);
+		return strItensDoacao(itensDoacao);
+	}
+
+	private String strItensDoacao(ArrayList<Item> entrada) {
+		String saida = "";
+		for (Item item : entrada) {
+			saida += item.toString();
+		}
+		return saida;
+
+	}
 }

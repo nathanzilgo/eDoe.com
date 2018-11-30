@@ -32,6 +32,11 @@ public abstract class Usuario {
 
 	}
 
+	/**
+	 * Metodo que formata o id do usuario.
+	 * 
+	 * @return retorna o id formatado.
+	 */
 	private String getId() {
 		StringBuilder stringBuilder = new StringBuilder(this.id);
 		if (this.id.length() == 11) {
@@ -47,38 +52,77 @@ public abstract class Usuario {
 		return stringBuilder.toString();
 	}
 
+	/**
+	 * Metodo que muda o nome do usuario.
+	 * 
+	 * @param nome nome novo.
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Metodo que muda o email do usuario.
+	 * 
+	 * @param email email novo.
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Metodo que muda o telefone do usuario.
+	 * 
+	 * @param telefone telefone novo.
+	 */
 	public void setTelefone(String telefone) {
 		this.celular = telefone;
 	}
 
+	/**
+	 * Metodo que muda a classe do usuario.
+	 * 
+	 * @param classe classe nova.
+	 */
 	public void setClasse(String classe) {
 		this.classe = classe;
 	}
 
+	/**
+	 * Metodo que retorna o nome do usuario.
+	 * 
+	 * @return retorna o nome.
+	 */
 	public String getNome() {
 		return this.nome;
 	}
 
+	/**
+	 * Metodo que retorna o mapa de itens.
+	 * 
+	 * @return retorna o mapa.
+	 */
 	public Map<Integer, Item> getItens() {
 		return itens;
 	}
 
-	public void setItens(Map<Integer, Item> itens) {
-		this.itens = itens;
-	}
-
+	/**
+	 * Metodo que pesquisa um item pelo id e o retorna.
+	 * 
+	 * @param id id do item a ser retornado.
+	 * @return retorna o item pesquisado.
+	 */
 	public Item getItem(int id) {
 		return this.getItens().get(id);
 	}
 
+	/**
+	 * Metodo que atualiza os dados de um usuario.
+	 * 
+	 * @param nome    novo nome.
+	 * @param email   novo email.
+	 * @param celular novo celular.
+	 */
 	public void atualizaUsuario(String nome, String email, String celular) {
 		if (Validar.checaArgumento(nome)) {
 			this.nome = nome;
@@ -92,16 +136,22 @@ public abstract class Usuario {
 
 	}
 
+	/**
+	 * Representacao em String de um usuario.
+	 */
 	@Override
 	public String toString() {
 		return this.nome + "/" + getId() + ", " + this.email + ", " + this.celular + ", status: ";
 	}
 
 	/**
-	 * Implementada em Doador.java
+	 * Metodo que adiciona um novo item ao mapa de itens.
 	 * 
-	 * @param item
-	 * @return Integer
+	 * @param idItem id do item a ser adicionado.
+	 * @param descricaoItem descricao do item a ser adicionado.
+	 * @param quantidade quantidade de itens a ser adicionada.
+	 * @param tags tags do item a ser adicionado.
+	 * @return retorna o id do item.
 	 */
 	public int adicionaItem(int idItem, String descricaoItem, int quantidade, String tags) {
 
@@ -131,11 +181,11 @@ public abstract class Usuario {
 	public abstract boolean existeItem(int idItem);
 
 	/**
-	 * Implementado em Doador.java Possui comportamento polimorfico com o outro
-	 * metodo do mesmo nome.
+	 * Checa se um determinado item existe. Retorna um booleano indicando se existe
+	 * ou nao.
 	 * 
-	 * @param item
-	 * @return
+	 * @param item item a ser checado se existe ou nao.
+	 * @return retorna se existe ou nao.
 	 */
 	public boolean existeItem(Item item) {
 		return getItem(item) == null ? false : true;
@@ -144,8 +194,8 @@ public abstract class Usuario {
 	/**
 	 * Procura por um item no mapa e o retorna.
 	 * 
-	 * @param item
-	 * @return
+	 * @param item item a ser procurado
+	 * @return retorna o item.
 	 */
 	public Item getItem(Item item) {
 		for (Item i : this.itens.values()) {
@@ -156,14 +206,32 @@ public abstract class Usuario {
 		return null;
 	}
 
+	/**
+	 * Retorna uma colecao dos itens do usuario.
+	 * 
+	 * @return retorna uma colecao de itens.
+	 */
 	public Collection<Item> retornaItensUsuario() {
 		return itens.values();
 	}
 
+	/**
+	 * Retorna o id do usuario.
+	 * 
+	 * @return retorna o id.
+	 */
 	public String retornaId() {
 		return this.id;
 	}
 
+	/**
+	 * Atualiza um item do usuario
+	 * 
+	 * @param idItem         id do item a ser atualizado.
+	 * @param novaQuantidade nova quantidade de itens.
+	 * @param novasTags      novas tags do item.
+	 * @return retorna uma representacao em String do item alterado.
+	 */
 	public String atualizaItem(int idItem, int novaQuantidade, String novasTags) {
 		if (idItem < 0) {
 
@@ -176,6 +244,12 @@ public abstract class Usuario {
 		return itens.get(idItem).atualizaItem(novaQuantidade, novasTags);
 
 	}
+
+	/**
+	 * Remove um item do usuario.
+	 * 
+	 * @param idItem id do item a ser removido.
+	 */
 
 	public void removeItemNecessario(int idItem) {
 
@@ -191,10 +265,22 @@ public abstract class Usuario {
 		itens.remove(idItem);
 	}
 
+	/**
+	 * Metodo privado para pegar o id de um item.
+	 * 
+	 * @param item item a ser pego o id.
+	 * @return retorna o id.
+	 */
 	private int getIdItem(Item item) {
 		return getItem(item).getId();
 	}
 
+	/**
+	 * Metodo que pesquisa um item pela sua descricao.
+	 * 
+	 * @param entrada descricao a ser procurada.
+	 * @return retorna um ArrayList de itens com a descricao procurada.
+	 */
 	public ArrayList<Item> pesquisaDescricao(String entrada) {
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
 		for (Item item : itens.values()) {

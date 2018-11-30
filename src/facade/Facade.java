@@ -9,7 +9,8 @@ public class Facade {
 	private Controller controller = new Controller();
 
 	public static void main(String[] args) {
-		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt", "acceptionTest/use_case_2.txt", "acceptionTest/use_case_4.txt" };
+		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt", "acceptionTest/use_case_2.txt","acceptionTest/use_case_3"
+				+ ".txt", "acceptionTest/use_case_4.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -106,5 +107,14 @@ public class Facade {
 	
 	public void removeItemNecessario(String idReceptor, int idItem) {
 		controller.removeItemNecessario(idReceptor, idItem);
+	}
+	public String pesquisaItemParaDoacaoPorDescricao(String entrada) {
+		return controller.pesquisaItemParaDoacaoPorDescricao(entrada);
+	}
+	public String listaDescritorDeItensParaDoacao() {
+		return controller.litaDescritores();
+	}
+	public String listaItensParaDoacao() {
+		return controller.listaItensDoacao();
 	}
 }

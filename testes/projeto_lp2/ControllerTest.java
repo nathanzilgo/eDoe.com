@@ -13,7 +13,6 @@ import junit.framework.Assert;
 class ControllerTest {
 
 	private Controller controller = new Controller();
-	private Random alt = new Random();
 
 	@Test
 	void testAdicionaDoadorValido() throws Exception {

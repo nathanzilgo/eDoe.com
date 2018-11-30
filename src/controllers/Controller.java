@@ -382,7 +382,13 @@ public class Controller {
 		mapaUsuarios.get(idReceptor).removeItemNecessario(idItem);
 
 	}
-
+	/**
+	 * pesquisa a partir de uma String de entrada na descricao dos itens e retorna todos os intens que possuem a string pesquisada na descricao
+	 * ignorando letras maiusculas e minusculas.
+	 * @param entrada String a ser pesqusada.
+	 * @return Itens que possuem a String pesquisada na descricao
+	 */
+	
 	public String pesquisaItemParaDoacaoPorDescricao(String entrada) {
 		Validar.validaPesquisa(entrada);
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
@@ -398,6 +404,7 @@ public class Controller {
 		return strItensPesquisados(itensPesquisados);
 	}
 
+	
 	private String strItensPesquisados(ArrayList<Item> entrada) {
 		String saida = "";
 		for (int i = 0; i < entrada.size() - 1; i++) {
@@ -435,7 +442,10 @@ public class Controller {
 				+ entrada.get(entrada.size() - 1).getDescricao();
 		return saida;
 	}
-
+	/**
+	 * lista todos os itens cadastrados no sistema primeiramente organizados pela quantidade em ordem decrescente e depois em ordem alfabetica.
+	 * @return String
+	 */
 	public String listaItensDoacao() {
 		ArrayList<Item> itensDoacao = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {

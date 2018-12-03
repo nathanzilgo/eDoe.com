@@ -86,4 +86,10 @@ public class Facade {
 	public String listaItensParaDoacao() {
 		return controller.listaItensDoacao();
 	}
+	
+	//**********************************************US 5**********************************************************
+	
+	public void match(String idReceptor, int idItemNec) {
+		//TODO
+	}
 }

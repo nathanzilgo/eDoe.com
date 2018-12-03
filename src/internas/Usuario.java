@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import ferramentas.Validar;
@@ -28,7 +29,8 @@ public abstract class Usuario {
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
-		this.itens = new HashMap<>();
+		this.itens = new LinkedHashMap<>();
+		this.idsItens = new HashSet<>();
 
 	}
 

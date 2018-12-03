@@ -120,9 +120,9 @@ class UsuarioTest {
 
 	@Test
 	void testExisteItemItem() {
-		assertEquals(false, this.novoDoador.existeItem(itemUm));
+		assertEquals(false, this.novoDoador.checaItem(itemUm));
 		this.novoDoador.adicionaItem(1, "cadeira de rodas", 1, "manual, adulto");
-		assertEquals(true, this.novoDoador.existeItem(itemUm));
+		assertEquals(true, this.novoDoador.checaItem(itemUm));
 	}
 
 }

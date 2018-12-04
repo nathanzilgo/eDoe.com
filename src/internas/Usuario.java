@@ -149,22 +149,22 @@ public abstract class Usuario {
 	/**
 	 * Metodo que adiciona um novo item ao mapa de itens.
 	 * 
-	 * @param idItem id do item a ser adicionado.
+	 * @param idItem        id do item a ser adicionado.
 	 * @param descricaoItem descricao do item a ser adicionado.
-	 * @param quantidade quantidade de itens a ser adicionada.
-	 * @param tags tags do item a ser adicionado.
+	 * @param quantidade    quantidade de itens a ser adicionada.
+	 * @param tags          tags do item a ser adicionado.
 	 * @return retorna o id do item.
 	 */
 	public int adicionaItem(int idItem, String descricaoItem, int quantidade, String tags) {
 
 		Item item = new Item(idItem, descricaoItem, quantidade, tags);
 
-		if (existeItem(item)) {
+		if (checaItem(item)) {
 			itens.get(getIdItem(item)).setQuantidade(quantidade);
 
 		}
 
-		if (!existeItem(item)) {
+		if (!checaItem(item)) {
 			this.itens.put(idItem, item);
 			return getIdItem(item);
 		}
@@ -189,7 +189,7 @@ public abstract class Usuario {
 	 * @param item item a ser checado se existe ou nao.
 	 * @return retorna se existe ou nao.
 	 */
-	public boolean existeItem(Item item) {
+	public boolean checaItem(Item item) {
 		return getItem(item) == null ? false : true;
 	}
 

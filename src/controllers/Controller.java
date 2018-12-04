@@ -476,6 +476,6 @@ public class Controller {
 	 */
 	
 	public void receptorMatch(String docReceptor, int idItemNec) {
-		this.mapaUsuarios.get(docReceptor).match(idItemNec);
+		this.mapaUsuarios.get(docReceptor).match(idItemNec);	
 	}
 }

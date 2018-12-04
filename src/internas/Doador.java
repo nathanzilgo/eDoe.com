@@ -26,7 +26,7 @@ public class Doador extends Usuario {
 	}
 
 	@Override
-	public boolean existeItem(Item item) {
+	public boolean checaItem(Item item) {
 		for(Item i: this.itens.values()) {
 			if(i.equals(item)) {
 				return true;

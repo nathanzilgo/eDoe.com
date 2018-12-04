@@ -19,7 +19,7 @@ import internas.Receptor;
 import internas.Usuario;
 
 public class Controller {
-	
+
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
 	private int contadorIdItem;
@@ -232,7 +232,7 @@ public class Controller {
 		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-		
+
 		this.descritores.add(descricaoItem);
 		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 	}
@@ -327,6 +327,17 @@ public class Controller {
 
 	}
 
+	/**
+	 * Metodo responsavel por listar todos os itens necessarios e retornar uma
+	 * representacao ordenada em String destes. O metodo cria um ArrayList de itens
+	 * temporario e itera sobre os receptores do mapa de usuarios, depois pega seus
+	 * itens e coloca as suas representacoes em String no ArrayList. Apos isso, o
+	 * metodo ordena todas as representacoes dos itens de todos os receptores e
+	 * retorna um String dessas representacoes.
+	 * 
+	 * @return retorna uma representacao em String de todos os itens necessarios.
+	 */
+
 	public String listaItensNecessarios() {
 		ArrayList<String> itens = new ArrayList<String>();
 
@@ -352,6 +363,19 @@ public class Controller {
 		return retorno;
 	}
 
+	/**
+	 * Metodo responsavel por atualizar um item necessario. O metodo pega o usuario
+	 * que contem o item pelo parametro idReceptor e o item a ser mudado pelo
+	 * parametro idItem. Apos isso, a nova quantidade sera dada pelo parametro
+	 * novaQuantidade e as novas tags pelo parametros novasTags.
+	 * 
+	 * @param idReceptor     id do usuario que contem o item.
+	 * @param idItem         id do item a ser atualizado.
+	 * @param novaQuantidade quantidade nova a ser colocada.
+	 * @param novasTags      tags novas a serem colocadas.
+	 * @return retorna uma representacao em String do item ja atualziado.
+	 */
+
 	public String atualizaItemNecessario(String idReceptor, int idItem, int novaQuantidade, String novasTags) {
 
 		Validar.validaId(idReceptor);
@@ -361,6 +385,15 @@ public class Controller {
 		}
 		return mapaUsuarios.get(idReceptor).atualizaItem(idItem, novaQuantidade, novasTags);
 	}
+
+	/**
+	 * Metodo responsavel por remover um item necessario. O metodo pega o id do
+	 * receptor a ter um item removido pelo parametro idReceptor e o id do item a
+	 * ser removido pelo parametro idItem.
+	 * 
+	 * @param idReceptor id do receptor a ser acessado.
+	 * @param idItem     id do item a ser removido.
+	 */
 
 	public void removeItemNecessario(String idReceptor, int idItem) {
 
@@ -373,13 +406,16 @@ public class Controller {
 		mapaUsuarios.get(idReceptor).removeItemNecessario(idItem);
 
 	}
+
 	/**
-	 * Pesquisa a partir de uma String de entrada na descricao dos itens e retorna todos os intens que possuem a string pesquisada na descricao
-	 * ignorando letras maiusculas e minusculas.
+	 * Pesquisa a partir de uma String de entrada na descricao dos itens e retorna
+	 * todos os intens que possuem a string pesquisada na descricao ignorando letras
+	 * maiusculas e minusculas.
+	 * 
 	 * @param descricao: String a ser pesqusada.
 	 * @return String: Itens que possuem a String pesquisada na descricao
 	 */
-	
+
 	public String pesquisaItemParaDoacaoPorDescricao(String descricao) {
 		Validar.validaPesquisa(descricao);
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
@@ -394,7 +430,7 @@ public class Controller {
 		Collections.sort(itensPesquisados, descricaoComparator);
 		return strItensPesquisados(itensPesquisados);
 	}
-	
+
 	private String strItensPesquisados(ArrayList<Item> entrada) {
 		String saida = "";
 		for (int i = 0; i < entrada.size() - 1; i++) {
@@ -432,8 +468,11 @@ public class Controller {
 				+ entrada.get(entrada.size() - 1).getDescricao();
 		return saida;
 	}
+
 	/**
-	 * lista todos os itens cadastrados no sistema primeiramente organizados pela quantidade em ordem decrescente e depois em ordem alfabetica.
+	 * lista todos os itens cadastrados no sistema primeiramente organizados pela
+	 * quantidade em ordem decrescente e depois em ordem alfabetica.
+	 * 
 	 * @return String
 	 */
 	public String listaItensDoacao() {
@@ -457,50 +496,53 @@ public class Controller {
 		return saida;
 
 	}
-	//**********************************************************US 5********************************************************************************
+
+	// **********************************************************US
+	// 5********************************************************************************
 	/**
-	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis matches para o item desejado
-	 * Caso nao existam, uma String vazia eh retornada
+	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis
+	 * matches para o item desejado Caso nao existam, uma String vazia eh retornada
 	 * 
 	 * @param docReceptor
 	 * @param idItemNec
 	 */
-	
+
 	public void receptorMatch(String docReceptor, int idItemNec) {
 		Item itemNec = this.getItem(idItemNec);
 		ArrayList<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
-		
-		for(Item iter: possiveisMatches) {
+
+		for (Item iter : possiveisMatches) {
 			this.mapaUsuarios.get(docReceptor).match(iter, itemNec);
 		}
 	}
-	
+
 	/**
 	 * Pesquisa um item dentre todos os usuarios, retorna null caso nao o encontre
 	 * 
-	 * @param idItem
-	 * @return Item
+	 * @param idItem id do item a ser procurado.
+	 * @return Item retorna o objeto do Item.
 	 */
 	public Item getItem(int idItem) {
-		for(Usuario us: this.mapaUsuarios.values()) {
+		for (Usuario us : this.mapaUsuarios.values()) {
 			return us.getItem(idItem);
 		}
 		return null;
 	}
+
 	/**
-	 * US 5 - 
-	 * Retorna uma lista com todos os itens que possuem a descricao fornecida.
-	 * Semelhante a 'String pesquisaItemParaDoacaoPorDescricao(String descricao)'
-	 * porem, nesta, uma lista eh retornada no lugar de uma representacao textual.
+	 * US 5 - Retorna uma lista com todos os itens que possuem a descricao
+	 * fornecida. Semelhante a 'String pesquisaItemParaDoacaoPorDescricao(String
+	 * descricao)' porem, nesta, uma lista eh retornada no lugar de uma
+	 * representacao textual.
 	 * 
 	 * @param descricao
 	 * @return List
 	 */
-	public ArrayList<Item> pesquisaItensPorDescricao(String descricao){
+	public ArrayList<Item> pesquisaItensPorDescricao(String descricao) {
 		Validar.validaPesquisa(descricao);
-		
+
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
-		
+
 		for (Usuario usuario : mapaUsuarios.values()) {
 			if (usuario instanceof Doador) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
@@ -508,8 +550,8 @@ public class Controller {
 				}
 			}
 		}
-		
+
 		return itensPesquisados;
 	}
-	
+
 }

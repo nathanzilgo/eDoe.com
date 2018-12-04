@@ -80,7 +80,7 @@ public class Facade {
 	}
 
 	public String listaDescritorDeItensParaDoacao() {
-		return controller.litaDescritores();
+		return controller.listaDescritores();
 	}
 
 	public String listaItensParaDoacao() {

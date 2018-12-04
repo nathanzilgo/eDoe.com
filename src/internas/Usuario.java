@@ -287,7 +287,7 @@ public abstract class Usuario {
 	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis matches para o item desejado
 	 * Caso nao existam, uma String vazia eh retornada
 	 */
-	public void match(int idItemNec) {
-			
+	public void match(Item itemMatch, Item itemNec) {
+		
 	}
 }

@@ -1,9 +1,14 @@
 package internas;
 
-public class Receptor extends Usuario {
+import java.util.ArrayList;
 
+public class Receptor extends Usuario {
+	
+	private ArrayList<Match> matches;
+	
 	public Receptor(String id, String nome, String email, String celular, String classe) {
 		super(id, nome, email, celular, classe);
+		this.matches = new ArrayList<>();
 	}
 
 	@Override
@@ -18,7 +23,8 @@ public class Receptor extends Usuario {
 		return false;
 	}
 	
-	public void match(int idItem) {
+	@Override
+	public void match(Item itemMatch, Item itemNec) {
 		
 	}
 }

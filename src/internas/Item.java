@@ -20,12 +20,14 @@ public class Item {
 	private int quantidade;
 	private String tags;
 	private String descricao;
+	private Usuario usuarioDoador;
 
-	public Item(int id, String descricao, int quantidade, String tags) {
+	public Item(int id, String descricao, int quantidade, String tags, Usuario usuarioDoador) {
 		this.id = id;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.tags = tags;
+		this.usuarioDoador = usuarioDoador;
 	}
 
 	public int getId() {

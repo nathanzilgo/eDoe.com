@@ -2,7 +2,6 @@ package internas;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -146,7 +145,7 @@ public abstract class Usuario {
 	 */
 	public int adicionaItem(int idItem, String descricaoItem, int quantidade, String tags) {
 
-		Item item = new Item(idItem, descricaoItem, quantidade, tags);
+		Item item = new Item(idItem, descricaoItem, quantidade, tags, this);
 
 		if (checaItem(item)) {
 			itens.get(getIdItem(item)).setQuantidade(quantidade);
@@ -290,4 +289,37 @@ public abstract class Usuario {
 	public void match(Item itemMatch, Item itemNec) {
 		
 	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public HashSet<Integer> getIdsItens() {
+		return idsItens;
+	}
+
+	public void setIdsItens(HashSet<Integer> idsItens) {
+		this.idsItens = idsItens;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setItens(Map<Integer, Item> itens) {
+		this.itens = itens;
+	}
+	
 }

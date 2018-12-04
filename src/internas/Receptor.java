@@ -17,12 +17,6 @@ public class Receptor extends Usuario {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public boolean existeItem(Item item) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public void match(int idItem) {
 		

@@ -35,23 +35,12 @@ public abstract class Usuario {
 	}
 
 	/**
-	 * Metodo que formata o id do usuario.
+	 * Formata o id do usuario e o retorna
 	 * 
-	 * @return retorna o id formatado.
+	 * @return String
 	 */
 	private String getId() {
-		StringBuilder stringBuilder = new StringBuilder(this.id);
-		if (this.id.length() == 11) {
-			stringBuilder.insert(this.id.length() - 8, '.');
-			stringBuilder.insert(this.id.length() - 4, '.');
-			stringBuilder.insert(this.id.length(), '-');
-			return stringBuilder.toString();
-		}
-		stringBuilder.insert(this.id.length() - 12, '.');
-		stringBuilder.insert(this.id.length() - 8, '.');
-		stringBuilder.insert(this.id.length() - 4, '/');
-		stringBuilder.insert(this.id.length() + 1, '-');
-		return stringBuilder.toString();
+		return this.id;
 	}
 
 	/**

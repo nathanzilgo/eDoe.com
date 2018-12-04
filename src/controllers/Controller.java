@@ -19,7 +19,7 @@ import internas.Receptor;
 import internas.Usuario;
 
 public class Controller {
-
+	
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
 	private int contadorIdItem;
@@ -466,5 +466,16 @@ public class Controller {
 		}
 		return saida;
 
+	}
+	//**********************************************************US 5********************************************************************************
+	/**
+	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis matches para o item desejado
+	 * Caso nao existam, uma String vazia eh retornada
+	 * @param docReceptor
+	 * @param idItemNec
+	 */
+	
+	public void receptorMatch(String docReceptor, int idItemNec) {
+		this.mapaUsuarios.get(docReceptor).match(idItemNec);
 	}
 }

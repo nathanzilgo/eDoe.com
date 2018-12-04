@@ -89,7 +89,7 @@ public class Facade {
 	
 	//**********************************************US 5**********************************************************
 	
-	public void match(String idReceptor, int idItemNec) {
-		//TODO
+	public void match(String docReceptor, int idItemNec) {
+		this.controller.receptorMatch(docReceptor, idItemNec);
 	}
 }

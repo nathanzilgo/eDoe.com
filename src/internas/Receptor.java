@@ -17,6 +17,8 @@ public class Receptor extends Usuario {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
+	
+	public void match(int idItem) {
+		
+	}
 }

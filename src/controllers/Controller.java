@@ -22,6 +22,7 @@ public class Controller {
 	
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
+	private LinkedHashMap<Integer, Item> mapaItens;	
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
@@ -232,9 +233,9 @@ public class Controller {
 		if (!this.existeusuario(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
-
+		
+		this.descritores.add(descricaoItem);
 		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
-
 	}
 
 	private boolean existeItem(int idItem) {
@@ -383,18 +384,18 @@ public class Controller {
 
 	}
 	/**
-	 * pesquisa a partir de uma String de entrada na descricao dos itens e retorna todos os intens que possuem a string pesquisada na descricao
+	 * Pesquisa a partir de uma String de entrada na descricao dos itens e retorna todos os intens que possuem a string pesquisada na descricao
 	 * ignorando letras maiusculas e minusculas.
-	 * @param entrada String a ser pesqusada.
-	 * @return Itens que possuem a String pesquisada na descricao
+	 * @param descricao: String a ser pesqusada.
+	 * @return String: Itens que possuem a String pesquisada na descricao
 	 */
 	
-	public String pesquisaItemParaDoacaoPorDescricao(String entrada) {
-		Validar.validaPesquisa(entrada);
+	public String pesquisaItemParaDoacaoPorDescricao(String descricao) {
+		Validar.validaPesquisa(descricao);
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {
 			if (usuario instanceof Doador) {
-				for (Item item : usuario.pesquisaDescricao(entrada)) {
+				for (Item item : usuario.pesquisaDescricao(descricao)) {
 					itensPesquisados.add(item);
 				}
 			}
@@ -402,6 +403,30 @@ public class Controller {
 
 		Collections.sort(itensPesquisados, descricaoComparator);
 		return strItensPesquisados(itensPesquisados);
+	}
+	/**
+	 * US 5 - 
+	 * Retorna uma lista com todos os itens que possuem a descricao fornecida.
+	 * Semelhante a 'String pesquisaItemParaDoacaoPorDescricao(String descricao)'
+	 * porem, nesta, uma lista eh retornada no lugar de uma representacao textual.
+	 * 
+	 * @param descricao
+	 * @return List
+	 */
+	public ArrayList<Item> pesquisaItensPorDescricao(String descricao){
+		Validar.validaPesquisa(descricao);
+		
+		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Doador) {
+				for (Item item : usuario.pesquisaDescricao(descricao)) {
+					itensPesquisados.add(item);
+				}
+			}
+		}
+		
+		return itensPesquisados;
 	}
 
 	
@@ -417,10 +442,10 @@ public class Controller {
 	/**
 	 * Lista os itens organizados pelos descritores
 	 * 
-	 * @return
+	 * @return String
 	 */
 
-	public String litaDescritores() {
+	public String listaDescritores() {
 		ArrayList<Item> exibeDescritores = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {
 			if (usuario instanceof Doador) {
@@ -471,11 +496,31 @@ public class Controller {
 	/**
 	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis matches para o item desejado
 	 * Caso nao existam, uma String vazia eh retornada
+	 * 
 	 * @param docReceptor
 	 * @param idItemNec
 	 */
 	
 	public void receptorMatch(String docReceptor, int idItemNec) {
-		this.mapaUsuarios.get(docReceptor).match(idItemNec);	
+		Item itemNec = this.getItem(idItemNec);
+		ArrayList<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
+		
+		for(Item iter: possiveisMatches) {
+			this.mapaUsuarios.get(docReceptor).match(iter, itemNec);
+		}	
 	}
+	
+	/**
+	 * Pesquisa um item dentre todos os usuarios, retorna null caso nao o encontre
+	 * 
+	 * @param idItem
+	 * @return Item
+	 */
+	public Item getItem(int idItem) {
+		for(Usuario us: this.mapaUsuarios.values()) {
+			return us.getItem(idItem);
+		}
+		return null;
+	}
+	
 }

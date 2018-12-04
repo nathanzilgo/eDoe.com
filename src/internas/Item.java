@@ -1,5 +1,6 @@
 package internas;
 
+import java.util.ArrayList;
 import java.util.Random;
 import internas.Doador;
 
@@ -7,8 +8,8 @@ import internas.Doador;
  * Classe que representa um Item para doacao.
  * 
  * Dois itens para doacao sao iguais se eles tiverem o mesmo descritor de item e
- * as mesmas tags (na mesma ordem). O ID de cada item e gerado a partir da ordem
- * em que cada um foi posto na estrutura de Doador.
+ * as mesmas tags (na mesma ordem). O ID de cada item eh gerado a partir da ordem
+ * em que cada um foi posto em todos os Doadores.
  * 
  * @author Nathan Fernandes
  *
@@ -122,6 +123,34 @@ public class Item {
 			}
 		}
 
+		return saida;
+	}
+	
+	/**
+	 * US5
+	 * Retorna uma lista de todas as tags separadas presentes no item
+	 * @return List<String>
+	 */
+	public ArrayList<String> listaTags(){
+		ArrayList<String> saida = new ArrayList<>();
+		String tmp = new String();
+		
+		if (tags == null)
+			return saida;
+		if (tags.trim().isEmpty())
+			return saida;
+		
+		for(char str : this.tags.toCharArray()) {
+			if(str != ',' && str != ' ') {
+				tmp += Character.toString(str);
+			}else if(str == ',') {
+				saida.add(tmp);
+				tmp = "";
+			}else {
+				continue;
+			}
+		}
+		
 		return saida;
 	}
 

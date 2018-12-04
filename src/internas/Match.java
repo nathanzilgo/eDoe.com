@@ -15,6 +15,38 @@ public class Match {
 		this.descricao = descricao;
 		this.tags = tags;
 	}
+
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
+	}
+
+	public HashMap<Integer, Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(HashMap<Integer, Item> itens) {
+		this.itens = itens;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 	
 	
 }

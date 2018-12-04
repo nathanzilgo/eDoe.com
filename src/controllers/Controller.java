@@ -22,7 +22,6 @@ public class Controller {
 	
 	private LinkedHashMap<String, Usuario> mapaUsuarios;
 	private HashSet<String> descritores;
-	private LinkedHashMap<Integer, Item> mapaItens;	
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
@@ -238,15 +237,6 @@ public class Controller {
 		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 	}
 
-	private boolean existeItem(int idItem) {
-		for (Usuario usuario : this.mapaUsuarios.values()) {
-			if (usuario.existeItem(idItem)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * Retorna o metodo toString() de Item.java Recebe como parametros o id do Item
 	 * a ser exibido e do doador que possui o item. Verifica se as entradas sao
@@ -404,31 +394,6 @@ public class Controller {
 		Collections.sort(itensPesquisados, descricaoComparator);
 		return strItensPesquisados(itensPesquisados);
 	}
-	/**
-	 * US 5 - 
-	 * Retorna uma lista com todos os itens que possuem a descricao fornecida.
-	 * Semelhante a 'String pesquisaItemParaDoacaoPorDescricao(String descricao)'
-	 * porem, nesta, uma lista eh retornada no lugar de uma representacao textual.
-	 * 
-	 * @param descricao
-	 * @return List
-	 */
-	public ArrayList<Item> pesquisaItensPorDescricao(String descricao){
-		Validar.validaPesquisa(descricao);
-		
-		ArrayList<Item> itensPesquisados = new ArrayList<>();
-		
-		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Doador) {
-				for (Item item : usuario.pesquisaDescricao(descricao)) {
-					itensPesquisados.add(item);
-				}
-			}
-		}
-		
-		return itensPesquisados;
-	}
-
 	
 	private String strItensPesquisados(ArrayList<Item> entrada) {
 		String saida = "";
@@ -507,7 +472,7 @@ public class Controller {
 		
 		for(Item iter: possiveisMatches) {
 			this.mapaUsuarios.get(docReceptor).match(iter, itemNec);
-		}	
+		}
 	}
 	
 	/**
@@ -521,6 +486,30 @@ public class Controller {
 			return us.getItem(idItem);
 		}
 		return null;
+	}
+	/**
+	 * US 5 - 
+	 * Retorna uma lista com todos os itens que possuem a descricao fornecida.
+	 * Semelhante a 'String pesquisaItemParaDoacaoPorDescricao(String descricao)'
+	 * porem, nesta, uma lista eh retornada no lugar de uma representacao textual.
+	 * 
+	 * @param descricao
+	 * @return List
+	 */
+	public ArrayList<Item> pesquisaItensPorDescricao(String descricao){
+		Validar.validaPesquisa(descricao);
+		
+		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		
+		for (Usuario usuario : mapaUsuarios.values()) {
+			if (usuario instanceof Doador) {
+				for (Item item : usuario.pesquisaDescricao(descricao)) {
+					itensPesquisados.add(item);
+				}
+			}
+		}
+		
+		return itensPesquisados;
 	}
 	
 }

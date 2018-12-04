@@ -23,8 +23,21 @@ public class Receptor extends Usuario {
 		return false;
 	}
 	
+	/**
+	 * Incompleto
+	 */
 	@Override
 	public void match(Item itemMatch, Item itemNec) {
+		int pontos = 20;
+		
+		//for(int iter = 0; iter < itemMatch.listaTags().size(); iter++) {
+			//if(itemMatch.listaTags())
+		//}
+		for(int iter = 0; iter < itemMatch.listaTags().size(); iter++) {
+			if(itemMatch.listaTags().get(iter).toLowerCase().equals(itemNec.listaTags().get(iter).toLowerCase())) {
+				pontos += 5;
+			}
+		}
 		
 	}
 }

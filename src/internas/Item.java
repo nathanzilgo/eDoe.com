@@ -2,7 +2,6 @@ package internas;
 
 import java.util.ArrayList;
 import java.util.Random;
-import internas.Doador;
 
 /**
  * Classe que representa um Item para doacao.

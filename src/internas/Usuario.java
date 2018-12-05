@@ -8,21 +8,21 @@ import java.util.Map;
 
 import ferramentas.Validar;
 
-public abstract class Usuario {
+public class Usuario {
 
 	private String id;
 	private String nome;
 	private String email;
 	private String celular;
 	private String classe;
+	private boolean isReceptor;
 	protected HashSet<Integer> idsItens;
 	/**
 	 * Estrutura que armazena os itens dos usuarios doadores
 	 */
 	protected Map<Integer, Item> itens;
 
-	public Usuario(String id, String nome, String email, String celular, String classe) {
-
+	public Usuario(String id, String nome, String email, String celular, String classe, boolean isReceptor) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -30,11 +30,11 @@ public abstract class Usuario {
 		this.classe = classe;
 		this.itens = new LinkedHashMap<>();
 		this.idsItens = new HashSet<>();
-
+		this.isReceptor = isReceptor;
 	}
 
 	/**
-	 * Formata o id do usuario e o retorna
+	 * Retorna o id do usuario
 	 * 
 	 * @return String
 	 */
@@ -123,7 +123,6 @@ public abstract class Usuario {
 		if (Validar.checaArgumento(celular)) {
 			this.celular = celular;
 		}
-
 	}
 
 	/**
@@ -131,7 +130,18 @@ public abstract class Usuario {
 	 */
 	@Override
 	public String toString() {
-		return this.nome + "/" + getId() + ", " + this.email + ", " + this.celular + ", status: ";
+		return this.nome + "/" + getId() + ", " + this.email + ", " + this.celular + ", status: "
+				+ this.getTipoUsuario();
+	}
+
+	private String getTipoUsuario() {
+		if (this.isReceptor)
+			return "receptor";
+		return "doador";
+	}
+
+	public boolean getIsReceptor() {
+		return isReceptor;
 	}
 
 	/**
@@ -168,7 +178,9 @@ public abstract class Usuario {
 	 * @param idItem
 	 * @return
 	 */
-	public abstract boolean existeItem(int idItem);
+	public boolean existeItem(int idItem) {
+		return this.itens.containsKey(idItem);
+	}
 
 	/**
 	 * Checa se um determinado item existe. Retorna um booleano indicando se existe
@@ -280,14 +292,13 @@ public abstract class Usuario {
 		}
 		return itensPesquisados;
 	}
-	
+
 	/**
-	 * US 5
-	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis matches para o item desejado
-	 * Caso nao existam, uma String vazia eh retornada
+	 * US 5 Chama a funcao dentro do receptor informado e tenta encontrar possiveis
+	 * matches para o item desejado Caso nao existam, uma String vazia eh retornada
 	 */
 	public void match(Item itemMatch, Item itemNec) {
-		
+
 	}
 
 	public String getCelular() {
@@ -321,5 +332,5 @@ public abstract class Usuario {
 	public void setItens(Map<Integer, Item> itens) {
 		this.itens = itens;
 	}
-	
+
 }

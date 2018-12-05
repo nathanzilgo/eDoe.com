@@ -13,9 +13,7 @@ import java.util.Scanner;
 import ferramentas.DescricaoComparator;
 import ferramentas.QuantidadeComparator;
 import ferramentas.Validar;
-import internas.Doador;
 import internas.Item;
-import internas.Receptor;
 import internas.Usuario;
 
 public class Controller {
@@ -52,7 +50,7 @@ public class Controller {
 
 		if (!existeusuario(id)) {
 			if (existeClasse(classe)) {
-				Usuario novoUsuario = new Doador(id, nome, email, celular, classe);
+				Usuario novoUsuario = new Usuario(id, nome, email, celular, classe, false);
 				this.mapaUsuarios.put(id, novoUsuario);
 				return id;
 			}
@@ -166,7 +164,7 @@ public class Controller {
 		while (sc.hasNextLine()) {
 			String[] dado = sc.nextLine().split(",");
 			if (!existeusuario(dado[0])) {
-				Usuario novoUsuario = new Receptor(dado[0], dado[1], dado[2], dado[3], dado[4]);
+				Usuario novoUsuario = new Usuario(dado[0], dado[1], dado[2], dado[3], dado[4], true);
 				this.mapaUsuarios.put(dado[0], novoUsuario);
 			} else {
 				this.mapaUsuarios.get(dado[0]).setNome(dado[1]);
@@ -342,7 +340,7 @@ public class Controller {
 		ArrayList<String> itens = new ArrayList<String>();
 
 		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Receptor) {
+			if (usuario.getIsReceptor() == true) {
 				for (Item item : usuario.retornaItensUsuario()) {
 					itens.add(item.toString() + ", Receptor: " + usuario.getNome() + "/" + usuario.retornaId());
 				}
@@ -420,7 +418,7 @@ public class Controller {
 		Validar.validaPesquisa(descricao);
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Doador) {
+			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
 					itensPesquisados.add(item);
 				}
@@ -449,7 +447,7 @@ public class Controller {
 	public String listaDescritores() {
 		ArrayList<Item> exibeDescritores = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Doador) {
+			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
 					exibeDescritores.add(item);
 				}
@@ -478,7 +476,7 @@ public class Controller {
 	public String listaItensDoacao() {
 		ArrayList<Item> itensDoacao = new ArrayList<>();
 		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Doador) {
+			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
 					itensDoacao.add(item);
 				}
@@ -544,7 +542,7 @@ public class Controller {
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
 
 		for (Usuario usuario : mapaUsuarios.values()) {
-			if (usuario instanceof Doador) {
+			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
 					itensPesquisados.add(item);
 				}

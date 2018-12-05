@@ -7,11 +7,13 @@
 				Nathan Fernandes
 				
 ###			US 2:
+				Gyovanna Costa
 				Nathan Fernandes
-				Mateus Diniz
 
 ###			US 3:
 				Mateus Diniz
 			
 ###			US 4:
 				Lucio Nathan
+###			US 5:
+Nathan Fernandes

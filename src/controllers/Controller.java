@@ -18,14 +18,14 @@ import internas.Usuario;
 
 public class Controller {
 
-	private LinkedHashMap<String, Usuario> mapaUsuarios;
+	private LinkedHashMap<String, Usuario> usuarios;
 	private HashSet<String> descritores;
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
 
 	public Controller() {
-		this.mapaUsuarios = new LinkedHashMap<>();
+		this.usuarios = new LinkedHashMap<>();
 		this.descritores = new HashSet<>();
 		this.contadorIdItem = 0;
 		this.descricaoComparator = new DescricaoComparator();
@@ -51,7 +51,7 @@ public class Controller {
 		if (!existeusuario(id)) {
 			if (existeClasse(classe)) {
 				Usuario novoUsuario = new Usuario(id, nome, email, celular, classe, false);
-				this.mapaUsuarios.put(id, novoUsuario);
+				this.usuarios.put(id, novoUsuario);
 				return id;
 			}
 			throw new IllegalArgumentException("Entrada invalida: opcao de classe invalida.");
@@ -70,7 +70,7 @@ public class Controller {
 	public String pesquisaUsuarioPorId(String id) {
 		Validar.validaId(id);
 		if (existeusuario(id)) {
-			return this.mapaUsuarios.get(id).toString();
+			return this.usuarios.get(id).toString();
 		}
 		throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 	}
@@ -86,7 +86,7 @@ public class Controller {
 	public String pesquisaUsuarioPorNome(String nome) {
 		Validar.validaNome(nome);
 		String retorno = "";
-		for (Usuario usuario : this.mapaUsuarios.values()) {
+		for (Usuario usuario : this.usuarios.values()) {
 			if (usuario.getNome().equalsIgnoreCase(nome)) {
 				retorno += usuario.toString() + " | ";
 			}
@@ -112,12 +112,12 @@ public class Controller {
 
 	public String atualizaUsuario(String id, String nome, String email, String celular) {
 		Validar.validaId(id);
-		if (!mapaUsuarios.containsKey(id)) {
+		if (!usuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
 
-		mapaUsuarios.get(id).atualizaUsuario(nome, email, celular);
-		return mapaUsuarios.get(id).toString();
+		usuarios.get(id).atualizaUsuario(nome, email, celular);
+		return usuarios.get(id).toString();
 	}
 
 	/**
@@ -129,15 +129,15 @@ public class Controller {
 	public void removeUsuario(String id) {
 		Validar.validaId(id);
 
-		if (!mapaUsuarios.containsKey(id)) {
+		if (!usuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
 
-		mapaUsuarios.remove(id);
+		usuarios.remove(id);
 	}
 
 	private boolean existeusuario(String id) {
-		return this.mapaUsuarios.containsKey(id);
+		return this.usuarios.containsKey(id);
 	}
 
 	private boolean existeClasse(String classe) {
@@ -165,12 +165,12 @@ public class Controller {
 			String[] dado = sc.nextLine().split(",");
 			if (!existeusuario(dado[0])) {
 				Usuario novoUsuario = new Usuario(dado[0], dado[1], dado[2], dado[3], dado[4], true);
-				this.mapaUsuarios.put(dado[0], novoUsuario);
+				this.usuarios.put(dado[0], novoUsuario);
 			} else {
-				this.mapaUsuarios.get(dado[0]).setNome(dado[1]);
-				this.mapaUsuarios.get(dado[0]).setEmail(dado[2]);
-				this.mapaUsuarios.get(dado[0]).setTelefone(dado[3]);
-				this.mapaUsuarios.get(dado[0]).setClasse(dado[4]);
+				this.usuarios.get(dado[0]).setNome(dado[1]);
+				this.usuarios.get(dado[0]).setEmail(dado[2]);
+				this.usuarios.get(dado[0]).setTelefone(dado[3]);
+				this.usuarios.get(dado[0]).setClasse(dado[4]);
 
 			}
 
@@ -232,7 +232,7 @@ public class Controller {
 		}
 
 		this.descritores.add(descricaoItem);
-		return this.mapaUsuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
+		return this.usuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 	}
 
 	/**
@@ -251,11 +251,11 @@ public class Controller {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
 		}
 
-		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem)) {
+		if (!this.usuarios.get(idDoador).existeItem(idItem)) {
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 		}
 
-		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
+		return this.usuarios.get(idDoador).getItem(idItem).toString();
 	}
 
 	/**
@@ -276,15 +276,15 @@ public class Controller {
 
 		if (!this.existeusuario(idDoador))
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem))
+		if (!this.usuarios.get(idDoador).existeItem(idItem))
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 
 		if (quantidade != 0)
-			this.mapaUsuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
+			this.usuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
 		if (tags != null)
-			this.mapaUsuarios.get(idDoador).getItem(idItem).setTags(tags);
+			this.usuarios.get(idDoador).getItem(idItem).setTags(tags);
 
-		return this.mapaUsuarios.get(idDoador).getItem(idItem).toString();
+		return this.usuarios.get(idDoador).getItem(idItem).toString();
 	}
 
 	/**
@@ -301,12 +301,12 @@ public class Controller {
 
 		if (!this.existeusuario(idDoador))
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if (this.mapaUsuarios.get(idDoador).getItens().isEmpty())
+		if (this.usuarios.get(idDoador).getItens().isEmpty())
 			throw new IllegalArgumentException("O Usuario nao possui itens cadastrados.");
-		if (!this.mapaUsuarios.get(idDoador).existeItem(idItem))
+		if (!this.usuarios.get(idDoador).existeItem(idItem))
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 
-		this.mapaUsuarios.get(idDoador).getItens().remove(idItem);
+		this.usuarios.get(idDoador).getItens().remove(idItem);
 	}
 
 	private int incrementador() {
@@ -321,7 +321,7 @@ public class Controller {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
 		}
 
-		return this.mapaUsuarios.get(idReceptor).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
+		return this.usuarios.get(idReceptor).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 
 	}
 
@@ -339,7 +339,7 @@ public class Controller {
 	public String listaItensNecessarios() {
 		ArrayList<String> itens = new ArrayList<String>();
 
-		for (Usuario usuario : mapaUsuarios.values()) {
+		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == true) {
 				for (Item item : usuario.retornaItensUsuario()) {
 					itens.add(item.toString() + ", Receptor: " + usuario.getNome() + "/" + usuario.retornaId());
@@ -378,10 +378,10 @@ public class Controller {
 
 		Validar.validaId(idReceptor);
 
-		if (!mapaUsuarios.containsKey(idReceptor)) {
+		if (!usuarios.containsKey(idReceptor)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
 		}
-		return mapaUsuarios.get(idReceptor).atualizaItem(idItem, novaQuantidade, novasTags);
+		return usuarios.get(idReceptor).atualizaItem(idItem, novaQuantidade, novasTags);
 	}
 
 	/**
@@ -397,11 +397,11 @@ public class Controller {
 
 		Validar.validaId(idReceptor);
 
-		if (!mapaUsuarios.containsKey(idReceptor)) {
+		if (!usuarios.containsKey(idReceptor)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idReceptor + ".");
 		}
 
-		mapaUsuarios.get(idReceptor).removeItemNecessario(idItem);
+		usuarios.get(idReceptor).removeItemNecessario(idItem);
 
 	}
 
@@ -417,7 +417,7 @@ public class Controller {
 	public String pesquisaItemParaDoacaoPorDescricao(String descricao) {
 		Validar.validaPesquisa(descricao);
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
-		for (Usuario usuario : mapaUsuarios.values()) {
+		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
 					itensPesquisados.add(item);
@@ -446,7 +446,8 @@ public class Controller {
 
 	public String listaDescritores() {
 		ArrayList<Item> exibeDescritores = new ArrayList<>();
-		for (Usuario usuario : mapaUsuarios.values()) {
+		
+		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
 					exibeDescritores.add(item);
@@ -475,7 +476,7 @@ public class Controller {
 	 */
 	public String listaItensDoacao() {
 		ArrayList<Item> itensDoacao = new ArrayList<>();
-		for (Usuario usuario : mapaUsuarios.values()) {
+		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
 					itensDoacao.add(item);
@@ -497,11 +498,11 @@ public class Controller {
 
 	}
 
-	// **********************************************************US
-	// 5********************************************************************************
+
 	/**
+	 * US 5 - 
 	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis
-	 * matches para o item desejado Caso nao existam, uma String vazia eh retornada
+	 * matches para o item desejado. Caso nao existam, uma String vazia eh retornada
 	 * 
 	 * @param docReceptor
 	 * @param idItemNec
@@ -509,11 +510,13 @@ public class Controller {
 
 	public void receptorMatch(String docReceptor, int idItemNec) {
 		Item itemNec = this.getItem(idItemNec);
+		
 		ArrayList<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
 
 		for (Item iter : possiveisMatches) {
-			this.mapaUsuarios.get(docReceptor).match(iter, itemNec);
+			this.usuarios.get(docReceptor).match(iter, itemNec);
 		}
+		
 	}
 
 	/**
@@ -523,7 +526,7 @@ public class Controller {
 	 * @return Item retorna o objeto do Item.
 	 */
 	public Item getItem(int idItem) {
-		for (Usuario us : this.mapaUsuarios.values()) {
+		for (Usuario us : this.usuarios.values()) {
 			return us.getItem(idItem);
 		}
 		return null;
@@ -543,7 +546,7 @@ public class Controller {
 
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
 
-		for (Usuario usuario : mapaUsuarios.values()) {
+		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
 					itensPesquisados.add(item);

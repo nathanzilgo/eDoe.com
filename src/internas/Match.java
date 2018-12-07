@@ -1,17 +1,13 @@
-	package internas;
-
-import java.util.HashMap;
+package internas;
 
 public class Match {
 	private int pontos;
-	private HashMap<Integer, Item> itens;
 	private String descricao;
 	private String tags;
 	
-	public Match(int pontos, HashMap<Integer, Item> itens, String descricao, String tags) {
+	public Match(int pontos, String descricao, String tags) {
 		super();
 		this.pontos = pontos;
-		this.itens = itens;
 		this.descricao = descricao;
 		this.tags = tags;
 	}
@@ -22,14 +18,6 @@ public class Match {
 
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
-	}
-
-	public HashMap<Integer, Item> getItens() {
-		return itens;
-	}
-
-	public void setItens(HashMap<Integer, Item> itens) {
-		this.itens = itens;
 	}
 
 	public String getDescricao() {
@@ -47,6 +35,19 @@ public class Match {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(pontos);
+		builder.append(", ");
+		builder.append(descricao);
+		builder.append(", tags:[");
+		builder.append(tags);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
 	
 }

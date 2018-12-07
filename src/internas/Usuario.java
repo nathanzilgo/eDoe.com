@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import ferramentas.Validar;
@@ -16,11 +17,9 @@ public class Usuario {
 	private String celular;
 	private String classe;
 	private boolean isReceptor;
-	protected HashSet<Integer> idsItens;
-	/**
-	 * Estrutura que armazena os itens dos usuarios doadores
-	 */
-	protected Map<Integer, Item> itens;
+	private HashSet<Integer> idsItens;
+	private Map<Integer, Item> itens;
+	private List<Match> matches;
 
 	public Usuario(String id, String nome, String email, String celular, String classe, boolean isReceptor) {
 		this.id = id;
@@ -30,81 +29,10 @@ public class Usuario {
 		this.classe = classe;
 		this.itens = new LinkedHashMap<>();
 		this.idsItens = new HashSet<>();
+		this.matches = new ArrayList<>();
 		this.isReceptor = isReceptor;
 	}
 
-	/**
-	 * Retorna o id do usuario
-	 * 
-	 * @return String
-	 */
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * Metodo que muda o nome do usuario.
-	 * 
-	 * @param nome nome novo.
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * Metodo que muda o email do usuario.
-	 * 
-	 * @param email email novo.
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * Metodo que muda o telefone do usuario.
-	 * 
-	 * @param telefone telefone novo.
-	 */
-	public void setTelefone(String telefone) {
-		this.celular = telefone;
-	}
-
-	/**
-	 * Metodo que muda a classe do usuario.
-	 * 
-	 * @param classe classe nova.
-	 */
-	public void setClasse(String classe) {
-		this.classe = classe;
-	}
-
-	/**
-	 * Metodo que retorna o nome do usuario.
-	 * 
-	 * @return retorna o nome.
-	 */
-	public String getNome() {
-		return this.nome;
-	}
-
-	/**
-	 * Metodo que retorna o mapa de itens.
-	 * 
-	 * @return retorna o mapa.
-	 */
-	public Map<Integer, Item> getItens() {
-		return itens;
-	}
-
-	/**
-	 * Metodo que pesquisa um item pelo id e o retorna.
-	 * 
-	 * @param id id do item a ser retornado.
-	 * @return retorna o item pesquisado.
-	 */
-	public Item getItem(int id) {
-		return this.getItens().get(id);
-	}
 
 	/**
 	 * Metodo que atualiza os dados de um usuario.
@@ -294,11 +222,26 @@ public class Usuario {
 	}
 
 	/**
-	 * US 5 Chama a funcao dentro do receptor informado e tenta encontrar possiveis
+	 * US 5 - Chama a funcao dentro do receptor informado e tenta encontrar possiveis
 	 * matches para o item desejado Caso nao existam, uma String vazia eh retornada
 	 */
 	public void match(Item itemMatch, Item itemNec) {
-
+		int pontos = 20;
+		ArrayList<String> itemMatchTags = itemMatch.listaTags();
+		ArrayList<String> itemNecTags = itemNec.listaTags();
+		
+		for(int x = 0; x < itemMatchTags.size(); x++) {
+			
+			for(int k = 0; k < itemNecTags.size(); k++) {
+				if(itemMatchTags.get(x).equalsIgnoreCase(itemNecTags.get(k)) && x==k) {
+					pontos += 10;
+				}
+				else if(itemMatchTags.get(x).equalsIgnoreCase(itemNecTags.get(k)) && x!=k) {
+					pontos += 5;
+				}
+			}
+		}
+		this.matches.add(new Match(pontos, itemMatch.getDescricao(), itemMatch.getTags()));
 	}
 
 	public String getCelular() {
@@ -333,4 +276,76 @@ public class Usuario {
 		this.itens = itens;
 	}
 
+	/**
+	 * Retorna o id do usuario
+	 * 
+	 * @return String
+	 */
+	public String getId() {
+		return this.id;
+	}
+
+	/**
+	 * Metodo que muda o nome do usuario.
+	 * 
+	 * @param nome nome novo.
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * Metodo que muda o email do usuario.
+	 * 
+	 * @param email email novo.
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Metodo que muda o telefone do usuario.
+	 * 
+	 * @param telefone telefone novo.
+	 */
+	public void setTelefone(String telefone) {
+		this.celular = telefone;
+	}
+
+	/**
+	 * Metodo que muda a classe do usuario.
+	 * 
+	 * @param classe classe nova.
+	 */
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+
+	/**
+	 * Metodo que retorna o nome do usuario.
+	 * 
+	 * @return retorna o nome.
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+
+	/**
+	 * Metodo que retorna o mapa de itens.
+	 * 
+	 * @return retorna o mapa.
+	 */
+	public Map<Integer, Item> getItens() {
+		return itens;
+	}
+
+	/**
+	 * Metodo que pesquisa um item pelo id e o retorna.
+	 * 
+	 * @param id id do item a ser retornado.
+	 * @return retorna o item pesquisado.
+	 */
+	public Item getItem(int id) {
+		return this.getItens().get(id);
+	}
 }

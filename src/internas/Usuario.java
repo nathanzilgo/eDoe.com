@@ -2,11 +2,13 @@ package internas;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import ferramentas.MatchComparator;
 import ferramentas.Validar;
 
 public class Usuario {
@@ -241,7 +243,29 @@ public class Usuario {
 				}
 			}
 		}
-		this.matches.add(new Match(pontos, itemMatch.getDescricao(), itemMatch.getTags()));
+		this.matches.add(new Match(pontos, itemMatch));
+	}
+	
+	/**
+	 * US 5 - 
+	 * Retorna os toString de todos os matches do doador receptor.
+	 * Ordenados conforme a especificacao: pontuacao, se for igual: identificador de item.
+	 * @return String
+	 */
+	public String getMatches() {
+		StringBuilder builder = new StringBuilder();
+		MatchComparator matchComparator = new MatchComparator();
+		
+		Collections.sort(this.matches, matchComparator);
+		
+		for(Match mt: this.matches) {
+			if(!mt.equals(this.matches.get(matches.size()-1))) {
+				builder.append(mt.toString());
+				builder.append(" | ");
+			}
+			builder.append(mt.toString());
+		}
+		return builder.toString();
 	}
 
 	public String getCelular() {

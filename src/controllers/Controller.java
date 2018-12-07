@@ -508,7 +508,7 @@ public class Controller {
 	 * @param idItemNec
 	 */
 
-	public void receptorMatch(String docReceptor, int idItemNec) {
+	public String receptorMatch(String docReceptor, int idItemNec) {
 		Item itemNec = this.getItem(idItemNec);
 		
 		ArrayList<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
@@ -517,6 +517,7 @@ public class Controller {
 			this.usuarios.get(docReceptor).match(iter, itemNec);
 		}
 		
+		return this.usuarios.get(docReceptor).getMatches();
 	}
 
 	/**

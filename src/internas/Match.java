@@ -4,12 +4,12 @@ public class Match {
 	private int pontos;
 	private String descricao;
 	private String tags;
+	private Item itemMatch;
 	
-	public Match(int pontos, String descricao, String tags) {
+	public Match(int pontos, Item itemMatch) {
 		super();
 		this.pontos = pontos;
-		this.descricao = descricao;
-		this.tags = tags;
+		this.itemMatch = itemMatch;
 	}
 
 	public int getPontos() {
@@ -35,7 +35,11 @@ public class Match {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-
+	
+	public int getItemId() {
+		return this.itemMatch.getId();
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -44,7 +48,12 @@ public class Match {
 		builder.append(descricao);
 		builder.append(", tags:[");
 		builder.append(tags);
-		builder.append("]");
+		builder.append("], quantidade:");
+		builder.append(this.itemMatch.getQuantidade());
+		builder.append(", doador:");
+		builder.append(this.itemMatch.getUsuario().getNome());
+		builder.append("/");
+		builder.append(this.itemMatch.getUsuario().getId());
 		return builder.toString();
 	}
 	

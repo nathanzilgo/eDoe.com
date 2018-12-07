@@ -28,7 +28,14 @@ public class Item {
 		this.tags = tags;
 		this.usuarioDoador = usuarioDoador;
 	}
-
+	/**
+	 * @return retorna o Dono do Item.
+	 */
+	public Usuario getUsuario() {
+		return usuarioDoador;
+	}
+	
+	
 	public int getId() {
 		return id;
 	}

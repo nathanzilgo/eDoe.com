@@ -38,7 +38,7 @@ public class Usuario {
 	 * 
 	 * @return String
 	 */
-	private String getId() {
+	public String getId() {
 		return this.id;
 	}
 

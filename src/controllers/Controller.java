@@ -488,9 +488,11 @@ public class Controller {
 
 	private String strItensDoacao(ArrayList<Item> entrada) {
 		String saida = "";
-		for (Item item : entrada) {
-			saida += item.toString();
+		for (int i = 0; i < entrada.size() - 1; i++) {
+			saida += entrada.get(i).toString() + ", doador: " + entrada.get(i).getUsuario().getNome() +"/" + entrada.get(i).getUsuario().getId() + " | ";
+			
 		}
+		saida += entrada.get(entrada.size()-1).toString() + ", doador: " + entrada.get(entrada.size()-1).getUsuario().getNome() +"/" + entrada.get(entrada.size()-1).getUsuario().getId();
 		return saida;
 
 	}

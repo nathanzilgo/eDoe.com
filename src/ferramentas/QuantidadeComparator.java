@@ -15,6 +15,6 @@ public class QuantidadeComparator implements Comparator<Item> {
         if(it.getQuantidade() == outro.getQuantidade()){
             return it.getDescricao().compareTo(outro.getDescricao());
         }
-        return it.getQuantidade() - outro.getQuantidade();
+        return outro.getQuantidade() - it.getQuantidade();
     }
 }

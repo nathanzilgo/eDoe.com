@@ -1,4 +1,5 @@
-# projeto_lp2
+# eDoe.com
+<img src="maxresdefault.jpg" alt="mim de papai"></img>
 
 ## 		Sprint 1:
 ###			US 1:
@@ -15,5 +16,8 @@
 			
 ###			US 4:
 				Lucio Nathan
+				
+##		Sprint 2:
+
 ###			US 5:
 				Nathan Fernandes

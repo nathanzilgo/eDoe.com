@@ -528,7 +528,9 @@ public class Controller {
 	 */
 	public Item getItem(int idItem) {
 		for (Usuario us : this.usuarios.values()) {
-			return us.getItem(idItem);
+			if(us.getItens().containsKey(idItem)) {
+				return us.getItem(idItem);
+			}
 		}
 		return null;
 	}

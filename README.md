@@ -1,4 +1,4 @@
-# <img src="heart.png" style="height:30px;width:30px;"></img>  eDoe.com
+# eDoe.com
 
 <img src="maxresdefault.jpg" alt="mim de papai"></img>
 

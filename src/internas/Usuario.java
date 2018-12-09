@@ -265,8 +265,9 @@ public class Usuario {
 			if(!mt.equals(this.matches.get(matches.size()-1))) {
 				builder.append(mt.toString());
 				builder.append(" | ");
+			}else {
+				builder.append(mt.toString());
 			}
-			builder.append(mt.toString());
 		}
 		return builder.toString();
 	}

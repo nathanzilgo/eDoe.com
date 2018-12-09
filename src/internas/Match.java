@@ -2,8 +2,6 @@ package internas;
 
 public class Match {
 	private int pontos;
-	private String descricao;
-	private String tags;
 	private Item itemMatch;
 	
 	public Match(int pontos, Item itemMatch) {
@@ -15,26 +13,6 @@ public class Match {
 	public int getPontos() {
 		return pontos;
 	}
-
-	public void setPontos(int pontos) {
-		this.pontos = pontos;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getTags() {
-		return tags;
-	}
-
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
 	
 	public int getItemId() {
 		return this.itemMatch.getId();
@@ -43,20 +21,46 @@ public class Match {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(pontos);
-		builder.append(", ");
-		builder.append(descricao);
-		builder.append(", tags:[");
-		builder.append(tags);
-		builder.append("], quantidade:");
+		builder.append(this.itemMatch.getId());
+		builder.append(" - ");
+		builder.append(this.itemMatch.getDescricao());
+		builder.append(", tags: [");
+		builder.append(this.itemMatch.getTags());
+		builder.append("], quantidade: ");
 		builder.append(this.itemMatch.getQuantidade());
-		builder.append(", doador:");
+		builder.append(", doador: ");
 		builder.append(this.itemMatch.getUsuario().getNome());
 		builder.append("/");
 		builder.append(this.itemMatch.getUsuario().getId());
 		return builder.toString();
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((itemMatch == null) ? 0 : itemMatch.hashCode());
+		result = prime * result + pontos;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Match other = (Match) obj;
+		if (itemMatch == null) {
+			if (other.itemMatch != null)
+				return false;
+		} else if (!itemMatch.equals(other.itemMatch))
+			return false;
+		if (pontos != other.pontos)
+			return false;
+		return true;
+	}
 	
 }

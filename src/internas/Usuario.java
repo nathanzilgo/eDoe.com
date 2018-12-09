@@ -224,8 +224,11 @@ public class Usuario {
 	}
 
 	/**
-	 * US 5 - Chama a funcao dentro do receptor informado e tenta encontrar possiveis
-	 * matches para o item desejado Caso nao existam, uma String vazia eh retornada
+	 * US 5 - Faz um match com os itens passados como parametros.
+	 * Ja que a o metodo em controller recebe uma lista de todos os itens com o descritor
+	 * desejado, o processo inicia com 20 pontos.
+	 * Cria duas listas com as tags do itemMatch e do itemNecessario.
+	 * 
 	 */
 	public void match(Item itemMatch, Item itemNec) {
 		int pontos = 20;

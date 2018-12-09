@@ -42,7 +42,11 @@ public class Validar {
 		if (isNull(nome) || isEmpty(nome))
 			throw new IllegalArgumentException("Entrada invalida: nome nao pode ser vazio ou nulo.");
 	}
-
+	
+	public static void validaReceptor(String documento) {
+		if (isNull(documento) || isEmpty(documento))
+			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
+	}
 	public static Boolean checaArgumento(String campo) {
 		if (!(isNull(campo) || isEmpty(campo))) {
 			return true;

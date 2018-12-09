@@ -503,15 +503,20 @@ public class Controller {
 	 * US 5 - 
 	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis
 	 * matches para o item desejado. Caso nao existam, uma String vazia eh retornada
+	 * Cria um arraylist com todos os itens que possuem o descritor procurado.
+	 * Percorre essa lista fazendo a operacao Match() de Usuario para cada item da lista.
 	 * 
 	 * @param docReceptor
 	 * @param idItemNec
+	 * @return toString() de todos os Matches
 	 */
 
 	public String receptorMatch(String docReceptor, int idItemNec) {
+		Validar.validaReceptor(docReceptor);
+		
 		Item itemNec = this.getItem(idItemNec);
 		
-		ArrayList<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
+		HashSet<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
 
 		for (Item iter : possiveisMatches) {
 			this.usuarios.get(docReceptor).match(iter, itemNec);
@@ -544,15 +549,18 @@ public class Controller {
 	 * @param descricao
 	 * @return List
 	 */
-	public ArrayList<Item> pesquisaItensPorDescricao(String descricao) {
+	public HashSet<Item> pesquisaItensPorDescricao(String descricao) {
 		Validar.validaPesquisa(descricao);
 
-		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		HashSet<Item> itensPesquisados = new HashSet<>();
 
 		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.pesquisaDescricao(descricao)) {
-					itensPesquisados.add(item);
+					if(!itensPesquisados.contains(item)) {
+						itensPesquisados.add(item);
+					}
+					
 				}
 			}
 		}

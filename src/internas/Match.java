@@ -22,7 +22,7 @@ public class Match {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.itemMatch.getId());
-		builder.append(" - ");
+		builder.append(" - pontos: " + this.pontos);
 		builder.append(this.itemMatch.getDescricao());
 		builder.append(", tags: [");
 		builder.append(this.itemMatch.getTags());

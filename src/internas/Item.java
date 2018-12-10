@@ -148,17 +148,20 @@ public class Item {
 		if (tags.trim().isEmpty())
 			return saida;
 		
-		for(char str : this.tags.toCharArray()) {
-			if(str != ',' && str != ' ') {
-				tmp += Character.toString(str);
-			}else if(str == ',') {
+		for(int k = 0; k < this.tags.length(); k++) {
+			if(tags.charAt(k) != ',' && k != tags.length()-1) {
+				tmp += tags.charAt(k);
+			}
+			else if(tags.charAt(k) == ',') {
 				saida.add(tmp);
 				tmp = "";
-			}else {
-				continue;
+			}
+			else if(k == this.tags.length()-1) {
+				tmp += tags.charAt(k);
+				saida.add(tmp);
+				break;
 			}
 		}
-		
 		return saida;
 	}
 

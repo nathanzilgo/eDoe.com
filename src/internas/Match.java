@@ -21,13 +21,7 @@ public class Match {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(this.itemMatch.getId());
-		builder.append(" - pontos: " + this.pontos);
-		builder.append(this.itemMatch.getDescricao());
-		builder.append(", tags: [");
-		builder.append(this.itemMatch.getTags());
-		builder.append("], quantidade: ");
-		builder.append(this.itemMatch.getQuantidade());
+		builder.append(this.itemMatch.toString());
 		builder.append(", doador: ");
 		builder.append(this.itemMatch.getUsuario().getNome());
 		builder.append("/");

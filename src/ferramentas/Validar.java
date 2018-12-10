@@ -101,8 +101,12 @@ public class Validar {
 			throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
 		if (isNull(idUsuario) || isEmpty(idUsuario))
 			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
-
 	}
+	
+	public static void validaItem(int id) {
+		if(id < 0) throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
+	}
+	
 	public static void validaPesquisa(String entrada) {
 		if(isNull(entrada) || isEmpty(entrada)) {
 			throw new IllegalArgumentException("Entrada invalida: texto da pesquisa nao pode ser vazio ou nulo.");

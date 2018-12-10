@@ -235,8 +235,8 @@ public class Usuario {
 		ArrayList<String> itemMatchTags = itemMatch.listaTags();
 		ArrayList<String> itemNecTags = itemNec.listaTags();
 		
-		System.out.println(itemMatchTags.toString());
-		System.out.println(itemNecTags.toString());
+		//System.out.println(itemMatchTags.toString());
+		//System.out.println(itemNecTags.toString());
 		
 		for(int x = 0; x < itemMatchTags.size(); x++) {
 			

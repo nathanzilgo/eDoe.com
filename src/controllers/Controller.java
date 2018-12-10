@@ -514,6 +514,13 @@ public class Controller {
 
 	public String receptorMatch(String docReceptor, int idItemNec) {
 		Validar.validaReceptor(docReceptor);
+		Validar.validaItem(idItemNec);
+		if(this.usuarios.get(docReceptor) == null) throw new IllegalArgumentException("Usuario nao encontrado: " + docReceptor + ".");
+		if(this.getItem(idItemNec) == null) throw new IllegalArgumentException("Item nao encontrado: " + idItemNec + ".");
+		if(!this.usuarios.get(docReceptor).getIsReceptor()) {
+			throw new IllegalArgumentException("O Usuario deve ser um receptor: " + docReceptor + ".");
+		}
+		
 		
 		Item itemNec = this.getItem(idItemNec);
 		

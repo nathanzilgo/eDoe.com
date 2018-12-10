@@ -87,7 +87,7 @@ public class Facade {
 		return controller.listaItensDoacao();
 	}
 	
-	//**********************************************US 5**********************************************************
+	//**********************************************US - 5**********************************************************
 	
 	public String match(String docReceptor, int idItemNec) {
 		return this.controller.receptorMatch(docReceptor, idItemNec);

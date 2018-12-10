@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import ferramentas.DescricaoComparator;
@@ -18,15 +19,15 @@ import internas.Usuario;
 
 public class Controller {
 
-	private LinkedHashMap<String, Usuario> usuarios;
-	private HashSet<String> descritores;
+	private Map<String, Usuario> usuarios;
+	private Map<String, Integer> descritores;
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
 
 	public Controller() {
 		this.usuarios = new LinkedHashMap<>();
-		this.descritores = new HashSet<>();
+		this.descritores = new LinkedHashMap<>();
 		this.contadorIdItem = 0;
 		this.descricaoComparator = new DescricaoComparator();
 		this.quantidadeComparator = new QuantidadeComparator();
@@ -187,7 +188,7 @@ public class Controller {
 	 * @return String
 	 */
 	public String getDescritor(String descricao) {
-		for (String str : this.descritores) {
+		for (String str : this.descritores.keySet()) {
 			if (str.equals(descricao.toLowerCase())) {
 				return str;
 			}
@@ -206,11 +207,11 @@ public class Controller {
 		Validar.validaDescritor(descricao);
 		descricao = Validar.retiraEspacos(descricao);
 
-		if (this.descritores.contains(descricao.toLowerCase())) {
+		if (this.descritores.containsKey(descricao.toLowerCase())) {
 			throw new IllegalArgumentException(
 					"Descritor de Item ja existente: " + this.getDescritor(descricao.toLowerCase()) + ".");
 		} else {
-			this.descritores.add(descricao.toLowerCase());
+			this.descritores.put(descricao.toLowerCase(), 0);
 		}
 	}
 
@@ -231,7 +232,7 @@ public class Controller {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + id + ".");
 		}
 
-		this.descritores.add(descricaoItem);
+		this.descritores.put(descricaoItem, quantidade);
 		return this.usuarios.get(id).adicionaItem(incrementador(), descricaoItem, quantidade, tags);
 	}
 

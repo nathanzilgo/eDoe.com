@@ -521,10 +521,9 @@ public class Controller {
 			throw new IllegalArgumentException("O Usuario deve ser um receptor: " + docReceptor + ".");
 		}
 		
-		
 		Item itemNec = this.getItem(idItemNec);
 		
-		HashSet<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao());
+		HashSet<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao().toLowerCase());
 
 		for (Item iter : possiveisMatches) {
 			this.usuarios.get(docReceptor).match(iter, itemNec);
@@ -564,16 +563,14 @@ public class Controller {
 
 		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
-				for (Item item : usuario.pesquisaDescricao(descricao)) {
-					if(!itensPesquisados.contains(item)) {
+				for (Item item : usuario.getItens().values()) {
+					if(item.getDescricao().equalsIgnoreCase(descricao)) {
 						itensPesquisados.add(item);
 					}
-					
 				}
 			}
 		}
-
 		return itensPesquisados;
-	}
-
+		}
 }
+

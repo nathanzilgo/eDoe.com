@@ -208,13 +208,14 @@ public class Usuario {
 	}
 
 	/**
-	 * Metodo que pesquisa um item pela sua descricao.
+	 * Metodo que pesquisa itens dentro do Usuario pela sua descricao.
 	 * 
-	 * @param entrada descricao a ser procurada.
-	 * @return retorna um ArrayList de itens com a descricao procurada.
+	 * @param Descricao a ser procurada.
+	 * @return ArrayList de itens com a descricao procurada.
 	 */
 	public ArrayList<Item> pesquisaDescricao(String entrada) {
 		ArrayList<Item> itensPesquisados = new ArrayList<>();
+		
 		for (Item item : itens.values()) {
 			if (item.pesquisaNaDescricao(entrada)) {
 				itensPesquisados.add(item);

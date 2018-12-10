@@ -184,12 +184,20 @@ public class Item {
 	public int retornaId() {
 		return this.id;
 	}
+	/**
+	 * pesquisa a partir do parametro de entrada se a des
+	 * 
+	 * @param entrada
+	 * @return
+	 */
 	public boolean pesquisaNaDescricao(String entrada) {
+		
 		for(String palavra : getDescricao().split(" ")) {
 			if(palavra.toLowerCase().equals(entrada.toLowerCase())) {
 				return true;
 				}
-			}	
+			}
+		
 		return false;
 	}
 }

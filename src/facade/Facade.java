@@ -1,17 +1,37 @@
 package facade;
 
 import java.io.File;
+import java.io.IOException;
 
+import bd.BancoDeDados;
 import controllers.Controller;
 import easyaccept.EasyAccept;
 
 public class Facade {
 	private Controller controller = new Controller();
+	private BancoDeDados bd = null;
+
+	public Facade() {
+		this.bd = BancoDeDados.getInstance();
+	}
+
+	public void iniciaSistema() throws IOException {
+		try {
+			bd.iniciaSistema();
+			controller = bd.getController();
+		} catch (NullPointerException e) {
+			controller = new Controller();
+		}
+	}
+
+	public void finalizaSistema() throws IOException {
+		bd.finalizaSistema();
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "facade.Facade", "acceptionTest/use_case_1.txt", "acceptionTest/use_case_2.txt",
-				"acceptionTest/use_case_3" + ".txt", "acceptionTest/use_case_4.txt", "acceptionTest/use_case_5.txt",
-				"acceptionTest/use_case_6.txt" };
+				"acceptionTest/use_case_3.txt" , "acceptionTest/use_case_4.txt", "acceptionTest/use_case_5.txt",
+				"acceptionTest/use_case_6.txt", "acceptionTest/use_case_7.txt"};
 		EasyAccept.main(args);
 	}
 

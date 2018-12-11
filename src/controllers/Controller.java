@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,8 +19,12 @@ import internas.Doacao;
 import internas.Item;
 import internas.Usuario;
 
-public class Controller {
+public class Controller implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Usuario> usuarios;
 	private Map<String, Integer> descritores;
 	private int contadorIdItem;
@@ -286,22 +291,25 @@ public class Controller {
 		}
 		if (quantidade != 0) {
 			this.usuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
-			this.descritores.put(getDescricaoPorId(idItem, idDoador),quantidade);
+			this.descritores.put(getDescricaoPorId(idItem, idDoador), quantidade);
 		}
 		if (tags != null) {
 			this.usuarios.get(idDoador).getItem(idItem).setTags(tags);
 		}
 		return this.usuarios.get(idDoador).getItem(idItem).toString();
 	}
+
 	/**
 	 * pega a descricao de um item a partir do id do Doador e o id do Item.
+	 * 
 	 * @param idItem
 	 * @param idDoador
 	 * @return String descricao do item.
 	 */
-	private String getDescricaoPorId(int idItem,String idDoador) {
+	private String getDescricaoPorId(int idItem, String idDoador) {
 		return usuarios.get(idDoador).getItem(idItem).getDescricao();
 	}
+
 	/**
 	 * Remove um item para doacao de um Usuario Doador, caso o item e o usuario
 	 * existam e as entradas sejam validas. O descritor do item permanece no
@@ -323,7 +331,7 @@ public class Controller {
 		if (!this.usuarios.get(idDoador).existeItem(idItem)) {
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
 		}
-		this.descritores.replace(getDescricaoPorId(idItem,idDoador),0);
+		this.descritores.replace(getDescricaoPorId(idItem, idDoador), 0);
 		this.usuarios.get(idDoador).getItens().remove(idItem);
 	}
 
@@ -423,10 +431,10 @@ public class Controller {
 
 	}
 
-	/**US-3
-	 * Pesquisa a partir de uma String de entrada na descricao dos itens e retorna
-	 * todos os intens que possuem a string pesquisada na descricao ignorando letras
-	 * maiusculas e minusculas.
+	/**
+	 * US-3 Pesquisa a partir de uma String de entrada na descricao dos itens e
+	 * retorna todos os intens que possuem a string pesquisada na descricao
+	 * ignorando letras maiusculas e minusculas.
 	 * 
 	 * @param descricao: String a ser pesqusada.
 	 * @return String: Itens que possuem a String pesquisada na descricao
@@ -456,9 +464,9 @@ public class Controller {
 		return saida;
 	}
 
-	/**US-3
-	 * Lista todos os descritores cadastrados no sistema organizados em ordem alfabetica
-	 * e suas respectivas quantidades.
+	/**
+	 * US-3 Lista todos os descritores cadastrados no sistema organizados em ordem
+	 * alfabetica e suas respectivas quantidades.
 	 * 
 	 * @return String
 	 */
@@ -482,9 +490,10 @@ public class Controller {
 		return saida;
 	}
 
-	/**US-3
-	 * lista com todos  os toString dos itens cadastrados no sistema primeiramente 
-	 * organizados pela quantidade em ordem decrescente e depois em ordem alfabetica.
+	/**
+	 * US-3 lista com todos os toString dos itens cadastrados no sistema
+	 * primeiramente organizados pela quantidade em ordem decrescente e depois em
+	 * ordem alfabetica.
 	 * 
 	 * @return String
 	 */

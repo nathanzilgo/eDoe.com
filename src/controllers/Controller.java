@@ -278,19 +278,30 @@ public class Controller {
 	public String atualizaItemParaDoacao(int idItem, String idDoador, int quantidade, String tags) throws Exception {
 		Validar.validaItem(idItem, idDoador);
 
-		if (!this.existeusuario(idDoador))
+		if (!this.existeusuario(idDoador)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if (!this.usuarios.get(idDoador).existeItem(idItem))
+		}
+		if (!this.usuarios.get(idDoador).existeItem(idItem)) {
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
-
-		if (quantidade != 0)
+		}
+		if (quantidade != 0) {
 			this.usuarios.get(idDoador).getItem(idItem).setQuantidade(quantidade);
-		if (tags != null)
+			this.descritores.put(getDescricaoPorId(idItem, idDoador),quantidade);
+		}
+		if (tags != null) {
 			this.usuarios.get(idDoador).getItem(idItem).setTags(tags);
-
+		}
 		return this.usuarios.get(idDoador).getItem(idItem).toString();
 	}
-
+	/**
+	 * pega a descricao de um item a partir do id do Doador e o id do Item.
+	 * @param idItem
+	 * @param idDoador
+	 * @return String descricao do item.
+	 */
+	private String getDescricaoPorId(int idItem,String idDoador) {
+		return usuarios.get(idDoador).getItem(idItem).getDescricao();
+	}
 	/**
 	 * Remove um item para doacao de um Usuario Doador, caso o item e o usuario
 	 * existam e as entradas sejam validas. O descritor do item permanece no
@@ -303,13 +314,16 @@ public class Controller {
 	public void removeItemParaDoacao(int idItem, String idDoador) throws Exception {
 		Validar.validaItem(idItem, idDoador);
 
-		if (!this.existeusuario(idDoador))
+		if (!this.existeusuario(idDoador)) {
 			throw new IllegalArgumentException("Usuario nao encontrado: " + idDoador + ".");
-		if (this.usuarios.get(idDoador).getItens().isEmpty())
+		}
+		if (this.usuarios.get(idDoador).getItens().isEmpty()) {
 			throw new IllegalArgumentException("O Usuario nao possui itens cadastrados.");
-		if (!this.usuarios.get(idDoador).existeItem(idItem))
+		}
+		if (!this.usuarios.get(idDoador).existeItem(idItem)) {
 			throw new IllegalArgumentException("Item nao encontrado: " + idItem + ".");
-
+		}
+		this.descritores.replace(getDescricaoPorId(idItem,idDoador),0);
 		this.usuarios.get(idDoador).getItens().remove(idItem);
 	}
 
@@ -409,7 +423,7 @@ public class Controller {
 
 	}
 
-	/**
+	/**US-3
 	 * Pesquisa a partir de uma String de entrada na descricao dos itens e retorna
 	 * todos os intens que possuem a string pesquisada na descricao ignorando letras
 	 * maiusculas e minusculas.
@@ -442,39 +456,35 @@ public class Controller {
 		return saida;
 	}
 
-	/**
-	 * Lista os itens organizados pelos descritores
+	/**US-3
+	 * Lista todos os descritores cadastrados no sistema organizados em ordem alfabetica
+	 * e suas respectivas quantidades.
 	 * 
 	 * @return String
 	 */
 
 	public String listaDescritores() {
-		ArrayList<Item> exibeDescritores = new ArrayList<>();
-
-		for (Usuario usuario : usuarios.values()) {
-			if (usuario.getIsReceptor() == false) {
-				for (Item item : usuario.getItens().values()) {
-					exibeDescritores.add(item);
-				}
-			}
+		ArrayList<String> exibeDescritores = new ArrayList<>();
+		for (String descritor : descritores.keySet()) {
+			exibeDescritores.add(descritor);
 		}
-		Collections.sort(exibeDescritores, descricaoComparator);
-		return strExibeDescritores(exibeDescritores);
+		return strDescritoresOrganizados(exibeDescritores);
 	}
 
-	private String strExibeDescritores(ArrayList<Item> entrada) {
+	private String strDescritoresOrganizados(ArrayList<String> exibeDescritores) {
 		String saida = "";
-		for (int i = 0; i < entrada.size() - 1; i++) {
-			saida += entrada.get(i).getQuantidade() + " - " + entrada.get(i).getDescricao() + " | ";
+		Collections.sort(exibeDescritores, String.CASE_INSENSITIVE_ORDER);
+		for (int i = 0; i < exibeDescritores.size() - 1; i++) {
+			saida += descritores.get(exibeDescritores.get(i)) + " - " + exibeDescritores.get(i) + " | ";
 		}
-		saida += entrada.get(entrada.size() - 1).getQuantidade() + " - "
-				+ entrada.get(entrada.size() - 1).getDescricao();
+		saida += descritores.get(exibeDescritores.get(exibeDescritores.size() - 1)) + " - "
+				+ exibeDescritores.get(exibeDescritores.size() - 1);
 		return saida;
 	}
 
-	/**
-	 * lista todos os itens cadastrados no sistema primeiramente organizados pela
-	 * quantidade em ordem decrescente e depois em ordem alfabetica.
+	/**US-3
+	 * lista com todos  os toString dos itens cadastrados no sistema primeiramente 
+	 * organizados pela quantidade em ordem decrescente e depois em ordem alfabetica.
 	 * 
 	 * @return String
 	 */

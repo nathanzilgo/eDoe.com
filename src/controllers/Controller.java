@@ -638,4 +638,14 @@ public class Controller {
 		}
 		return null;
 	}
+
+	public String listaDoacoes() {
+		String listar = "";
+		Collections.sort(this.doacao);
+		for (Doacao retorno : doacao) {
+			listar += retorno.toString() + " | ";
+		}
+		listar = listar.substring(0, listar.length()-3);
+		return listar.trim();
+	}
 }

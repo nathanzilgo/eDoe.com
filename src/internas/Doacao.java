@@ -1,6 +1,6 @@
 package internas;
 
-public class Doacao {
+public class Doacao implements Comparable<Doacao>{
 	private String data;
 	private Usuario doador;
 	private Item itemDoado;
@@ -25,6 +25,22 @@ public class Doacao {
 
 	public int getId() {
 		return this.itemDoado.getId();
+	}
+
+	@Override
+	public int compareTo(Doacao o) {
+		if(this.data.equals(o.data)) {
+			return this.itemDoado.getDescricao().compareTo(o.itemDoado.getDescricao());
+		}
+		return this.dataEmDias() - o.dataEmDias();
+	}
+	
+	private int dataEmDias() {
+		String[] s = data.split("/");
+		int dia = Integer.parseInt(s[0]);
+		int mes = Integer.parseInt(s[1]);
+		int ano = Integer.parseInt(s[2]);
+		return dia + mes*30 + ano*365;
 	}
 
 }

@@ -96,11 +96,16 @@ public class Facade {
 	}
 
 	/**
-	 * Us 6 
+	 * Us 6
+	 * 
 	 * @throws Exception **************************
 	 */
-	
+
 	public String realizaDoacao(int idItemNec, int idItemDoado, String data) throws Exception {
 		return this.controller.realizaDoacao(idItemNec, idItemDoado, data);
+	}
+
+	public String listaDoacoes() {
+		return this.controller.listaDoacoes();
 	}
 }

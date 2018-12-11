@@ -127,7 +127,7 @@ class ControllerTest {
 		// Pesquisa doador ja cadastrado por id
 		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
 				"pessoa_fisica");
-		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+		assertEquals("Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.pesquisaUsuarioPorId("01234567899"));
 
 	}
@@ -158,7 +158,7 @@ class ControllerTest {
 		 */
 		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
 				"pessoa_fisica");
-		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+		assertEquals("Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.pesquisaUsuarioPorNome("Raquel Lopes"));
 
 		/*
@@ -169,7 +169,7 @@ class ControllerTest {
 		controller.adicionaDoador("12345648577", "Igreja", "igrejamatias@gmail.com", "(21) 3353-2221", "igreja");
 		controller.adicionaDoador("36271892019", "Igreja", "igrejadejesus@gmail.com", "(21) 9899-0023", "igreja");
 		assertEquals(
-				"Igreja/123.456.789-00, igrejarosario@gmail.com, (21) 9888-0021, status: doador | Igreja/123.456.485-77, igrejamatias@gmail.com, (21) 3353-2221, status: doador | Igreja/362.718.920-19, igrejadejesus@gmail.com, (21) 9899-0023, status: doador",
+				"Igreja/12345678900, igrejarosario@gmail.com, (21) 9888-0021, status: doador | Igreja/12345648577, igrejamatias@gmail.com, (21) 3353-2221, status: doador | Igreja/36271892019, igrejadejesus@gmail.com, (21) 9899-0023, status: doador",
 				controller.pesquisaUsuarioPorNome("Igreja"));
 
 	}
@@ -198,21 +198,19 @@ class ControllerTest {
 		// Atualiza nome de doador ja cadastrado
 		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
 				"pessoa_fisica");
-		assertEquals("Raquel A. Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+		assertEquals("Raquel A. Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.atualizaUsuario("01234567899", "Raquel A. Lopes", "", ""));
 
 		// Atualiza email de doador ja cadastrado
-		assertEquals(
-				"Raquel A. Lopes/012.345.678-99, raquel_lopes@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+		assertEquals("Raquel A. Lopes/01234567899, raquel_lopes@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.atualizaUsuario("01234567899", "     ", "raquel_lopes@computacao.ufcg.edu.br", ""));
 
 		// Atualiza telefone de doador ja cadastrado
-		assertEquals(
-				"Raquel A. Lopes/012.345.678-99, raquel_lopes@computacao.ufcg.edu.br, (83) 3333-3333, status: doador",
+		assertEquals("Raquel A. Lopes/01234567899, raquel_lopes@computacao.ufcg.edu.br, (83) 3333-3333, status: doador",
 				controller.atualizaUsuario("01234567899", "     ", null, "(83) 3333-3333"));
 
 		// Atualiza nome, email e telefone de doador ja cadastrado
-		assertEquals("Raquel Lopes/012.345.678-99, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
+		assertEquals("Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.atualizaUsuario("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br",
 						"(83) 9990-9999"));
 	}

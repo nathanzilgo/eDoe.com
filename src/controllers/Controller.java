@@ -596,7 +596,8 @@ public class Controller {
 		Validar.validaRealizaDoacao(idItemNec, idItemDoado, data);
 		if (getItem(idItemNec) != null) {
 			if (getItem(idItemDoado) != null) {
-				if (getItem(idItemNec).getDescricao().equals(this.getItem(idItemDoado).getDescricao())) {
+				if (getItem(idItemNec).getDescricao().trim()
+						.equalsIgnoreCase(this.getItem(idItemDoado).getDescricao().trim())) {
 					this.doacao.add(new Doacao(data, getItem(idItemDoado).getUsuario(), getItem(idItemDoado),
 							getItem(idItemNec).getUsuario(), checaQtdItemDoacao(idItemNec, idItemDoado)));
 					return getDoacao(idItemDoado).toString();

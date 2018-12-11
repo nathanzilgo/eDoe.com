@@ -22,3 +22,6 @@
 
 ###			US 5:
 				Nathan Fernandes
+###			US 6:
+				Gyovanna Costa
+				Nathan Fernandes

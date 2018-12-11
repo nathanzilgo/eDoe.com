@@ -581,10 +581,10 @@ public class Controller {
 	}
 
 	/**
-	 * O metodo realizaDoacao(), tem como objetivo o id de um item necessario, o id
-	 * de um item a ser doado, alem da data da doacao, e verificar se as informações
-	 * são válidas, caso sejam inválidas o sistema lança uma exceção, caso contrário
-	 * é retornado o toString dessa doacao.
+	 * O metodo realizaDoacao(), tem como objetivo receber o id de um item
+	 * necessario, o id de um item a ser doado, alem da data da doacao, e verificar
+	 * se as informações são válidas, caso sejam inválidas o sistema lança uma
+	 * exceção, caso contrário é retornado o toString dessa doacao.
 	 * 
 	 * @param idItemNec   id do item que o receptor necessita.
 	 * @param idItemDoado id do item que o doador possui.

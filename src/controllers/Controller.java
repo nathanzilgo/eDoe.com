@@ -583,8 +583,8 @@ public class Controller {
 	/**
 	 * O metodo realizaDoacao(), tem como objetivo receber o id de um item
 	 * necessario, o id de um item a ser doado, alem da data da doacao, e verificar
-	 * se as informações são válidas, caso sejam inválidas o sistema lança uma
-	 * exceção, caso contrário é retornado o toString dessa doacao.
+	 * se as informacoes são validas, caso sejam invalidas o sistema lanca uma
+	 * excecao, caso contrario e retornado o toString dessa doacao.
 	 * 
 	 * @param idItemNec   id do item que o receptor necessita.
 	 * @param idItemDoado id do item que o doador possui.
@@ -639,13 +639,21 @@ public class Controller {
 		return null;
 	}
 
+	/**
+	 * O metodo listaDoacoes(), tem como objetivo retornar a representacao textual
+	 * de todas as doacoes cadastradas no sistema ordenadas por data, caso a data
+	 * das doacoes sejam iguais e ordenada por ordem alfabetica do descritor do item
+	 * doado.
+	 * 
+	 * @return representacao textual de todas as doacoes de forma ordenada.
+	 */
 	public String listaDoacoes() {
 		String listar = "";
 		Collections.sort(this.doacao);
 		for (Doacao retorno : doacao) {
 			listar += retorno.toString() + " | ";
 		}
-		listar = listar.substring(0, listar.length()-3);
+		listar = listar.substring(0, listar.length() - 3);
 		return listar.trim();
 	}
 }

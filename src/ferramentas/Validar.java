@@ -18,19 +18,16 @@ public class Validar {
 		return Integer.toString(valor).trim().equals("");
 	}
 
-	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe)
-		 {
+	public static void adicionaUsuario(String id, String nome, String email, String celular, String classe) {
 
-		if (isNull(nome) || isEmpty(nome))
-			throw new IllegalArgumentException("Entrada invalida: nome nao pode ser vazio ou nulo.");
+		validaNome(nome);
+		validaId(id);
 		if (isNull(email) || isEmpty(email))
 			throw new IllegalArgumentException("Entrada invalida: email nao pode ser vazio ou nulo.");
 		if (isNull(celular) || isEmpty(celular))
 			throw new IllegalArgumentException("Entrada invalida: celular nao pode ser vazio ou nulo.");
 		if (isNull(classe) || isEmpty(classe))
 			throw new IllegalArgumentException("Entrada invalida: classe nao pode ser vazia ou nula.");
-		if (isNull(id) || isEmpty(id))
-			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
 	}
 
 	public static void validaId(String id) {
@@ -42,11 +39,11 @@ public class Validar {
 		if (isNull(nome) || isEmpty(nome))
 			throw new IllegalArgumentException("Entrada invalida: nome nao pode ser vazio ou nulo.");
 	}
-	
+
 	public static void validaReceptor(String documento) {
-		if (isNull(documento) || isEmpty(documento))
-			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
+		validaId(documento);
 	}
+
 	public static Boolean checaArgumento(String campo) {
 		if (!(isNull(campo) || isEmpty(campo))) {
 			return true;
@@ -70,9 +67,7 @@ public class Validar {
 	 * @throws Exception
 	 */
 	public static void validaAdicionaItem(String id, String descricao, int quantidade, String tags) {
-		if (isNull(id) || isEmpty(id)) {
-			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
-		}
+		validaId(id);
 		validaDescritor(descricao);
 		if (quantidade <= 0) {
 			throw new IllegalArgumentException("Entrada invalida: quantidade deve ser maior que zero.");
@@ -80,7 +75,7 @@ public class Validar {
 	}
 
 	/**
-	 * Retira espaacos inuteis da entrada.
+	 * Retira espacos inuteis da entrada.
 	 * 
 	 * @param entrada
 	 */
@@ -89,27 +84,36 @@ public class Validar {
 	}
 
 	public static void validaExibeItem(int idItem, String idDoador) {
-		if (isNull(idDoador) || isEmpty(idDoador))
-			throw new IllegalArgumentException();
+		validaId(idDoador);
 		if (isNull(idItem) || isEmpty(idItem))
 			throw new IllegalArgumentException();
 
 	}
 
 	public static void validaItem(int idItem, String idUsuario) {
-		if (idItem < 0)
-			throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
-		if (isNull(idUsuario) || isEmpty(idUsuario))
-			throw new IllegalArgumentException("Entrada invalida: id do usuario nao pode ser vazio ou nulo.");
+		validaItem(idItem);
+		validaId(idUsuario);
 	}
-	
+
 	public static void validaItem(int id) {
-		if(id < 0) throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
+		if (id < 0)
+			throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
 	}
-	
+
 	public static void validaPesquisa(String entrada) {
-		if(isNull(entrada) || isEmpty(entrada)) {
+		if (isNull(entrada) || isEmpty(entrada)) {
 			throw new IllegalArgumentException("Entrada invalida: texto da pesquisa nao pode ser vazio ou nulo.");
 		}
+	}
+
+	public static void validaRealizaDoacao(int idItemNec, int idItemDoado, String data) {
+		validaItem(idItemNec);
+		validaItem(idItemDoado);
+		validaData(data);
+	}
+
+	public static void validaData(String data) {
+		if (isNull(data) || isEmpty(data))
+			throw new IllegalArgumentException("Entrada invalida: data nao pode ser vazia ou nula.");
 	}
 }

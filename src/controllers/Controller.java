@@ -14,6 +14,7 @@ import java.util.Scanner;
 import ferramentas.DescricaoComparator;
 import ferramentas.QuantidadeComparator;
 import ferramentas.Validar;
+import internas.Doacao;
 import internas.Item;
 import internas.Usuario;
 
@@ -24,6 +25,7 @@ public class Controller {
 	private int contadorIdItem;
 	private DescricaoComparator descricaoComparator;
 	private QuantidadeComparator quantidadeComparator;
+	private ArrayList<Doacao> doacao;
 
 	public Controller() {
 		this.usuarios = new LinkedHashMap<>();
@@ -31,6 +33,7 @@ public class Controller {
 		this.contadorIdItem = 0;
 		this.descricaoComparator = new DescricaoComparator();
 		this.quantidadeComparator = new QuantidadeComparator();
+		this.doacao = new ArrayList<>();
 	}
 
 	/**
@@ -447,7 +450,7 @@ public class Controller {
 
 	public String listaDescritores() {
 		ArrayList<Item> exibeDescritores = new ArrayList<>();
-		
+
 		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
@@ -491,21 +494,23 @@ public class Controller {
 	private String strItensDoacao(ArrayList<Item> entrada) {
 		String saida = "";
 		for (int i = 0; i < entrada.size() - 1; i++) {
-			saida += entrada.get(i).toString() + ", doador: " + entrada.get(i).getUsuario().getNome() +"/" + entrada.get(i).getUsuario().getId() + " | ";
-			
+			saida += entrada.get(i).toString() + ", doador: " + entrada.get(i).getUsuario().getNome() + "/"
+					+ entrada.get(i).getUsuario().getId() + " | ";
+
 		}
-		saida += entrada.get(entrada.size()-1).toString() + ", doador: " + entrada.get(entrada.size()-1).getUsuario().getNome() +"/" + entrada.get(entrada.size()-1).getUsuario().getId();
+		saida += entrada.get(entrada.size() - 1).toString() + ", doador: "
+				+ entrada.get(entrada.size() - 1).getUsuario().getNome() + "/"
+				+ entrada.get(entrada.size() - 1).getUsuario().getId();
 		return saida;
 
 	}
 
-
 	/**
-	 * US 5 - 
-	 * Chama a funcao dentro do receptor informado e tenta encontrar possiveis
-	 * matches para o item desejado. Caso nao existam, uma String vazia eh retornada
-	 * Cria um arraylist com todos os itens que possuem o descritor procurado.
-	 * Percorre essa lista fazendo a operacao Match() de Usuario para cada item da lista.
+	 * US 5 - Chama a funcao dentro do receptor informado e tenta encontrar
+	 * possiveis matches para o item desejado. Caso nao existam, uma String vazia eh
+	 * retornada Cria um arraylist com todos os itens que possuem o descritor
+	 * procurado. Percorre essa lista fazendo a operacao Match() de Usuario para
+	 * cada item da lista.
 	 * 
 	 * @param docReceptor
 	 * @param idItemNec
@@ -515,20 +520,22 @@ public class Controller {
 	public String receptorMatch(String docReceptor, int idItemNec) {
 		Validar.validaReceptor(docReceptor);
 		Validar.validaItem(idItemNec);
-		if(this.usuarios.get(docReceptor) == null) throw new IllegalArgumentException("Usuario nao encontrado: " + docReceptor + ".");
-		if(this.getItem(idItemNec) == null) throw new IllegalArgumentException("Item nao encontrado: " + idItemNec + ".");
-		if(!this.usuarios.get(docReceptor).getIsReceptor()) {
+		if (this.usuarios.get(docReceptor) == null)
+			throw new IllegalArgumentException("Usuario nao encontrado: " + docReceptor + ".");
+		if (this.getItem(idItemNec) == null)
+			throw new IllegalArgumentException("Item nao encontrado: " + idItemNec + ".");
+		if (!this.usuarios.get(docReceptor).getIsReceptor()) {
 			throw new IllegalArgumentException("O Usuario deve ser um receptor: " + docReceptor + ".");
 		}
-		
+
 		Item itemNec = this.getItem(idItemNec);
-		
+
 		HashSet<Item> possiveisMatches = this.pesquisaItensPorDescricao(itemNec.getDescricao().toLowerCase());
 
 		for (Item iter : possiveisMatches) {
 			this.usuarios.get(docReceptor).match(iter, itemNec);
 		}
-		
+
 		return this.usuarios.get(docReceptor).getMatches();
 	}
 
@@ -540,7 +547,7 @@ public class Controller {
 	 */
 	public Item getItem(int idItem) {
 		for (Usuario us : this.usuarios.values()) {
-			if(us.getItens().containsKey(idItem)) {
+			if (us.getItens().containsKey(idItem)) {
 				return us.getItem(idItem);
 			}
 		}
@@ -564,13 +571,70 @@ public class Controller {
 		for (Usuario usuario : usuarios.values()) {
 			if (usuario.getIsReceptor() == false) {
 				for (Item item : usuario.getItens().values()) {
-					if(item.getDescricao().equalsIgnoreCase(descricao)) {
+					if (item.getDescricao().equalsIgnoreCase(descricao)) {
 						itensPesquisados.add(item);
 					}
 				}
 			}
 		}
 		return itensPesquisados;
-		}
-}
+	}
 
+	/**
+	 * O metodo realizaDoacao(), tem como objetivo o id de um item necessario, o id
+	 * de um item a ser doado, alem da data da doacao, e verificar se as informações
+	 * são válidas, caso sejam inválidas o sistema lança uma exceção, caso contrário
+	 * é retornado o toString dessa doacao.
+	 * 
+	 * @param idItemNec   id do item que o receptor necessita.
+	 * @param idItemDoado id do item que o doador possui.
+	 * @param data        data da doacao.
+	 * @return representacao textual da doacao
+	 * @throws Exception
+	 */
+	public String realizaDoacao(int idItemNec, int idItemDoado, String data) throws Exception {
+		Validar.validaRealizaDoacao(idItemNec, idItemDoado, data);
+		if (getItem(idItemNec) != null) {
+			if (getItem(idItemDoado) != null) {
+				if (getItem(idItemNec).getDescricao().equals(this.getItem(idItemDoado).getDescricao())) {
+					this.doacao.add(new Doacao(data, getItem(idItemDoado).getUsuario(), getItem(idItemDoado),
+							getItem(idItemNec).getUsuario(), checaQtdItemDoacao(idItemNec, idItemDoado)));
+					return getDoacao(idItemDoado).toString();
+				}
+				throw new IllegalArgumentException("Os itens nao tem descricoes iguais.");
+
+			}
+			throw new IllegalArgumentException("Item nao encontrado: " + idItemDoado + ".");
+		}
+		throw new IllegalArgumentException("Item nao encontrado: " + idItemNec + ".");
+	}
+
+	private int checaQtdItemDoacao(int idItemNec, int idItemDoado) throws Exception {
+		int qtdNec = getItem(idItemNec).getQuantidade();
+		int qtdDoado = getItem(idItemDoado).getQuantidade();
+		int retorno = qtdNec;
+
+		if (qtdNec > qtdDoado) {
+			retorno = qtdDoado;
+			getItem(idItemNec).setQuantidade(qtdNec - qtdDoado);
+			removeItemParaDoacao(idItemDoado, getItem(idItemDoado).getUsuario().getId());
+		} else if (qtdNec == qtdDoado) {
+			removeItemNecessario(getItem(idItemNec).getUsuario().getId(), idItemNec);
+			removeItemParaDoacao(idItemDoado, getItem(idItemDoado).getUsuario().getId());
+		} else {
+			getItem(idItemDoado).setQuantidade(qtdDoado - qtdNec);
+			removeItemNecessario(getItem(idItemNec).getUsuario().getId(), idItemNec);
+		}
+
+		return retorno;
+	}
+
+	private Doacao getDoacao(int idItemDoado) {
+		for (Doacao retorna : doacao) {
+			if (retorna.getId() == idItemDoado) {
+				return retorna;
+			}
+		}
+		return null;
+	}
+}

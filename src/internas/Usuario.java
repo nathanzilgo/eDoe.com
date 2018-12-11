@@ -257,7 +257,9 @@ public class Usuario {
 	 * US 5 - 
 	 * Retorna os toString de todos os matches do doador receptor.
 	 * Ordenados conforme a especificacao: pontuacao, se for igual: identificador de item.
-	 * @return String
+	 * Por fim, reseta a estrutura matches para que nao se repitam matches passados no mesmo receptor.
+	 * 
+	 * @return toString() de todos os matches.
 	 */
 	public String getMatches() {
 		StringBuilder builder = new StringBuilder();
@@ -273,6 +275,7 @@ public class Usuario {
 				builder.append(mt.toString());
 			}
 		}
+		this.matches = new ArrayList<>();
 		return builder.toString();
 	}
 

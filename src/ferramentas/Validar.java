@@ -96,8 +96,7 @@ public class Validar {
 	}
 
 	public static void validaItem(int id) {
-		if (id < 0)
-			throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
+		if (id < 0) throw new IllegalArgumentException("Entrada invalida: id do item nao pode ser negativo.");
 	}
 
 	public static void validaPesquisa(String entrada) {

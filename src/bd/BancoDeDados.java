@@ -114,7 +114,7 @@ public class BancoDeDados {
 	}
 
 	/**
-	 * Retorna o objeto Controller encontrado no hug.dat
+	 * Retorna o objeto Controller encontrado no arquivo.dat
 	 * 
 	 * @return
 	 */

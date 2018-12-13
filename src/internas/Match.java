@@ -1,10 +1,14 @@
 package internas;
 
-public class Match {
+import java.io.Serializable;
+
+public class Match implements Serializable {
 	private int pontos;
 	private Item itemMatch;
-	
+	private static final long serialVersionUID = 1L;
+
 	public Match(int pontos, Item itemMatch) {
+
 		super();
 		this.pontos = pontos;
 		this.itemMatch = itemMatch;

@@ -45,4 +45,3 @@ class ItemTest {
 		assertEquals("macarrao, almondegas", i1.tagsToString());
 	}
 
-}

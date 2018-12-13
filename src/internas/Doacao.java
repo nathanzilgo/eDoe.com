@@ -1,6 +1,9 @@
 package internas;
 
-public class Doacao implements Comparable<Doacao> {
+import java.io.Serializable;
+
+public class Doacao implements Comparable<Doacao>, Serializable {
+	private static final long serialVersionUID = 1L;
 	private String data;
 	private Usuario doador;
 	private Item itemDoado;

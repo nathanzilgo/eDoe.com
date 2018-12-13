@@ -1,6 +1,10 @@
 package ferramentas;
 
-public class Validar {
+import java.io.Serializable;
+
+public class Validar implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private static boolean isNull(String valor) {
 		return valor == null;

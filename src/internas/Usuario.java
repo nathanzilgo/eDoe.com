@@ -1,5 +1,6 @@
 package internas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,8 +12,9 @@ import java.util.Map;
 import ferramentas.MatchComparator;
 import ferramentas.Validar;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nome;
 	private String email;

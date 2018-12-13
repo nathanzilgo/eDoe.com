@@ -1,5 +1,6 @@
 package internas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,8 +14,9 @@ import java.util.Random;
  * @author Nathan Fernandes
  *
  */
-public class Item {
+public class Item implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int quantidade;
 	private String tags;

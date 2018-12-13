@@ -1,8 +1,17 @@
-<head>
-<link rel="stylesheet" type="text/css" media="all" href="styles.css">
-</head>
 
-<h1 class="blue">  eDoe.com </h1>
+<style>
+	img{
+		margin: auto;
+		display: block;
+	};
+	
+	h1{
+		color: powderblue;
+		font-size: 50px;
+	}
+</style>
+
+<h1>  eDoe.com </h1>
 
 <img src="doar.png" alt="doacao"></img>
 

@@ -8,13 +8,21 @@ O projeto utiliza uma implementação simples com as classes Doacao, Usuario (qu
 Inicialmente usamos o padrão Strategy com os tipos Doador e Receptor herdando de Usuario. Posteriormente optamos pela utilização de uma flag do tipo booleana para identificar se o usuario.
 
 O QUE FOI FEITO
-Na US1 - 
-Na US2 -
-Na US3 – implementamos os métodos no controller para listar todos os itens de doadores além dos comparators de Item afim de organizar tanto pela quantidade como pela descrição .
+
+Na US1 - foi criado as classes Controller e Usuario bem como os metodos de leitura de arquivo csv para o cadastramento de receptores. sendo o controller como uma classe principal do projeto como uma alternativa de simpliificar o código e a implementação do mesmo.
+
+Na US2 - 
+
+Na US3 – Foi implementado os métodos no controller para listar todos os itens de doadores além dos comparators de Item afim de organizar tanto pela quantidade como pela descrição.
+
 Na US4 - Foi implementado os métodos de adicionar itens necessários, listar todos os itens necessários com seus respectivos receptores, atualizar item necessário e de remover um item necessário.
-Na US5-
-Na US6-
+
+Na US5- 
+
+Na US6- Foi implementado o historico de doação, que mantem o historico das transferencias de itens entre usuarios doadores e recptores no sistema.
+
 Na US7- Foi implementado uma classe auxiliar chamada BancoDeDados que é responsável pelo salvamento do sistema. Esta classe salva uma instância do controller que carrega todas as informações do sistema.
+
 POR QUEM FOI FEITO
 Gyovanna Costa – US1,US2,US6 documentação das classes,Testes Junit,fez quase todos os métodos da us1,ajudou na us2,e implementou quase toda US6. 
 Nathan Fernandes – US1,US2,US3,US5 documentação das classes,tratamento de erros,todos os métodos da US2 e US5.

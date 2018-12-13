@@ -1,6 +1,8 @@
-<link rel="stylesheet" type="text/css" media="all" href="styles.css"/>
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="styles.css">
+</head>
 
-<h1 class="blue">  eDoe.com/>
+<h1 class="blue">  eDoe.com </h1>
 
 <img src="doar.png" alt="doacao"></img>
 

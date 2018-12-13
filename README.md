@@ -2,7 +2,7 @@
 
 <h1 style="color:powderblue; font-size: 50px">  eDoe.com </h1>
 
-<center><img src="doar.png" alt="doacao" style="margin:auto;display:block"></img></center>
+<center><img src="doar.png" alt="doacao" align="center" style="margin:auto;display:block"></img></center>
 
 ## 		Sprint 1:
 ###			US 1:

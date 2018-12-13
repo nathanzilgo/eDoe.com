@@ -1,8 +1,6 @@
-#  eDoe.com
+<link rel="stylesheet" type="text/css" media="all" href="styles.css"/>
 
-<style>
-img {display: flexbox; margin: auto}
-</style>
+<h1 class="blue">  eDoe.com/>
 
 <img src="doar.png" alt="doacao"></img>
 

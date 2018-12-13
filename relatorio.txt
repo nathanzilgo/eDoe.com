@@ -1,0 +1,22 @@
+
+UFCG - Universidade Federal de Campina Grande
+Ciência da Computação
+Projeto de Laboratório - Programação II
+13 de Dezembro de 2018
+Design geral:
+O projeto utiliza uma implementação simples com as classes Doacao, Usuario (que pode ser receptor ou doador), Item e Match. Possui apenas um controlador com todos os métodos utilizados na Fachada. Além disso, criamos um pacote ferramentas com classes auxiliares para validação, comparação de dados e captura de erros. Ferramentas contem as classes usadas como Comparator nos sorts (Collections.sort()) e a classe Validar.
+Inicialmente usamos o padrão Strategy com os tipos Doador e Receptor herdando de Usuario. Posteriormente optamos pela utilização de uma flag do tipo booleana para identificar se o usuario.
+
+O QUE FOI FEITO
+Na US1 - 
+Na US2 -
+Na US3 – implementamos os métodos no controller para listar todos os itens de doadores além dos comparators de Item afim de organizar tanto pela quantidade como pela descrição .
+Na US4 -
+Na US5-
+Na US6-
+Na US7-
+POR QUEM FOI FEITO
+Gyovanna Costa – US1,US2,US6 documentação das classes,Testes Junit,fez quase todos os métodos da us1,ajudou na us2,e implementou quase toda US6. 
+Nathan Fernandes – US1,US2,US3,US5 documentação das classes,tratamento de erros,todos os métodos da US2 e US5.
+Mateus Diniz – US2,US3, documentação das classes,tratamento de erros,todos os métodos da us3 e algumas mudanças na us2,e relatório.
+Lucio Nathan – US1,US4,US7, documentação das classes feitas,algoritmo de leitura de arquivo csv, e salvamento de sistema,todos os métodos da us4.

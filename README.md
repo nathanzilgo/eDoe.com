@@ -27,6 +27,6 @@
 				Nathan Fernandes
 ###			US 6:
 				Gyovanna Costa
-				Nathan Fernandes
+				
 ###			US 7:
 				Lucio Nathan

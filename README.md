@@ -1,19 +1,8 @@
 
-<style>
-	img{
-		margin: auto;
-		display: block;
-	};
-	
-	h1{
-		color: powderblue;
-		font-size: 50px;
-	}
-</style>
 
-<h1>  eDoe.com </h1>
+<h1 style="color:powderblue; font-size: 50px">  eDoe.com </h1>
 
-<img src="doar.png" alt="doacao"></img>
+<img src="doar.png" alt="doacao" style="margin:auto;display:block"></img>
 
 ## 		Sprint 1:
 ###			US 1:

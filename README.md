@@ -11,8 +11,8 @@
 				Nathan Fernandes
 				
 ###			US 2:
-				Gyovanna Costa
 				Nathan Fernandes
+				Gyovanna Costa
 				Mateus Diniz
 
 ###			US 3:

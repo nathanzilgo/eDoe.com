@@ -1,5 +1,9 @@
 #  eDoe.com
 
+<style>
+img {display: flexbox; margin: auto}
+</style>
+
 <img src="doar.png" alt="doacao"></img>
 
 ## 		Sprint 1:

@@ -3,23 +3,32 @@ package projeto_lp2;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controllers.Controller;
+import internas.Usuario;
 import junit.framework.Assert;
 
 class ControllerTest {
 
-	private Controller controller = new Controller();
+	Controller controller = new Controller();
+
+	@BeforeEach
+	void testAdicionaDoador() throws Exception {
+		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
+				"pessoa_fisica");
+		controller.adicionaDoador("12345678900", "Igreja", "igrejarosario@gmail.com", "(21) 9888-0021", "igreja");
+	}
 
 	@Test
 	void testAdicionaDoadorValido() throws Exception {
 		// Adiciona pessoa fisica como doador.
-		assertEquals("01234567899", controller.adicionaDoador("01234567899", "Raquel Lopes",
-				"raquel@computacao.ufcg.edu.br", "(83) 9990-9999", "pessoa_fisica"));
+		assertEquals("012345670010", controller.adicionaDoador("012345670010", "Ana Lopes",
+				"ana@computacao.ufcg.edu.br", "(83) 9990-9999", "pessoa_fisica"));
 
 		// Adiciona igreja como doador.
-		assertEquals("12345678900", controller.adicionaDoador("12345678900", "Igreja do Rosario",
+		assertEquals("12345678990", controller.adicionaDoador("12345678990", "Igreja do Rosario",
 				"igrejarosario@gmail.com", "(21) 9888-0021", "igreja"));
 
 		// Adiciona ong como doador.
@@ -108,8 +117,6 @@ class ControllerTest {
 		});
 
 		// Adiciona doador existente
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
 					"pessoa_fisica");
@@ -125,8 +132,6 @@ class ControllerTest {
 	@Test
 	void testPesquisaUsuarioPorIdValido() throws Exception {
 		// Pesquisa doador ja cadastrado por id
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		assertEquals("Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.pesquisaUsuarioPorId("01234567899"));
 
@@ -156,8 +161,6 @@ class ControllerTest {
 		 * Pesquisa doador ja cadastrado por nome, unico doador cadastrado com esse nome
 		 * no sistema.
 		 */
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		assertEquals("Raquel Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.pesquisaUsuarioPorNome("Raquel Lopes"));
 
@@ -165,7 +168,6 @@ class ControllerTest {
 		 * Pesquisa doador ja cadastrado por nome, varios doadores cadastrados com esse
 		 * nome no sistema.
 		 */
-		controller.adicionaDoador("12345678900", "Igreja", "igrejarosario@gmail.com", "(21) 9888-0021", "igreja");
 		controller.adicionaDoador("12345648577", "Igreja", "igrejamatias@gmail.com", "(21) 3353-2221", "igreja");
 		controller.adicionaDoador("36271892019", "Igreja", "igrejadejesus@gmail.com", "(21) 9899-0023", "igreja");
 		assertEquals(
@@ -196,8 +198,6 @@ class ControllerTest {
 	@Test
 	void testAtualizaUsuarioValido() throws Exception {
 		// Atualiza nome de doador ja cadastrado
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		assertEquals("Raquel A. Lopes/01234567899, raquel@computacao.ufcg.edu.br, (83) 9990-9999, status: doador",
 				controller.atualizaUsuario("01234567899", "Raquel A. Lopes", "", ""));
 
@@ -239,8 +239,6 @@ class ControllerTest {
 	void testRemoveUsuarioValido() throws Exception {
 		// Remove doador ja cadastrado
 		String id = "01234567899";
-		controller.adicionaDoador(id, "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		controller.removeUsuario(id);
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.pesquisaUsuarioPorId(id);
@@ -261,7 +259,7 @@ class ControllerTest {
 
 		// Remove usuario por id inexistente
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			controller.removeUsuario("01234567899");
+			controller.removeUsuario("01234567890");
 		});
 	}
 
@@ -307,12 +305,6 @@ class ControllerTest {
 
 	@Test
 	void testAdicionaItemParaDoacaoValido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
-		// Criado doador Igreja
-		controller.adicionaDoador("12345678900", "Igreja do Rosario", "igrejarosario@gmail.com", "(21) 9888-0021",
-				"igreja");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		assertEquals(1, controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto"));
 		// Criado item curso sobre cuidados com o bebe e adicionado a Igreja, retorna o
@@ -366,9 +358,6 @@ class ControllerTest {
 
 	@Test
 	void testExibeItemValido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 		// Retornando toString do item cadeira de rodas do doador Raquel
@@ -378,9 +367,6 @@ class ControllerTest {
 
 	@Test
 	void testExibeItemInvalido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 
@@ -397,9 +383,6 @@ class ControllerTest {
 
 	@Test
 	void testAtualizaItemParaDoacaoValido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 
@@ -410,9 +393,6 @@ class ControllerTest {
 
 	@Test
 	void testAtualizaItemParaDoacaoInvalido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 
@@ -440,9 +420,6 @@ class ControllerTest {
 
 	@Test
 	void testRemoveItemParaDoacaoValido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 		// Retornando toString do item cadeira de rodas do doador Raquel
@@ -459,9 +436,6 @@ class ControllerTest {
 
 	@Test
 	void testRemoveItemParaDoacaoInvalido() throws Exception {
-		// Criado doador Raquel
-		controller.adicionaDoador("01234567899", "Raquel Lopes", "raquel@computacao.ufcg.edu.br", "(83) 9990-9999",
-				"pessoa_fisica");
 		// Criado item cadeira de rodas e adicionado a Raquel, retorna o id do item = 1
 		controller.adicionaItemParaDoacao("01234567899", "cadeira de rodas", 1, "manual, adulto");
 
@@ -474,6 +448,66 @@ class ControllerTest {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			controller.atualizaItemParaDoacao(4, "01234567899", 1, "manual, adulto");
 		});
+	}
+
+	@Test
+	void testAdicionaItemNecessario() {
+
+	}
+
+	@Test
+	void listaItensNecessarios() {
+
+	}
+
+	@Test
+	void atualizaItemNecessario() {
+
+	}
+
+	@Test
+	void removeItemNecessario() {
+
+	}
+
+	@Test
+	void pesquisaItemParaDoacaoPorDescricao() {
+
+	}
+
+	@Test
+	void listaDescritores() {
+
+	}
+
+	@Test
+	void listaItensDoacao() {
+
+	}
+
+	@Test
+	void receptorMatch() {
+
+	}
+
+	@Test
+	void getItem() {
+
+	}
+
+	@Test
+	void pesquisaItensPorDescricao() {
+
+	}
+
+	@Test
+	void realizaDoacao() {
+
+	}
+
+	@Test
+	void listaDoacoes() {
+
 	}
 
 }

@@ -8,7 +8,8 @@ import internas.Item;
 import internas.Usuario;
 
 class ItemTest {
-	Usuario novoUsuario = new Usuario("1111111", "Raquel Lopes", "raquel_lopes@ccc.ufcg.edu.br", "3333 - 3333", "pessoa_fisica", false);
+	Usuario novoUsuario = new Usuario("1111111", "Raquel Lopes", "raquel_lopes@ccc.ufcg.edu.br", "3333 - 3333",
+			"pessoa_fisica", false);
 	Item i1 = new Item(1, "macarrao bom", 5, "macarrao,almondegas", novoUsuario);
 	Item i2 = new Item(2, "sapatos novos", 2, "adidas,novo", novoUsuario);
 	Item i3 = new Item(3, "macarrao bom", 3, "macarrao,almondegas", novoUsuario);
@@ -45,3 +46,4 @@ class ItemTest {
 		assertEquals("macarrao, almondegas", i1.tagsToString());
 	}
 
+}

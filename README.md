@@ -1,6 +1,6 @@
 #  eDoe.com
 
-<img src="maxresdefault.jpg" alt="mim de papai"></img>
+<img src="doar.png" alt="doacao"></img>
 
 ## 		Sprint 1:
 ###			US 1:
@@ -26,3 +26,5 @@
 ###			US 6:
 				Gyovanna Costa
 				Nathan Fernandes
+###			US 7:
+				Lucio Nathan

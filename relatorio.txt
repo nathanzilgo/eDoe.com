@@ -11,12 +11,12 @@ O QUE FOI FEITO
 Na US1 - 
 Na US2 -
 Na US3 – implementamos os métodos no controller para listar todos os itens de doadores além dos comparators de Item afim de organizar tanto pela quantidade como pela descrição .
-Na US4 -
+Na US4 - Foi implementado os métodos de adicionar itens necessários, listar todos os itens necessários com seus respectivos receptores, atualizar item necessário e de remover um item necessário.
 Na US5-
 Na US6-
-Na US7-
+Na US7- Foi implementado uma classe auxiliar chamada BancoDeDados que é responsável pelo salvamento do sistema. Esta classe salva uma instância do controller que carrega todas as informações do sistema.
 POR QUEM FOI FEITO
 Gyovanna Costa – US1,US2,US6 documentação das classes,Testes Junit,fez quase todos os métodos da us1,ajudou na us2,e implementou quase toda US6. 
 Nathan Fernandes – US1,US2,US3,US5 documentação das classes,tratamento de erros,todos os métodos da US2 e US5.
 Mateus Diniz – US2,US3, documentação das classes,tratamento de erros,todos os métodos da us3 e algumas mudanças na us2,e relatório.
-Lucio Nathan – US1,US4,US7, documentação das classes feitas,algoritmo de leitura de arquivo csv, e salvamento de sistema,todos os métodos da us4.
+Lucio Nathan – US1,US4,US7, documentação das classes feitas,algoritmo de leitura de arquivo csv, e salvamento de sistema,todos os métodos da us4 e todos os métodos da us7.

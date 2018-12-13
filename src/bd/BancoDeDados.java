@@ -21,7 +21,7 @@ import java.io.ObjectOutputStream;
 
 public class BancoDeDados {
 
-	private static BancoDeDados instance = null;
+	private static BancoDeDados instance;
 	private static final String path = "arquivos_sistema";
 	private static final String file = "arquivo.dat";
 	private Controller controller;
@@ -33,6 +33,7 @@ public class BancoDeDados {
 	 * Construtor.
 	 */
 	private BancoDeDados() {
+
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class BancoDeDados {
 	 * 
 	 * @throws IOException
 	 */
-	public void finalizaSistema() throws IOException {
+	public void finalizaSistema(Controller controller) throws IOException {
 
 		try {
 			this.controllerOutput = new ObjectOutputStream(new FileOutputStream(path + "/" + file));

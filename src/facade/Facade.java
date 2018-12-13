@@ -9,7 +9,7 @@ import easyaccept.EasyAccept;
 
 public class Facade {
 	private Controller controller = new Controller();
-	private BancoDeDados bd = null;
+	private BancoDeDados bd;
 
 	public Facade() {
 		this.bd = BancoDeDados.getInstance();
@@ -25,7 +25,7 @@ public class Facade {
 	}
 
 	public void finalizaSistema() throws IOException {
-		bd.finalizaSistema();
+		bd.finalizaSistema(this.controller);
 	}
 
 	public static void main(String[] args) {

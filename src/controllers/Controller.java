@@ -378,7 +378,7 @@ public class Controller implements Serializable {
 		String retorno = "";
 
 		for (int i = 0; i < itens.size() - 1; i++) {
-
+			
 			retorno += itens.get(i) + " | ";
 		}
 

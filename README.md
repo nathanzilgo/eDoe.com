@@ -2,7 +2,7 @@
 
 # eDoe.com
 
-<center><img src="doar.png" alt="doacao" align="center" style="margin:auto;display:block"></img></center>
+<center><img src="../imagens_e_documentos/doar.png" alt="doacao" align="center" style="margin:auto;display:block"></img></center>
 
 # Descrição:
 O projeto envolve o desenvolvimento do back-end do sistema eDoe.com, feito em Java.

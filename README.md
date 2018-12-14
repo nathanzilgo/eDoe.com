@@ -1,9 +1,16 @@
 
 
-<h1 style="color:powderblue; font-size: 50px">  eDoe.com </h1>
+# eDoe.com
 
 <center><img src="doar.png" alt="doacao" align="center" style="margin:auto;display:block"></img></center>
 
+# Descrição:
+O projeto envolve o desenvolvimento do back-end do sistema eDoe.com, feito em Java.
+O sistema consiste em uma coleção de usuarios receptores e doadores que podem realizar adições de itens para doar e itens para receber como doação.
+O sistema realiza as transações e as mantém em um histórico armazenado em arquivo txt.
+
+# Equipe:
+<img src="equipe.jpeg" alt="equipe"></img>
 ## 		Sprint 1:
 ###			US 1:
 				Gyovanna Costa
